@@ -127,13 +127,25 @@ table thead {
                                         <?php 
                                         foreach ($set_score as $key => $v_set_score): 
                                         $s = explode("|",$v_check_student->Score100);
+                                        if($onoff_savescore[0]->onoff_name == $v_set_score->regscore_namework){
+                                            $onoff_status = $onoff_savescore[0]->onoff_status;
+                                        }elseif($onoff_savescore[1]->onoff_name == $v_set_score->regscore_namework){
+                                            $onoff_status = $onoff_savescore[1]->onoff_status;
+                                        }elseif($onoff_savescore[2]->onoff_name == $v_set_score->regscore_namework){
+                                            $onoff_status = $onoff_savescore[2]->onoff_status;
+                                        }elseif($onoff_savescore[3]->onoff_name == $v_set_score->regscore_namework){
+                                            $onoff_status = $onoff_savescore[3]->onoff_status;
+                                        }
+                                        
                                         ?>
                                         <td>
                                             <input type="text" class="form-control check_score"
                                                 check-score-key="<?=$v_set_score->regscore_score?>"
                                                 id="<?=$v_check_student->StudentID?>"
                                                 name="<?=$v_check_student->StudentID?>[]"
-                                                value="<?=$v_check_student->Score100 == "" ?"0":$s[$key]?>">
+                                                value="<?=$v_check_student->Score100 == "" ?"0":$s[$key]?>"
+                                               <?=$onoff_status == "off"?"disabled":""?> 
+                                                >
                                         </td>
                                         <?php endforeach; ?>
                                         <td class="align-middle">
