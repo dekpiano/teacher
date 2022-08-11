@@ -88,7 +88,7 @@ table thead {
                                         <th>เลขที่</th>
                                         <th>เลขประจำตัว</th>
                                         <th width="200">ชื่อ - นามสกุล</th>
-                                        <th width="">เวลาเรียน<br>(40)</th>
+                                        <th width="">เวลาเรียน<br>(20)</th>
                                         <?php 
                                     $sum_scoer = 0;
                                     foreach ($set_score as $key => $v_set_score): 

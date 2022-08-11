@@ -128,7 +128,7 @@ function calculateRowSum() {
 
         $(this).find('.subtot').html(sum);
 
-        if (study_time < 32) {
+        if (study_time < 16) {
             $(this).find('.grade').html('มส');
         } else {
             $(this).find('.grade').html(check_grade(sum));
