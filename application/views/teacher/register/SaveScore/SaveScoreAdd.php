@@ -88,7 +88,7 @@ table thead {
                                         <th>เลขที่</th>
                                         <th>เลขประจำตัว</th>
                                         <th width="200">ชื่อ - นามสกุล</th>
-                                        <th width="">เวลาเรียน<br> <small>(40 สัปดาห์)</small> </th>
+                                        <th width="">เวลาเรียน<br> <small>(20 สัปดาห์)</small> </th>
                                         <?php 
                                     $sum_scoer = 0;
                                     foreach ($set_score as $key => $v_set_score): 
@@ -122,7 +122,7 @@ table thead {
                                         </td>
                                         <td>
                                         <input type="text" class="form-control study_time" id="study_time"
-                                                name="study_time[]" value="<?=$v_check_student->StudyTime == 0 || $v_check_student->StudyTime == "" ?"0":$v_check_student->StudyTime?>">
+                                                name="study_time[]" value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"0":$v_check_student->StudyTime?>">
                                         </td>
                                         <?php 
                                         foreach ($set_score as $key => $v_set_score): 
@@ -138,13 +138,13 @@ table thead {
                                         }
                                         
                                         ?>
-                                        <td>
+                                        <td></td>
                                             <input type="text" class="form-control check_score"
                                                 check-score-key="<?=$v_set_score->regscore_score?>"
                                                 id="<?=$v_check_student->StudentID?>"
                                                 name="<?=$v_check_student->StudentID?>[]"
                                                 value="<?=$v_check_student->Score100 == "" ?"0":$s[$key]?>"
-                                               <?=$onoff_status == "off"?"disabled":""?> 
+                                               <?=$onoff_status == "off"?"readonly":""?> 
                                                 >
                                         </td>
                                         <?php endforeach; ?>
