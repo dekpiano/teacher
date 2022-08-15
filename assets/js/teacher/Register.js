@@ -92,7 +92,7 @@ $(document).on('submit', '.form_set_score', function(e) {
 $(".check_score").each(function() {
     $(this).keyup(function() {
         calculateTotal($(this).parent().index());
-        // console.log($(this).parent().index());
+        //console.log($(this).parent().index());
     });
 });
 
@@ -115,21 +115,37 @@ function calculateTotal(index) {
     calculateRowSum();
 }
 
+function Charactor($char) {
+    var re = new RegExp("^([0-9]|[ร])+$", "g");
+    return re.test($char);
+}
+
 function calculateRowSum() {
     $('table tbody tr').each(function() {
+
         var sum = 0;
         var study_time;
+        var Check_ro = 0;
         $(this).find('td').each(function() {
-            sum += parseInt($(this).find('.check_score').val()) || 0;
+
+            if ($(this).find('.check_score').val() == "ร") {
+                Check_ro += 1;
+            } else {
+                sum += parseInt($(this).find('.check_score').val()) || 0;
+            }
+
+
         });
 
         study_time = $(this).find('.study_time').val()
-        console.log($(this).find('.study_time').val());
+            // console.log($(this).find('.study_time').val());
 
         $(this).find('.subtot').html(sum);
 
         if (study_time < 16) {
             $(this).find('.grade').html('มส');
+        } else if (Check_ro > 0) {
+            $(this).find('.grade').html('ร');
         } else {
             $(this).find('.grade').html(check_grade(sum));
         }

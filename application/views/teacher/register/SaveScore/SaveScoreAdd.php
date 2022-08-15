@@ -138,7 +138,7 @@ table thead {
                                         }
                                         
                                         ?>
-                                        <td></td>
+                                        <td>
                                             <input type="text" class="form-control check_score"
                                                 check-score-key="<?=$v_set_score->regscore_score?>"
                                                 id="<?=$v_check_student->StudentID?>"
