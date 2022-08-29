@@ -122,7 +122,7 @@ table thead {
                                         </td>
                                         <td>
                                         <input type="text" class="form-control study_time" id="study_time"
-                                                name="study_time[]" value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"0":$v_check_student->StudyTime?>">
+                                                name="study_time[]" value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>">
                                         </td>
                                         <?php 
                                         foreach ($set_score as $key => $v_set_score): 
@@ -143,7 +143,7 @@ table thead {
                                                 check-score-key="<?=$v_set_score->regscore_score?>"
                                                 id="<?=$v_check_student->StudentID?>"
                                                 name="<?=$v_check_student->StudentID?>[]"
-                                                value="<?=$v_check_student->Score100 == "" ?"0":$s[$key]?>"
+                                                value="<?=$v_check_student->Score100 == "" ?"":$s[$key]?>"
                                                <?=$onoff_status == "off"?"readonly":""?> 
                                                 >
                                         </td>

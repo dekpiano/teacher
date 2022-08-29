@@ -133,8 +133,6 @@ function calculateRowSum() {
             } else {
                 sum += parseInt($(this).find('.check_score').val()) || 0;
             }
-
-
         });
 
         study_time = $(this).find('.study_time').val()
