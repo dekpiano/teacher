@@ -110,11 +110,13 @@ class ConTeacherRegister extends CI_Controller {
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('RegisterYear',$term.'/'.$yaer)
+                                ->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
+       
+                               
        
         }else{
             $sub_checkroom = explode('-',$room);
@@ -155,7 +157,7 @@ class ConTeacherRegister extends CI_Controller {
         $check_idSubject = $this->db->where('SubjectCode',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
         $data['set_score'] = $this->db->where('regscore_subjectID',$check_idSubject->SubjectID)->get('tb_register_score')->result();
         $data['onoff_savescore'] = $this->db->where('onoff_id >=',2)->where('onoff_id <=',5)->get('tb_register_onoff')->result();   
-       // echo '<pre>'; print_r($data['onoff_savescore']);exit();
+      
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -165,12 +167,24 @@ class ConTeacherRegister extends CI_Controller {
 
     public function insert_score(){ 
 
+        $TimeNum = $this->input->post('TimeNum');
         foreach ($this->input->post('StudentID') as $num => $value) {
-            // print_r($value);
+           //print_r($this->input->post('TimeNum'));
             // print_r($this->input->post('SubjectCode'));
             $study_time = $this->input->post('study_time');
             // print_r(); exit();
-            $Grade = $this->check_grade(array_sum($this->input->post($value)));
+            if((($TimeNum*80)/100) > $study_time[$num]){
+                $Grade = "มส";
+            }else{
+                if(in_array("ร",$this->input->post($value))){
+                    $Grade = "ร";
+                }else{
+                    $Grade = $this->check_grade(array_sum($this->input->post($value)));
+                }
+            }
+           
+            
+           
 
             $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
             $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num]);

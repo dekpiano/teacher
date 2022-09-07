@@ -53,6 +53,7 @@ table thead {
                 <div class="card-header d-flex align-items-center">
                     <h3 class="h4">รายวิชาที่สอน <?=$check_student[0]->SubjectCode?> <?=$check_student[0]->SubjectName?>
                         ครูประจำวิชา <?=$this->session->userdata('fullname');?></h3>
+                        
                 </div>
                 <div class="card-body">
 
@@ -88,7 +89,12 @@ table thead {
                                         <th>เลขที่</th>
                                         <th>เลขประจำตัว</th>
                                         <th width="200">ชื่อ - นามสกุล</th>
-                                        <th width="">เวลาเรียน<br> <small>(20 สัปดาห์)</small> </th>
+                                        <?php 
+                                        if(floatval($check_student[0]->SubjectUnit) == 0.5){ $TimeNum = 20; }
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 1){$TimeNum = 40;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 1.5){$TimeNum = 60;}
+                                        ?>
+                                        <th width="">เวลาเรียน<br> <small>(<?=intval($TimeNum);?> ชั่วโมง)</small> </th>
                                         <?php 
                                     $sum_scoer = 0;
                                     foreach ($set_score as $key => $v_set_score): 
@@ -119,9 +125,11 @@ table thead {
                                                 name="SubjectCode" value="<?=$check_student[0]->SubjectCode?>">
                                             <input type="text" class="form-control sr-only" id="RegisterYear"
                                                 name="RegisterYear" value="<?=$check_student[0]->RegisterYear?>">
+                                            <input type="text" class="form-control sr-only" id="TimeNum"
+                                                name="TimeNum" value="<?=$TimeNum?>">
                                         </td>
                                         <td>
-                                        <input type="text" class="form-control study_time" id="study_time"
+                                        <input type="text" class="form-control study_time" id="study_time" check-time="<?=$TimeNum;?>"
                                                 name="study_time[]" value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>">
                                         </td>
                                         <?php 
