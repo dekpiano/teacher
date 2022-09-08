@@ -49,7 +49,7 @@ td {
             <th rowspan="2" style="width: 5%">เลขที่</th>
             <th rowspan="2" style="width: 4%">เลขประจำตัวนักเรียน</th>
             <th rowspan="2" style="width: 30%">ชื่อ - นามสกุล</th>
-            <th rowspan="2" style="width: 8%">เวลาเรียน (40)</th>
+            <th rowspan="2" style="width: 8%">เวลาเรียน (<?=$re_subjuct[0]->SubjectHour?>)</th>
             <?php 
                 $sum_scoer = 0;
                 foreach ($set_score as $key => $v_set_score): 
@@ -101,7 +101,7 @@ td {
                 <?=$v_check_student->Grade?>
                 <?php endif; ?>
             </td>
-            <td class="center"><?php $Status =  explode("/",$v_check_student->StudentStatus); echo $Status[1]?></td>
+            <td class="center"><?=$v_check_student->StudentBehavior?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>

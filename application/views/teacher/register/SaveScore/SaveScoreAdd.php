@@ -46,7 +46,6 @@ table thead {
     <div class="container-fluid">
         <div class="col-lg-12">
             <div class="card">
-                <?=print_r($check_student[0]);?>
                 <div class="card-close">
                     <a href="#" id="chcek_score" subject-id="<?=$check_student[0]->SubjectID?>"
                         class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">ตั้งค่าคะแนน</a>
@@ -79,7 +78,7 @@ table thead {
                     </div>
                     <div class="table-responsive">
                         <form class="form_score">
-                            <table id="tb_score" class="table table-striped table-hover table-bordered">
+                            <table id="tb_score" class="table table-hover table-bordered">
                                 <thead class="text-center">
                                     <tr>
                                         <th colspan="5">ข้อมูลนักเรียน</th>
@@ -164,7 +163,13 @@ table thead {
                                             <div class="grade text-center font-weight-bold"></div>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <?php $Status =  explode("/",$v_check_student->StudentStatus); echo $Status[1]?>
+                                            <?php 
+                                            if($v_check_student->StudentBehavior == "ปกติ"){ 
+                                                echo '<span class="text-success">'.$v_check_student->StudentBehavior.'</span>';
+                                            }else{
+                                                echo '<span class="text-danger">'.$v_check_student->StudentBehavior.'</span>';
+                                            }
+                                            ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

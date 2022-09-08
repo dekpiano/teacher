@@ -104,7 +104,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
-                                    tb_students.StudentStatus
+                                    tb_students.StudentStatus,
+                                    tb_students.StudentBehavior
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -139,7 +140,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
-                                    tb_students.StudentStatus
+                                    tb_students.StudentStatus,
+                                    tb_students.StudentBehavior
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -182,9 +184,6 @@ class ConTeacherRegister extends CI_Controller {
                     $Grade = $this->check_grade(array_sum($this->input->post($value)));
                 }
             }
-           
-            
-           
 
             $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
             $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num]);
@@ -293,7 +292,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
-                                    tb_students.StudentStatus
+                                    tb_students.StudentStatus,
+                                    tb_students.StudentBehavior
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -350,7 +350,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
-                                    tb_students.StudentStatus
+                                    tb_students.StudentStatus,
+                                    tb_students.StudentBehavior
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -372,7 +373,7 @@ class ConTeacherRegister extends CI_Controller {
         $live_mpdf->WriteHTML($ReportFront);
 
         $live_mpdf->AddPage(); 
-        $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
+       $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
         $live_mpdf->WriteHTML($ReportSummary);
         $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE); 
     }
