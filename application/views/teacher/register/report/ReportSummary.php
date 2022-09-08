@@ -93,7 +93,7 @@ td {
                 <?=$v_check_student->Score100 == "" ?"0":$s[$key]?>
             </td>
             <?php endforeach; ?>
-            <td class="center"><?=array_sum($s)?></td>
+            <td class="center"><?=@array_sum($s)?></td>
             <td class="center">
                 <?php if($v_check_student->StudyTime < 32): ?>
                     มส
