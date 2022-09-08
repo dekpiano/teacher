@@ -46,6 +46,7 @@ table thead {
     <div class="container-fluid">
         <div class="col-lg-12">
             <div class="card">
+                <?=print_r($check_student[0]);?>
                 <div class="card-close">
                     <a href="#" id="chcek_score" subject-id="<?=$check_student[0]->SubjectID?>"
                         class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">ตั้งค่าคะแนน</a>
