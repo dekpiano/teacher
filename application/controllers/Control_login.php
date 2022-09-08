@@ -193,6 +193,35 @@ class Control_login extends CI_Controller {
 		
 	}
 
+	public function LoginAdmin()
+	{	
+			$username = $this->input->post('username');
+			$password = md5(md5($this->input->post('password')));
+			
+			
+			if($this->input->server('REQUEST_METHOD') == TRUE){
+				if($this->Model_login->record_count_teacher1($username, $password) == 1)
+				{
+
+					$result = $this->Model_login->fetch_teacher_login1($username, $password);
+					$this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','class' => $result->StudentClass,'img' => $result->pers_img,'groupleade'=>$result->pers_groupleade,'CheckStatusPassword'=>$result->pers_changepassword));
+
+					set_cookie('username_cookie',$username,'3600'); 
+					set_cookie('password_cookie',$password,'3600');
+
+				 redirect('Admin/Home');
+					//echo "Yes";
+
+				}
+				else
+				{					
+					//$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'ชื่อผู้ใช้งานหรือรหัสผ่าน ไม่ถูกต้อง หรือ ไม่ข้อมูลในระบบ กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
+					// redirect('login');
+					redirect('welcome');
+					//print($this->Model_login->record_count_teacher1($username, $password));
+				}
+			}
+	}	
 
 
 	public function logout()

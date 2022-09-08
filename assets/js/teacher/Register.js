@@ -56,6 +56,26 @@ $(document).on('keyup', '.check_score', function() {
     }
 });
 
+$(document).on('keyup', '.study_time', function() {
+    var num = parseInt($(this).val());
+    var key = parseInt($(this).attr('check-time'));
+   
+    if (num > key) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'คุณกรอกเวลาเรียนเกินกำหนด '+ key + 'ชั่วโมง <br>กรุณากรอกเวลาเรียนใหม่',
+            showConfirmButton: false,
+            timer: 3000
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                //window.location.reload();
+                $(this).val("0");
+            }
+        })
+    }
+});
+
 
 $(document).on('submit', '.form_set_score', function(e) {
     e.preventDefault();
@@ -99,7 +119,7 @@ $(".check_score").each(function() {
 $(".study_time").each(function() {
     $(this).keyup(function() {
         calculateTotal($(this).parent().index());
-        // console.log($(this).parent().index());
+        //console.log();
     });
 });
 
@@ -121,6 +141,7 @@ function Charactor($char) {
 }
 
 function calculateRowSum() {
+    var TimeNum =  $('.study_time').attr('check-time');
     $('table tbody tr').each(function() {
 
         var sum = 0;
@@ -136,11 +157,10 @@ function calculateRowSum() {
         });
 
         study_time = $(this).find('.study_time').val()
-            // console.log($(this).find('.study_time').val());
+       
 
         $(this).find('.subtot').html(sum);
-
-        if (study_time < 16) {
+        if (80*TimeNum/100 > study_time) {
             $(this).find('.grade').html('มส');
         } else if (Check_ro > 0) {
             $(this).find('.grade').html('ร');
@@ -209,7 +229,7 @@ $(document).on('submit', '.form_score', function(e) {
         type: "post",
         data: $(this).serialize(), //this is formData
         success: function(data) {
-            //console.log(data);
+            console.log(data);
             if (data > 0) {
                 Swal.fire({
                     position: 'top-end',
@@ -223,7 +243,7 @@ $(document).on('submit', '.form_score', function(e) {
                     }
                 })
             } else {
-                window.location.reload();
+               // window.location.reload();
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
