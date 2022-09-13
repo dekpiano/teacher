@@ -55,8 +55,8 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->group_by('tb_register.SubjectCode')
                                 ->get()->result();
-        
-        //echo '<pre>'; print_r($data['check_subject']);exit();
+        $data['onoff'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();                        
+        //echo '<pre>'; print_r($data['onoff']);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');

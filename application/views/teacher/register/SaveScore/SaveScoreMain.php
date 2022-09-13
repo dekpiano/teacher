@@ -66,9 +66,16 @@
                                     <td><?=$v_check_subject->SubjectUnit?></td>
                                     <td><?=$v_check_subject->SubjectHour?></td>
                                     <td>
+                                        <?php if($onoff[0]->onoff_status == "off"): ?>
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#AlertNoReg"
+                                            class="btn btn-danger btn-sm"><i class="fa fa-pencil"
+                                                aria-hidden="true"></i> ยังไม่เปิดให้บันทึก</a>
+                                        <?php else: ?>
                                         <a href="<?=base_url('Register/SaveScoreAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectCode.'/all')?>"
                                             class="btn btn-primary btn-sm"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i> บันทึกผลการเรียน</a>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <a href="#" id="chcek_report" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -102,19 +109,40 @@
                 </button>
             </div>
             <form action="<?=base_url('Register/RopoetPT');?>" method="post">
-            <div class="modal-body">
-                <select name="select_print" id="select_print" class="form-control mb-3">
-                    <option value="all">ทั้งหมด</option>
-                </select>
+                <div class="modal-body">
+                    <select name="select_print" id="select_print" class="form-control mb-3">
+                        <option value="all">ทั้งหมด</option>
+                    </select>
 
-                <input type="text" name="report_RegisterYear" id="report_RegisterYear" style="display:none">
-                <input type="text" name="report_SubjectCode" id="report_SubjectCode" style="display:none">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">พิมพ์</button>
-            </div>
+                    <input type="text" name="report_RegisterYear" id="report_RegisterYear" style="display:none">
+                    <input type="text" name="report_SubjectCode" id="report_SubjectCode" style="display:none">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">พิมพ์</button>
+                </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="AlertNoReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">บันทึกผลการเรียน</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                ขณะนี้! ระบบยังไม่เปิดให้ลงผลการเรียน รอสักครู่... <br>
+                ทางฝ่ายวิชาการจะแจ้งให้ทราบอีกครั้ง
+            </div>
+
         </div>
     </div>
 </div>
