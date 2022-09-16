@@ -31,7 +31,7 @@
                           <table class="table table-hover" id="TB_showstudent">
                               <thead>
                                   <tr>
-                                      <th scope="col">#</th>
+                                      <th scope="col">เลขที่</th>
                                       <th scope="col">เลขประจำตัว</th>
                                       <th scope="col">ชื่อ - นามสกุล</th>
                                   </tr>
@@ -75,7 +75,7 @@
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=14"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
-          <?php if($this->uri->segment(1) === "SupStd"): ?>
+          <?php if($this->uri->segment(1) === "Teaching"): ?>
           <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=9"></script>
           <?php endif; ?>
 

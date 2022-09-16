@@ -31,6 +31,7 @@ var  $title = "หน้าแรก";
     public function CheckHomeRoomMain(){
         $data['title']  = "หน้าแรกโฮมรูม";       
         $data['teacher'] = $this->TeacRoom();
+        //echo '<pre>';print_r($data['teacher']); exit();
 
         if($data['teacher'][0]->Reg_Class == "1" || $data['teacher'][0]->Reg_Class == "2"|| $data['teacher'][0]->Reg_Class == "3" || $data['teacher'][0]->Reg_Class == "4" || $data['teacher'][0]->Reg_Class == "5" || $data['teacher'][0]->Reg_Class == "6"){
             redirect('Teacher/Teaching/CheckHomeRoomDashboard/'.date('d-m-Y'));
@@ -154,12 +155,12 @@ var  $title = "หน้าแรก";
                                 ->get('tb_checkhomeroom')->row();
  //echo '<pre>'; print_r($data['ChkHomeRoom1']); exit();
         if(date("Y-m-d",strtotime(@$data['ChkHomeRoom1']->chk_home_date)) != date("Y-m-d")){
-            $data['Action'] = base_url('teacher/ConTeacherTeaching/Insert_CheckHomeRoom');
+            $data['Action'] = base_url('ConTeacherTeaching/Insert_CheckHomeRoom');
             $data['ButtonName'] = "บันทึกข้อมูล";
             $data['ButtonClass'] = "primary";
 
         }else{
-            $data['Action'] = base_url('teacher/ConTeacherTeaching/Update_CheckHomeRoom');
+            $data['Action'] = base_url('ConTeacherTeaching/Update_CheckHomeRoom');
             $data['ButtonName'] = "อัพเดตข้อมูล";
             $data['ButtonClass'] = "warning";
 
@@ -228,7 +229,7 @@ var  $title = "หน้าแรก";
       }else{
         $this->session->set_flashdata(array('msg'=> 'YES','messge' => 'บันทึกข้อมูลไม่สำเร็จ','status'=>'error'));
       }
-      redirect('Teacher/Teaching/CheckHomeRoomAdd');
+      redirect('Teaching/CheckHomeRoomAdd');
     }
 
     public function Update_CheckHomeRoom(){  
@@ -284,7 +285,7 @@ var  $title = "หน้าแรก";
       }else{
         $this->session->set_flashdata(array('msg'=> 'YES','messge' => 'อัพเดตข้อมูลไม่สำเร็จ','status'=>'error'));
       }
-      redirect('Teacher/Teaching/CheckHomeRoomAdd');
+      redirect('Teaching/CheckHomeRoomAdd');
     }
 
     public function CheckHomeRoomStatistics(){
