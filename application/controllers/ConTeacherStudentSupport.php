@@ -27,9 +27,9 @@ var  $title = "หน้าแรก";
         }else{
             $checkStatus = strlen($CClass[0]->Reg_Class);
             if($checkStatus == 3){
-                $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_class',$CClass[0]->Reg_Class)->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
+                $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_class',$CClass[0]->Reg_Class)->order_by('s_homevisit_year','DESC')->get('tb_homevisit_send')->result();
             }elseif($checkStatus == 1){           
-                $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2564')->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
+                $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2564')->order_by('s_homevisit_year','DESC')->get('tb_homevisit_send')->result();
             }
         }
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
@@ -51,7 +51,7 @@ var  $title = "หน้าแรก";
         //echo '<pre>'; print_r($CheckClsss);  exit();
         if($CheckClsss > 0){
             $this->session->set_flashdata(array('status'=>'info','msg'=>'YES','messge'=>'ข้อมูลซ้ำ ,ได้บันทึกไว้แล้ว กรุณาตรวจสอบอีกครั้ง'));
-            redirect('Teacher/SupStd/Main');
+            redirect('SupStd/Main');
         }else{
             $data = array('s_homevisit_year' => $year = $this->input->post('s_homevisit_year'),
             's_homevisit_class' => $CClass[0]->Reg_Class,
@@ -61,7 +61,7 @@ var  $title = "หน้าแรก";
             $add = $this->DBaffairs->insert('tb_homevisit_send',$data);
             if($add){
             $this->session->set_flashdata(array('status'=>'success','msg'=>'YES','messge'=>'บันทึกข้อมูลไว้แล้ว และให้เพิ่มไฟล์ตามเมนูที่กำหนด โดยคลิกไอคอน <label class="badge badge-warning h6"><i class="fa fa-upload" aria-hidden="true"></i></label>  อัพโหลดไฟล์'));
-            redirect('Teacher/SupStd/Main');
+            redirect('SupStd/Main');
             }
         }
         
