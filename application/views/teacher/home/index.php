@@ -70,7 +70,18 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="col-md-2 col-6">
+                            <div class="card1 text-center">
+                                <a href="https://www.canva.com/design/DAFM6-tONMU/rh78MScz3cQZpBUxpCCFcQ/view?utm_content=DAFM6-tONMU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" target="_blank">
+                                    <div class="image">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/1705/1705312.png" width="39" />
+                                    </div>
+                                    <span>คู่มือบันทึกผลการเรียน</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+                    
                 </div>
 
 

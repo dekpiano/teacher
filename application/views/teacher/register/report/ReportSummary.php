@@ -95,7 +95,7 @@ td {
             <?php endforeach; ?>
             <td class="center"><?=@array_sum($s)?></td>
             <td class="center">
-                <?php if($v_check_student->StudyTime >= $re_subjuct[0]->SubjectHour): ?>
+                <?php if((80*intVal($v_check_student->StudyTime))/100 >= $re_subjuct[0]->SubjectHour || $v_check_student->StudyTime == ""): ?>
                     มส
                 <?php else: ?>
                 <?=$v_check_student->Grade?>
