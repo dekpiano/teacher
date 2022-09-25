@@ -79,6 +79,8 @@ $(document).on('keyup', '.study_time', function() {
 
 $(document).on('submit', '.form_set_score', function(e) {
     e.preventDefault();
+
+    $('.btn').addClass('disabled')
     $.ajax({
         url: '../../../../../ConTeacherRegister/setting_score/' + $(this).attr('id'),
         type: "post",
