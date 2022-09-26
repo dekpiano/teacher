@@ -1,3 +1,25 @@
+$(document).on('keydown', '.KeyEnter', function(e) {
+    var KeyEn = $(this).index('input.KeyEnter');
+    // console.log(KeyEn);
+    // console.log("Key" + e.keyCode);
+    if (e.keyCode == 37) {
+        KeyEn = KeyEn - 1;
+        $('input.KeyEnter:eq(' + KeyEn + ')').focus();
+    }
+    if (e.keyCode == 39) {
+        KeyEn = KeyEn + 1;
+        $('input.KeyEnter:eq(' + KeyEn + ')').focus();
+    }
+    if (e.keyCode == 38) {
+        KeyEn = KeyEn - 5;
+        $('input.KeyEnter:eq(' + KeyEn + ')').focus();
+    }
+    if (e.keyCode == 40) {
+        KeyEn = KeyEn + 5;
+        $('input.KeyEnter:eq(' + KeyEn + ')').focus();
+    }
+});
+
 $(".score").each(function() {
     $(this).keyup(function() {
         calculateSum();
@@ -59,12 +81,12 @@ $(document).on('keyup', '.check_score', function() {
 $(document).on('keyup', '.study_time', function() {
     var num = parseInt($(this).val());
     var key = parseInt($(this).attr('check-time'));
-   
+
     if (num > key) {
         Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: 'คุณกรอกเวลาเรียนเกินกำหนด '+ key + 'ชั่วโมง <br>กรุณากรอกเวลาเรียนใหม่',
+            title: 'คุณกรอกเวลาเรียนเกินกำหนด ' + key + 'ชั่วโมง <br>กรุณากรอกเวลาเรียนใหม่',
             showConfirmButton: false,
             timer: 3000
         }).then((result) => {
@@ -143,7 +165,7 @@ function Charactor($char) {
 }
 
 function calculateRowSum() {
-    var TimeNum =  $('.study_time').attr('check-time');
+    var TimeNum = $('.study_time').attr('check-time');
     $('table tbody tr').each(function() {
 
         var sum = 0;
@@ -159,10 +181,10 @@ function calculateRowSum() {
         });
 
         study_time = $(this).find('.study_time').val()
-       
+
 
         $(this).find('.subtot').html(sum);
-        if (80*TimeNum/100 > study_time) {
+        if (80 * TimeNum / 100 > study_time) {
             $(this).find('.grade').html('มส');
         } else if (Check_ro > 0) {
             $(this).find('.grade').html('ร');
@@ -245,7 +267,7 @@ $(document).on('submit', '.form_score', function(e) {
                     }
                 })
             } else {
-               // window.location.reload();
+                // window.location.reload();
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

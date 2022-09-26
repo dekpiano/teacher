@@ -129,8 +129,8 @@ table thead {
                                                 name="TimeNum" value="<?=$TimeNum?>">
                                         </td>
                                         <td>
-                                        <input type="text" class="form-control study_time" id="study_time" check-time="<?=$TimeNum;?>"
-                                                name="study_time[]" value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>">
+                                        <input type="text" class="form-control study_time KeyEnter" id="study_time" check-time="<?=$TimeNum;?>"
+                                                name="study_time[]" value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>" autocomplete="off">
                                         </td>
                                         <?php 
                                         foreach ($set_score as $key => $v_set_score): 
@@ -147,13 +147,13 @@ table thead {
                                         
                                         ?>
                                         <td>
-                                            <input type="text" class="form-control check_score"
+                                            <input type="text" class="form-control check_score KeyEnter"
                                                 check-score-key="<?=$v_set_score->regscore_score?>"
                                                 id="<?=$v_check_student->StudentID?>"
                                                 name="<?=$v_check_student->StudentID?>[]"
                                                 value="<?=$v_check_student->Score100 == "" ?"":$s[$key]?>"
                                                <?=$onoff_status == "off"?"readonly":""?> 
-                                                >
+                                               autocomplete="off">
                                         </td>
                                         <?php endforeach; ?>
                                         <td class="align-middle">
