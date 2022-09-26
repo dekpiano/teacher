@@ -370,11 +370,11 @@ class ConTeacherRegister extends CI_Controller {
 
         $data['test'] = $this->input->post('report_RegisterYear'); //true
         $ReportFront = $this->load->view('teacher/register/report/ReportFront',$data,true);        
-      $live_mpdf->WriteHTML($ReportFront);
+        $live_mpdf->WriteHTML($ReportFront);
 
       $live_mpdf->AddPage(); 
-      $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
-    $live_mpdf->WriteHTML($ReportSummary);
+        $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
+        $live_mpdf->WriteHTML($ReportSummary);
         $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE); 
     }
 

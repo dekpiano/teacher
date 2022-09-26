@@ -107,7 +107,7 @@ foreach ($check_student as $key => $v_check_student) {
        }else if($v_check_student->Grade == "ร"){
         $gradeR += 1;
         }else{
-            $sum = intval($v_check_student->Grade);
+            $sum = floatval($v_check_student->Grade);
             if (($sum > 100) || ($sum < 0)) {
                 $grade_error = "ไม่สามารถคิดเกรดได้ คะแนนเกิน";
                 } else if (($sum == 4)) {
