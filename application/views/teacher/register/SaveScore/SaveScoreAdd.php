@@ -53,7 +53,7 @@ table thead {
                 <div class="card-header d-flex align-items-center">
                     <h3 class="h4">รายวิชาที่สอน <?=$check_student[0]->SubjectCode?> <?=$check_student[0]->SubjectName?>
                         ครูประจำวิชา <?=$this->session->userdata('fullname');?></h3>
-                        
+
                 </div>
                 <div class="card-body">
 
@@ -70,7 +70,8 @@ table thead {
                                         $sub_room = explode('/',$sub_doc[1]);
                                         $all_room = $sub_room[0].'-'.$sub_room[1];
                                         ?>
-                                        <option <?=$this->uri->segment(7) == $all_room ?"selected":"" ?> value="<?=$all_room;?>"><?=$v_check_room->StudentClass;?></option>
+                                    <option <?=$this->uri->segment(7) == $all_room ?"selected":"" ?>
+                                        value="<?=$all_room;?>"><?=$v_check_room->StudentClass;?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -125,12 +126,14 @@ table thead {
                                                 name="SubjectCode" value="<?=$check_student[0]->SubjectCode?>">
                                             <input type="text" class="form-control sr-only" id="RegisterYear"
                                                 name="RegisterYear" value="<?=$check_student[0]->RegisterYear?>">
-                                            <input type="text" class="form-control sr-only" id="TimeNum"
-                                                name="TimeNum" value="<?=$TimeNum?>">
+                                            <input type="text" class="form-control sr-only" id="TimeNum" name="TimeNum"
+                                                value="<?=$TimeNum?>">
                                         </td>
                                         <td>
-                                        <input type="text" class="form-control study_time KeyEnter" id="study_time" check-time="<?=$TimeNum;?>"
-                                                name="study_time[]" value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>" autocomplete="off">
+                                            <input type="text" class="form-control study_time KeyEnter" id="study_time"
+                                                check-time="<?=$TimeNum;?>" name="study_time[]"
+                                                value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>"
+                                                autocomplete="off">
                                         </td>
                                         <?php 
                                         foreach ($set_score as $key => $v_set_score): 
@@ -152,8 +155,7 @@ table thead {
                                                 id="<?=$v_check_student->StudentID?>"
                                                 name="<?=$v_check_student->StudentID?>[]"
                                                 value="<?=$v_check_student->Score100 == "" ?"":$s[$key]?>"
-                                               <?=$onoff_status == "off"?"readonly":""?> 
-                                               autocomplete="off">
+                                                <?=$onoff_status == "off"?"readonly":""?> autocomplete="off">
                                         </td>
                                         <?php endforeach; ?>
                                         <td class="align-middle">
@@ -176,10 +178,34 @@ table thead {
                                 </tbody>
                             </table>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">บันทึกคะแนน</button>
-                            </div>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"
+                                        aria-hidden="true"></i> บันทึกคะแนน</button>
 
+                            </div>
                         </form>
+                        <hr>
+                        <div class="text-center ">
+                            <form action="<?=base_url('Register/RopoetPT');?>" method="post" target="_blank">
+
+                                <input type="text" name="report_RegisterYear" id="report_RegisterYear"
+                                    style="display:none" value="<?=$check_room[0]->RegisterYear;?>">
+                                <input type="text" name="report_SubjectCode" id="report_SubjectCode"
+                                    style="display:none" value="<?=$check_student[0]->SubjectCode;?>">
+                                    <?php if( $this->uri->segment(6) == "all") : ?>
+                                    <input type="text" name="select_print" id="select_print"
+                                    style="display:none" value="all">
+                                    <?php else : ?>
+                                        <input type="text" name="select_print" id="select_print"
+                                    style="display:none" value="<?=$check_student[0]->StudentClass;?>">
+                                    <?php endif; ?>
+
+
+                                <button type="submit" class="btn btn-warning"><i class="fa fa-print"
+                                        aria-hidden="true"></i> พิมพ์รายงาน</button>
+                                
+                            </form>
+                        </div>
+
                     </div>
                     <?php else: ?>
 
@@ -268,7 +294,7 @@ table thead {
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit"  class="btn btn-primary " >บันทึกคะแนนเก็บ</button>
+                    <button type="submit" class="btn btn-primary ">บันทึกคะแนนเก็บ</button>
                 </div>
             </form>
         </div>

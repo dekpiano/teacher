@@ -72,6 +72,7 @@ class ConTeacherRegister extends CI_Controller {
         
         $data['check_room'] = $this->db->select('
                                     tb_students.StudentClass,
+                                    tb_register.RegisterYear
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -312,6 +313,7 @@ class ConTeacherRegister extends CI_Controller {
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
                             ->where('SubjectCode',$this->input->post('report_SubjectCode'))
                             ->get('tb_subjects')->result();
+            //echo "<pre>";print_r($data['re_subjuct']); exit();
             $data['re_room'] = $this->input->post('select_print');
             $sub_room = explode(".",$this->input->post('select_print'));
             $sub_Year =  explode("/",$this->input->post('report_RegisterYear'));
