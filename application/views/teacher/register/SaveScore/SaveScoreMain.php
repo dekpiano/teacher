@@ -73,7 +73,7 @@
                                                 aria-hidden="true"></i> ยังไม่เปิดให้บันทึก</a>
                                         <?php else: ?>
                                         <a href="<?=base_url('Register/SaveScoreAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectCode.'/all')?>"
-                                            class="btn btn-primary btn-sm"><i class="fa fa-pencil"
+                                            class="btn btn-primary btn-sm clickLoad"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i> บันทึกผลการเรียน</a>
                                         <?php endif; ?>
                                     </td>

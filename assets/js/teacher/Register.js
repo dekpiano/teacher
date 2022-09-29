@@ -20,6 +20,15 @@ $(document).on('keydown', '.KeyEnter', function(e) {
     }
 });
 
+$(document).on('click', '.clickLoad', function() {
+    // disable button
+    $(this).prop("disabled", true);
+    // add spinner to button
+    $(this).html(
+        '<i class="fa fa-circle-o-notch fa-spin"></i> loading...'
+    );
+});
+
 $(".score").each(function() {
     $(this).keyup(function() {
         calculateSum();
