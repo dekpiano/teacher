@@ -291,6 +291,8 @@ $(document).on('click', '#chcek_report', function() {
     $("#report_RegisterYear").val($(this).attr('report-yaer'));
     $("#report_SubjectCode").val($(this).attr('report-subject'));
 
+    $('#select_print option').remove();
+
     $.post("../ConTeacherRegister/checkroom_report", {
         report_yaer: $(this).attr('report-yaer'),
         report_subject: $(this).attr('report-subject')
@@ -300,5 +302,6 @@ $(document).on('click', '#chcek_report', function() {
             console.log(val.StudentClass);
             $('#select_print').append('<option value="' + val.StudentClass + '">' + val.StudentClass + '</option>');
         });
+        $('#select_print').append('<option value="all">ทั้งหมด</option>');
     }, 'json');
 });
