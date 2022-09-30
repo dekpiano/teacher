@@ -294,7 +294,7 @@ table thead {
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary clickLoad">บันทึกคะแนนเก็บ</button>
+                    <button type="submit" class="btn btn-primary">บันทึกคะแนนเก็บ</button>
                 </div>
             </form>
         </div>
