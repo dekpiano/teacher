@@ -28,9 +28,7 @@ class Welcome extends CI_Controller {
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['banner'] = "";
 		
-		$this->load->view('user/layout/HeaderUser.php',$data);
-        $this->load->view('user/PageWelcomeAcademic.php');
-		$this->load->view('user/layout/FooterUser.php');
+		redirect(base_url());
 	}
 
 	public function LoginStudent()
