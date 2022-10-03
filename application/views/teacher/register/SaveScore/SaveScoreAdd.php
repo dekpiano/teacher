@@ -132,7 +132,7 @@ table thead {
                                         <td>
                                             <input type="text" class="form-control study_time KeyEnter" id="study_time"
                                                 check-time="<?=$TimeNum;?>" name="study_time[]"
-                                                value="<?=$v_check_student->StudyTime == "0" || $v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>"
+                                                value="<?=$v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>"
                                                 autocomplete="off">
                                         </td>
                                         <?php 
