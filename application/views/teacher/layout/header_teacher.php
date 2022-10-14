@@ -21,7 +21,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="<?=base_url()?>assets/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="<?=base_url()?>assets/images/logo_fav.png">
+    <link rel="shortcut icon" href="https://skj.ac.th/uploads/logo/LogoSKJ_4.png">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
