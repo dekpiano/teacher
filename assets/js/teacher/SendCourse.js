@@ -1,4 +1,42 @@
 // Submit form data via Ajax
+$(document).on('submit', '#form_upload_plan', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '../ConTeacherCourse/UploadPlan',
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        //dataType: 'json',
+        beforeSend: function() {
+            // disable button
+            $('#btn-submit').prop("disabled", true);
+            // add spinner to button
+            $('#btn-submit').html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> loading...'
+            );
+        },
+        success: function(response) {
+            console.log(response);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'อัพเดตข้อมูลรายวิชาที่จะใช้ส่งแผนสำเร็จ',
+                showConfirmButton: false,
+                timer: 2000
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.reload();
+                }
+            })
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+});
+
+// Submit form data via Ajax
 $(document).on('submit', '#form_insert_plan', function(e) {
     e.preventDefault();
     $.ajax({

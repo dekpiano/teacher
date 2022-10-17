@@ -210,6 +210,71 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');
     }
 
+    function UploadPlan(){
+        $exp = explode('/',$this->input->post('Year'));
+        
+        $CheckYear = $this->db->get('tb_send_plan_setup')->result();
+        
+        $CheckRegisPlan = $this->db->select('
+        skjacth_academic.tb_register.SubjectCode,
+        skjacth_academic.tb_subjects.SubjectName,
+        skjacth_academic.tb_subjects.SubjectClass,
+        skjacth_academic.tb_subjects.SubjectType,
+        skjacth_academic.tb_register.TeacherID,
+        skjacth_personnel.tb_personnel.pers_learning,
+        skjacth_academic.tb_subjects.SubjectYear
+        ')
+        ->from('skjacth_academic.tb_register')
+        ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
+        ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
+        ->where('SubjectYear',$CheckYear[0]->seplanset_term.'/'.$CheckYear[0]->seplanset_year)
+        ->group_by('skjacth_academic.tb_register.SubjectCode')
+        ->get()->result();
+
+            
+           
+            
+            foreach ($CheckRegisPlan as $key => $value) {          
+                $data = $this->db->select('seplan_coursecode')
+                            ->where('seplan_year',$exp[1])
+                            ->where('seplan_term',$exp[0])
+                            ->where('seplan_coursecode',$value->SubjectCode)
+                            ->group_by('seplan_coursecode')
+                            ->get('tb_send_plan')->result();
+                       
+                if(count($data) == 1){
+                    echo "ซ้ำ";
+                }else{
+                    echo "ไม่ซ้ำ";
+                   
+                         $typePlan  = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','แผนการสอนเต็ม','บันทึกหลังสอน');
+
+                        foreach ($typePlan as $key => $v_typePlan) {                           
+                                $Class = explode('.',$value->SubjectClass);
+                                $Type = explode('/',$value->SubjectType);
+                                $insert =  array('seplan_namesubject'=> $value->SubjectName,
+                                'seplan_coursecode'=> $value->SubjectCode,
+                                'seplan_typesubject'=> $Type[1],                   
+                                'seplan_year'=> $exp[1],
+                                'seplan_term'=> $exp[0],
+                                'seplan_usersend'=> $value->TeacherID,
+                                'seplan_learning'  => $value->pers_learning,
+                                'seplan_status1' => "รอตรวจ",
+                                'seplan_status2' => "รอตรวจ",
+                                'seplan_gradelevel' => $Class[1],
+                                'seplan_typeplan' => $v_typePlan
+                            );
+                            $result= $this->ModTeacherCourse->plan_insert($insert);
+                            
+                        }
+                    }
+                }           
+                
+       // echo json_encode($CheckSendPlan);
+   
+        
+    }
+
     function insert_plan(){
        
        $pers = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_id,pers_position,pers_learning')
@@ -349,7 +414,21 @@ var  $title = "หน้าแรก";
                             ->where($array)
                             ->order_by('pers_learning')
                             ->get('tb_personnel')->result();
-    $CheckYear = $this->db->get('tb_send_plan_setup')->result();
+    $data['CheckYearMain'] = $this->db->get('tb_send_plan_setup')->result();
+    if($this->input->post('Year') == ""){
+        $CheckYear = $this->db->get('tb_send_plan_setup')->result();
+        $data['year'] = $CheckYear[0]->seplanset_year;
+        $data['term'] = $CheckYear[0]->seplanset_term;
+    }else{
+        $CheckYear = explode('/',$this->input->post('Year'));
+        $data['year'] = $CheckYear[1];
+        $data['term'] = $CheckYear[0];
+    }
+
+    $data['CheckSelectYear'] = $this->db->select('seplan_year,seplan_term')
+                                            ->group_by('seplan_year,seplan_term')
+                                            ->order_by('seplan_year,seplan_term','desc')
+                                            ->get('tb_send_plan')->result();
     $data['Plan'] = $this->db->select('skjacth_personnel.tb_personnel.pers_id,
                                         skjacth_personnel.tb_personnel.pers_prefix,
                                         skjacth_personnel.tb_personnel.pers_firstname,
@@ -358,10 +437,10 @@ var  $title = "หน้าแรก";
                                         skjacth_academic.tb_send_plan.*')
                                         ->from('skjacth_academic.tb_send_plan')
                                         ->join('skjacth_personnel.tb_personnel','skjacth_academic.tb_send_plan.seplan_usersend = skjacth_personnel.tb_personnel.pers_id','LEFT')
-                                        ->where('seplan_year',$CheckYear[0]->seplanset_year)
-                                        ->where('seplan_term',$CheckYear[0]->seplanset_term)
+                                        ->where('seplan_year',$data['year'])
+                                        ->where('seplan_term',$data['term'])
                                         ->group_by('seplan_coursecode,pers_id')->get()->result();
-    //print_r($date['SetPlan']); exit();
+    //echo '<pre>';print_r($data['CheckSelectYear']); exit();
     $this->load->view('teacher/layout/header_teacher.php',$data);
     $this->load->view('teacher/layout/navbar_teaher.php');
     $this->load->view('teacher/course/plan/plan_setting_teacher.php');

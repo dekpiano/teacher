@@ -65,6 +65,7 @@ $route['LoginTeacher'] = "Control_login/LoginTeacher";
 // Teacher
 $route['Home'] = "ConTeacherHome/TeacherHome";
 $route['Course'] = "ConTeacherCourse/Course";
+$route['Course/UploadPlan'] = "ConTeacherCourse/UploadPlan";
 $route['Course/LoadPlan'] = "ConTeacherCourse/LoadPlan";
 $route['Course/SendPlan'] = "ConTeacherCourse/send_plan";
 $route['Course/EditPlan/(:num)'] = "ConTeacherCourse/edit_plan/$1";
