@@ -187,11 +187,14 @@ var  $title = "หน้าแรก";
       
     }
 
-    public function SupStdCheckWorkManager(){ 
+    public function SupStdCheckWorkManager($year = null){ 
         $data['title']  = "เช็คงานหัวหน้างาน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
-        $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();             
-        $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2564')->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
+        $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();   
+
+        $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year',$year)->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
+
+        $data['CheckYear'] = $this->DBaffairs->select('s_homevisit_year')->group_by('s_homevisit_year')->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
 
         $this->load->view('teacher/layout/header_teacher.php',$data);

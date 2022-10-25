@@ -93,7 +93,7 @@ $route['Register/RopoetPT'] = "ConTeacherRegister/report_pt";
 
 
 $route['SupStd/Main'] = "ConTeacherStudentSupport/SupStdMain";
-$route['SupStd/CheckWorkManager'] = "ConTeacherStudentSupport/SupStdCheckWorkManager";
+$route['SupStd/CheckWorkManager/(:any)'] = "ConTeacherStudentSupport/SupStdCheckWorkManager/$1";
 $route['SupStd/CheckWorkExecutive'] = "ConTeacherStudentSupport/SupStdCheckWorkExecutive";
 $route['SupStdMain/Add'] = "ConTeacherStudentSupport/SupStdAdd";
 

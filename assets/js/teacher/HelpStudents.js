@@ -162,7 +162,7 @@ $('.ConfrimStatus').change(function(e) {
 $('.ConfrimStatusManager').change(function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../ConTeacherStudentSupport/confrim_statusmanager',
+        url: '../../ConTeacherStudentSupport/confrim_statusmanager',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
@@ -219,4 +219,9 @@ $(document).on("change", "#homevisit_set_onoff", function() {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
         }
     });
+});
+
+$(document).on("change", "#homevisit_ckeck_year", function() {
+    //alert($(this).val());
+    window.location.href = $(this).val();
 });

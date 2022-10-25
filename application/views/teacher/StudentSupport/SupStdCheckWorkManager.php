@@ -17,16 +17,32 @@
                 <strong>
                     สำหรับหัวหน้างาน
                     <div class="float-right">
-                       <small><a target="_blank" href="<?=base_url('uploads/affairs/helpstd/คู่มือ/คู่มือการใช้งานระบบส่งงานเยี่ยมบ้านSDQ.pdf')?>">คู่มือการใช้งาน</a>  | <a target="_blank" href="https://drive.google.com/file/d/1H3Y4uPQ-2kV6T1CsoPn0wvPo3kABFULd/view?fbclid=IwAR2RsE-vTgd4ocwToAzgynJorRX2h2mCkXBZOgAuwB0xns2SK2MAj7wLX5k">โหลดไฟล์ต้นฉบับ</a></small> 
+                        <small><a target="_blank"
+                                href="<?=base_url('uploads/affairs/helpstd/คู่มือ/คู่มือการใช้งานระบบส่งงานเยี่ยมบ้านSDQ.pdf')?>">คู่มือการใช้งาน</a>
+                            | <a target="_blank"
+                                href="https://drive.google.com/file/d/1H3Y4uPQ-2kV6T1CsoPn0wvPo3kABFULd/view?fbclid=IwAR2RsE-vTgd4ocwToAzgynJorRX2h2mCkXBZOgAuwB0xns2SK2MAj7wLX5k">โหลดไฟล์ต้นฉบับ</a></small>
                     </div>
                 </strong>
             </div>
         </div>
 
         <div class="card">
-         
-            <div class="card-header d-flex align-items-center">
-                <h3 class="h4">งานเยี่ยมบ้าน / SDQ</h3>
+
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="h4">งานเยี่ยมบ้าน / SDQ</h3>
+                </div>
+                <div>
+                    <select name="account" class="form-control w-auto" id="homevisit_ckeck_year">
+                        <?php foreach ($CheckYear as $key => $v_CheckYear): ?>
+                        <option <?=$this->uri->segment(3) == $v_CheckYear->s_homevisit_year ?"selected":""?> value="<?= $v_CheckYear->s_homevisit_year?>">ปี <?= $v_CheckYear->s_homevisit_year?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+
+
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -44,7 +60,7 @@
                             </tr>
                         </thead>
                         <!-- สำหรับหัวหน้างาน -->
-                      
+
                         <tbody>
                             <?php 
                                 foreach ($AllAffairs as $key => $v_Aff) :                                                                 
@@ -67,7 +83,7 @@
                                             <?php else : ?>
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
-                                    
+
                                         </div>
                                     </form>
 
@@ -87,7 +103,7 @@
                                             <?php else : ?>
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
-                                         
+
                                         </div>
                                     </form>
                                 </td>
@@ -107,7 +123,7 @@
                                             <?php else : ?>
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
-                                          
+
                                         </div>
                                     </form>
                                 </td>
@@ -126,44 +142,51 @@
                                             <?php else : ?>
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
-                                          
+
                                         </div>
                                     </form>
                                 </td>
                                 <td>
                                     <?php echo $v_Aff->s_homevisit_statuslevelhead; ?>
-                                    
+
                                 </td>
                                 <td>
-                                <?php 
+                                    <?php 
                                    
                                     $statusmanager = $v_Aff->s_homevisit_statusmanager;
-                                      if($statusmanager == "รอตรวจ" || $statusmanager == "ไม่ผ่าน") {
+                                      if($statusmanager == "ไม่ผ่าน") {
                                             $valid = 'is-invalid';
                                       }elseif($statusmanager == "ผ่าน"){
                                         $valid = 'is-valid';
+                                      }elseif($statusmanager == "รอตรวจ" || $statusmanager == ""){
+                                        $valid = "";
                                       }
                                     ?>
-                                   
+
                                     <form class="ConfrimStatusManager" method="post">
                                         <input type="hidden" id="AffID" name="AffID"
                                             value="<?=$v_Aff->s_homevisit_id?>">
-                                        <select name="s_homevisit_statusmanager" id="s_homevisit_statusmanager<?=$v_Aff->s_homevisit_id?>" class="form-control mb-3 <?=$valid?>">
-                                            <option <?=$v_Aff->s_homevisit_statusmanager == "รอตรวจ" ? "selected" : "" ?> value="รอตรวจ">รอตรวจ</option>
+                                        <select name="s_homevisit_statusmanager"
+                                            id="s_homevisit_statusmanager<?=$v_Aff->s_homevisit_id?>"
+                                            class="form-control mb-3 <?=$valid?>">
+                                            <option
+                                                <?=$v_Aff->s_homevisit_statusmanager == "รอตรวจ" ? "selected" : "" ?>
+                                                value="รอตรวจ">รอตรวจ</option>
                                             <option <?=$v_Aff->s_homevisit_statusmanager == "ผ่าน" ? "selected" : "" ?>
                                                 value="ผ่าน">ผ่าน</option>
-                                            <option <?=$v_Aff->s_homevisit_statusmanager == "ไม่ผ่าน" ? "selected" : "" ?>
+                                            <option
+                                                <?=$v_Aff->s_homevisit_statusmanager == "ไม่ผ่าน" ? "selected" : "" ?>
                                                 value="ไม่ผ่าน">ไม่ผ่าน</option>
                                         </select>
                                     </form>
-                                    
+
                                 </td>
                             </tr>
-                           
+
                             <?php endforeach; ?>
                         </tbody>
-                      
-                    
+
+
                     </table>
                 </div>
             </div>
@@ -207,7 +230,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
