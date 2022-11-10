@@ -11,12 +11,12 @@ var  $title = "หน้าแรก";
 		}
         $this->DBpersonnel = $this->load->database('personnel', TRUE); 
         $this->DBaffairs = $this->load->database('affairs', TRUE);
-        $this->CheckHomeVisitManager = $this->DBaffairs->select('homevisit_set_id,homevisit_set_manager')->where('homevisit_set_id',1)->get('tb_homevisit_setting')->first_row();
+        $this->CheckHomeVisitManager = $this->DBaffairs->select('homevisit_set_id,homevisit_set_manager,homevisit_set_onoff')->where('homevisit_set_id',1)->get('tb_homevisit_setting')->first_row();
     }
 
     public function SupStdMain(){      
         $data['title']  = "หน้าหลักเยี่ยมบ้านนักเรียน";  
-        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $data['CheckOnOff'] = $this->CheckHomeVisitManager;
         //print_r($CheckHomeVisitManager->homevisit_set_manager); exit();
 
         $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();
@@ -189,7 +189,7 @@ var  $title = "หน้าแรก";
 
     public function SupStdCheckWorkManager($year = null){ 
         $data['title']  = "เช็คงานหัวหน้างาน";
-        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $data['CheckOnOff'] = $this->CheckHomeVisitManager;
         $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();   
 
         $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year',$year)->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();

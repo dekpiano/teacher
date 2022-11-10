@@ -11,20 +11,34 @@
         <?php  if(isset($CClass[0]->Reg_Class)):
     $IfLen = strlen($CClass[0]->Reg_Class); 
     ?>
-        <div class="statistic d-flex align-items-center bg-white has-shadow">
-            <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
-            <div class="text">
-                <strong>
-                    สำหรับหัวหน้างาน
-                    <div class="float-right">
-                        <small><a target="_blank"
-                                href="<?=base_url('uploads/affairs/helpstd/คู่มือ/คู่มือการใช้งานระบบส่งงานเยี่ยมบ้านSDQ.pdf')?>">คู่มือการใช้งาน</a>
-                            | <a target="_blank"
-                                href="https://drive.google.com/file/d/1H3Y4uPQ-2kV6T1CsoPn0wvPo3kABFULd/view?fbclid=IwAR2RsE-vTgd4ocwToAzgynJorRX2h2mCkXBZOgAuwB0xns2SK2MAj7wLX5k">โหลดไฟล์ต้นฉบับ</a></small>
-                    </div>
-                </strong>
+        <div class="statistic d-flex align-items-center bg-white has-shadow justify-content-between">
+            <div class="d-flex">
+                <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
+                <div>
+                    <strong>
+                        สำหรับหัวหน้างาน
+                    </strong>
+                    <strong>
+                        <div>
+                            <small><a target="_blank"
+                                    href="<?=base_url('uploads/affairs/helpstd/คู่มือ/คู่มือการใช้งานระบบส่งงานเยี่ยมบ้านSDQ.pdf')?>">คู่มือการใช้งาน</a>
+                                | <a target="_blank"
+                                    href="https://drive.google.com/file/d/1H3Y4uPQ-2kV6T1CsoPn0wvPo3kABFULd/view?fbclid=IwAR2RsE-vTgd4ocwToAzgynJorRX2h2mCkXBZOgAuwB0xns2SK2MAj7wLX5k">โหลดไฟล์ต้นฉบับ</a></small>
+                        </div>
+                    </strong>
+                </div>
+            </div>
+
+            <div>
+                สถานะระบบ 
+                <select name="homevisit_set_onoff" id="homevisit_set_onoff" class="form-control mb-3">
+                    <option <?=$CheckOnOff->homevisit_set_onoff == "on" ?"selected":"";?> value="on">เปิด</option>
+                    <option <?=$CheckOnOff->homevisit_set_onoff == "off" ?"selected":"";?> value="off">ปิด</option>
+                </select>
             </div>
         </div>
+
+
 
         <div class="card">
 
@@ -35,7 +49,9 @@
                 <div>
                     <select name="account" class="form-control w-auto" id="homevisit_ckeck_year">
                         <?php foreach ($CheckYear as $key => $v_CheckYear): ?>
-                        <option <?=$this->uri->segment(3) == $v_CheckYear->s_homevisit_year ?"selected":""?> value="<?= $v_CheckYear->s_homevisit_year?>">ปี <?= $v_CheckYear->s_homevisit_year?></option>
+                        <option <?=$this->uri->segment(3) == $v_CheckYear->s_homevisit_year ?"selected":""?>
+                            value="<?= $v_CheckYear->s_homevisit_year?>">ปี <?= $v_CheckYear->s_homevisit_year?>
+                        </option>
                         <?php endforeach; ?>
                     </select>
                 </div>

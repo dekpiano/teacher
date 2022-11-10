@@ -71,7 +71,7 @@
 
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=12"></script>
+          
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=20"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
@@ -81,6 +81,10 @@
 
           <?php if($this->uri->segment(1) === "Register"): ?>
           <script src="<?=base_url()?>assets/js/teacher/Register.js?v=24"></script>
+          <?php endif; ?>
+
+          <?php if($this->uri->segment(1) === "SupStd"): ?>
+            <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=14"></script>
           <?php endif; ?>
 
           </body>

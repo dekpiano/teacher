@@ -201,8 +201,8 @@ $('.ConfrimStatusManager').change(function(e) {
 
 
 $(document).on("change", "#homevisit_set_onoff", function() {
-    //alert($(this).prop('checked'));
-    $.post("../ConTeacherStudentSupport/Setting_Helpstd_OnOff", { onoff: $(this).prop('checked') }, function(data, status) {
+    //alert($(this).val());
+    $.post("../../ConTeacherStudentSupport/Setting_Helpstd_OnOff", { onoff: $(this).val() }, function(data, status) {
         if (data == 1) {
             Swal.fire({
                 position: 'top-end',
@@ -224,4 +224,12 @@ $(document).on("change", "#homevisit_set_onoff", function() {
 $(document).on("change", "#homevisit_ckeck_year", function() {
     //alert($(this).val());
     window.location.href = $(this).val();
+});
+
+$(document).on("click", ".SendCheckOnOff", function() {
+    Swal.fire(
+        'แจ้งเตือน!',
+        'ระบบปิดให้ส่งเยี่ยมบ้านแล้ว !',
+        'warning'
+    )
 });

@@ -78,7 +78,7 @@
                     <li class="<?=$this->uri->segment(2) == 'Main' ? 'active' : '' ?>">
                         <a href="<?=base_url('SupStd/Main');?>">เยี่ยมบ้าน / SDQ</a>
                     </li>
-                    <?php if(@$CheckHomeVisitManager->homevisit_set_manager == $this->session->userdata('login_id')): ?>
+                    <?php if('pers_006' == $this->session->userdata('login_id')): ?>
                     <span class="heading">ตรวจงาน</span>
                     <li class="<?=$this->uri->segment(2) == 'CheckWorkManager' ? 'active' : '' ?>">
                         <a href="<?=base_url('SupStd/CheckWorkManager/2565');?>">หัวหน้างาน</a>
