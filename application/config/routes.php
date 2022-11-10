@@ -90,6 +90,8 @@ $route['Teaching/RoomOnlineMain'] = "ConTeacherTeaching/RoomOnlineMain";
 $route['Register/SaveScoreMain'] = "ConTeacherRegister/SaveScoreMain";
 $route['Register/SaveScoreAdd/(:any)/(:any)/(:any)/(:any)'] = "ConTeacherRegister/SaveScoreAdd/$1/$2/$3/$4";
 $route['Register/RopoetPT'] = "ConTeacherRegister/report_pt";
+$route['Register/LearnRepeatMain'] = "ConTeacherRegister/LearnRepeatMain";
+$route['Register/LearnRepeatAdd/(:any)/(:any)/(:any)/(:any)'] = "ConTeacherRegister/LearnRepeatAdd/$1/$2/$3/$4";
 
 
 $route['SupStd/Main'] = "ConTeacherStudentSupport/SupStdMain";

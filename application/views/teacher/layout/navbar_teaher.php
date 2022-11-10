@@ -29,7 +29,8 @@
             <li><a href="#TeacherSaveScore" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานวัดผล </a>
                 <ul id="TeacherSaveScore" class="collapse list-unstyled <?=$this->uri->segment(1) == 'Register' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(2) == 'SaveScoreMain' ? 'active' : '' ?>"><a href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน</a></li>                  
+                    <li class="<?=$this->uri->segment(2) == 'SaveScoreMain' ? 'active' : '' ?>"><a href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a></li>  
+                    <li class="<?=$this->uri->segment(2) == 'LearnRepeatMain' ? 'active' : '' ?>"><a href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a></li>                
                 </ul>
             </li>
             
