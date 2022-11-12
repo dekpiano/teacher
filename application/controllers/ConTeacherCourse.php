@@ -449,6 +449,9 @@ var  $title = "หน้าแรก";
 
  function setting_teacher_eidt(){     
     $PlanCode = $this->input->post('PlanCode');
+    $PlanYear = $this->input->post('PlanYear');
+    $PlanTerm = $this->input->post('PlanTerm');
+
     $json = $this->db->select('seplan_namesubject,
                                 seplan_coursecode,
                                 seplan_gradelevel,
@@ -457,6 +460,8 @@ var  $title = "หน้าแรก";
                                 seplan_term,
                                 seplan_usersend')
                                 ->where('seplan_coursecode',$PlanCode)
+                                ->where('seplan_year',$PlanYear)
+                                ->where('seplan_term',$PlanTerm)
                                 ->limit(1)
                                 ->get('tb_send_plan')
                                 ->result();

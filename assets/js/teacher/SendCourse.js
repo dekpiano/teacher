@@ -89,7 +89,12 @@ $(document).on('submit', '#form_insert_plan', function(e) {
 
 
 $(document).on("click", ".EditTeach", function() {
-    $.post("../ConTeacherCourse/setting_teacher_eidt", { PlanCode: $(this).attr('PlanCode') }, function(data, status) {
+    console.log($(this).attr('PlanYear'));
+    $.post("../ConTeacherCourse/setting_teacher_eidt", {
+        PlanCode: $(this).attr('PlanCode'),
+        PlanYear: $(this).attr('PlanYear'),
+        PlanTerm: $(this).attr('PlanTerm')
+    }, function(data, status) {
         $('#up_seplan_coursecode').val(data[0].seplan_coursecode);
         $('#up_seplan_namesubject').val(data[0].seplan_namesubject);
         $('#up_seplan_gradelevel').val(data[0].seplan_gradelevel);

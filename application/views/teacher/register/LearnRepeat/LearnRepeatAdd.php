@@ -56,7 +56,7 @@ table thead {
                         ครูประจำวิชา <?=$this->session->userdata('fullname');?></h3>
 
                 </div>
-                <div class="card-body">
+                <div class="card-body bg-warning">
 
                     <?php if(!empty($set_score)):?>
                     <div>
@@ -78,7 +78,7 @@ table thead {
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive bg-white">
                         <form class="form_score">
                             <table id="tb_score" class="table table-hover table-bordered">
                                 <thead class="text-center">
@@ -209,7 +209,7 @@ table thead {
                         <?php if($check_student) :?>
                         <hr>
                         <div class="text-center ">
-                            <form action="<?=base_url('Register/RopoetPT');?>" method="post" target="_blank">
+                            <form action="<?=base_url('Register/ReportLearnRepeat');?>" method="post" target="_blank">
 
                                 <input type="text" name="report_RegisterYear" id="report_RegisterYear"
                                     style="display:none" value="<?=@$check_room[0]->RegisterYear;?>">
@@ -224,7 +224,7 @@ table thead {
                                 <?php endif; ?>
 
 
-                                <button type="submit" class="btn btn-warning"><i class="fa fa-print"
+                                <button type="submit" class="btn btn-warning  mb-3"><i class="fa fa-print"
                                         aria-hidden="true"></i> พิมพ์รายงาน</button>
 
                             </form>
