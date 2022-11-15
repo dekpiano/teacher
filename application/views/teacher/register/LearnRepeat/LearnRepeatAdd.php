@@ -46,20 +46,20 @@ table thead {
     <div class="container-fluid">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-close">
+                <!-- <div class="card-close">
                     <a href="#" id="chcek_score" subject-id="<?=@$check_student[0]->SubjectID?>"
                         class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">ตั้งค่าคะแนน</a>
-                </div>
+                </div> -->
                 <div class="card-header d-flex align-items-center">
                     <h3 class="h4">รายวิชาที่สอน <?=@$check_student[0]->SubjectCode?>
                         <?=@$check_student[0]->SubjectName?>
                         ครูประจำวิชา <?=$this->session->userdata('fullname');?></h3>
 
                 </div>
-                <div class="card-body bg-warning">
+                <div class="card-body">
 
                     <?php if(!empty($set_score)):?>
-                    <div>
+                    <!-- <div>
                         <div class="form-group row justify-content-center">
                             <label class="col-sm-3 form-control-label align-self-center text-right">เลือกห้อง</label>
                             <div class="col-sm-4">
@@ -77,7 +77,7 @@ table thead {
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="table-responsive bg-white">
                         <form class="form_score">
                             <table id="tb_score" class="table table-hover table-bordered">

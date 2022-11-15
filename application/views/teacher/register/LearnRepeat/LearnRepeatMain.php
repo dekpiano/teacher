@@ -66,7 +66,7 @@
                                     <td><?=$v_check_subject->SubjectUnit?></td>
                                     <td><?=$v_check_subject->SubjectHour?></td>
                                     <td>
-                                        <?php if(1 != 1): ?>
+                                        <?php if($onoff[0]->onoff_status == 'off'): ?>
                                         <a href="#" data-toggle="modal"
                                             data-target="#AlertNoReg"
                                             class="btn btn-danger btn-sm"><i class="fa fa-pencil"

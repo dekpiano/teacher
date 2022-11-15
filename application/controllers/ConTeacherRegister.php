@@ -158,10 +158,10 @@ class ConTeacherRegister extends CI_Controller {
         }
 
         $check_idSubject = $this->db->where('SubjectCode',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
-        //print_r(urldecode($subject)); exit();
+        //print_r($check_idSubject); exit();
         $data['set_score'] = $this->db->where('regscore_subjectID',$check_idSubject->SubjectID)->get('tb_register_score')->result();
         $data['onoff_savescore'] = $this->db->where('onoff_id >=',2)->where('onoff_id <=',5)->get('tb_register_onoff')->result();   
-      
+       
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -401,7 +401,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->group_by('tb_register.SubjectCode')
                                 ->get()->result();
-        $data['onoff'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();                        
+        $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
         //echo '<pre>'; print_r($data['onoff']);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
