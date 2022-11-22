@@ -102,7 +102,7 @@
                                     <img src="https://cdn-icons-png.flaticon.com/512/1705/1705312.png" width="36" />
                                 </div>
                                 <div>
-                                    <a
+                                    <a target="_blank"
                                         href="https://www.canva.com/design/DAFM6-tONMU/rh78MScz3cQZpBUxpCCFcQ/view?utm_content=DAFM6-tONMU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">
                                         <div class="text">
                                             <h4 class="m-0">คู่มือบันทึกผลการเรียน</h4>

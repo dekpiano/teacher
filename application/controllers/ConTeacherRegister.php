@@ -39,7 +39,7 @@ class ConTeacherRegister extends CI_Controller {
     public function SaveScoreMain(){      
         $data['title']  = "หน้าบันทึกผลการเรียนหลัก";
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['check_subject'] = $this->db->select('
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,
@@ -67,7 +67,7 @@ class ConTeacherRegister extends CI_Controller {
     public function SaveScoreAdd($term,$yaer,$subject,$room){      
         $data['title']  = "บันทึกผลการเรียน";
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
        
         
         $data['check_room'] = $this->db->select('
@@ -385,7 +385,7 @@ class ConTeacherRegister extends CI_Controller {
     public function LearnRepeatMain(){
         $data['title']  = "หน้าบันทึกผลการเรียน (ซ้ำ)";
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['check_subject'] = $this->db->select('
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,

@@ -18,6 +18,7 @@ var  $title = "หน้าแรก";
     public function CheckHomeRoom(){      
         $data['title']  = "โฮมรูม";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['teacher'] = $this->db->select('skjacth_personnel.tb_personnel.pers_prefix,
                                             skjacth_personnel.tb_personnel.pers_firstname,
                                             skjacth_personnel.tb_personnel.pers_lastname,

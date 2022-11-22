@@ -45,7 +45,7 @@
                         <tbody>
                             <?php  foreach ($planNew as $key => $v_planNew): ?>
                             <tr>
-                                <td scope="row"><?=$v_planNew->seplan_term?>/<?=$v_planNew->seplan_year?></td>
+                                <td scope="row"><?=$v_planNew->seplan_year?>/<?=$v_planNew->seplan_term?></td>
                                 <td><?=$v_planNew->seplan_coursecode.' '.$v_planNew->seplan_namesubject?>
                                     (<?=$v_planNew->seplan_typesubject?>)</td>
                                 <td>ม.<?=$v_planNew->seplan_gradelevel?></td>

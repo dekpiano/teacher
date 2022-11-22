@@ -3,7 +3,8 @@
     <nav class="side-navbar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="https://academic.skj.ac.th/uploads/General/Personnel/<?=$this->session->userdata('img');?>"
+            <div class="avatar"><img
+                    src="https://academic.skj.ac.th/uploads/General/Personnel/<?=$this->session->userdata('img');?>"
                     alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
                 <h1 class="h4"><?=$this->session->userdata('fullname');?> </h1>
@@ -19,8 +20,11 @@
         <ul class="list-unstyled">
             <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูผู้สอน </a>
-                <ul id="TeacherLarn" class="collapse list-unstyled <?=$this->uri->segment(1) == 'Teaching' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(2) == 'CheckHomeRoomMain' || $this->uri->segment(2) == 'CheckHomeRoomAdd'|| $this->uri->segment(2) == 'CheckHomeRoomStatistics' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/CheckHomeRoomMain');?>">เช็ตชื่อโฮมรูม</a></li>
+                <ul id="TeacherLarn"
+                    class="collapse list-unstyled <?=$this->uri->segment(1) == 'Teaching' ? 'show' : '' ?>">
+                    <li
+                        class="<?=$this->uri->segment(2) == 'CheckHomeRoomMain' || $this->uri->segment(2) == 'CheckHomeRoomAdd'|| $this->uri->segment(2) == 'CheckHomeRoomStatistics' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Teaching/CheckHomeRoomMain');?>">เช็ตชื่อโฮมรูม</a></li>
                     <!-- <li class="<?=$this->uri->segment(2) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
                     <li class="<?=$this->uri->segment(2) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li> -->
                 </ul>
@@ -28,12 +32,15 @@
 
             <li><a href="#TeacherSaveScore" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานวัดผล </a>
-                <ul id="TeacherSaveScore" class="collapse list-unstyled <?=$this->uri->segment(1) == 'Register' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(2) == 'SaveScoreMain' ? 'active' : '' ?>"><a href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a></li>  
-                    <li class="<?=$this->uri->segment(2) == 'LearnRepeatMain' ? 'active' : '' ?>"><a href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a></li>                
+                <ul id="TeacherSaveScore"
+                    class="collapse list-unstyled <?=$this->uri->segment(1) == 'Register' ? 'show' : '' ?>">
+                    <li class="<?=$this->uri->segment(2) == 'SaveScoreMain' ? 'active' : '' ?>"><a
+                            href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a></li>
+                    <li class="<?=$this->uri->segment(2) == 'LearnRepeatMain' ? 'active' : '' ?>"><a
+                            href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a></li>
                 </ul>
             </li>
-            
+
             <li class=" <?=$this->uri->segment(1) == 'Course' ? 'active' : '' ?>">
                 <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานหลักสูตร </a>
@@ -41,27 +48,40 @@
                     class="collapse list-unstyled  <?=$this->uri->segment(1) == 'Course' ? 'show' : '' ?>">
                     <?php if($this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002') : ?>
                     <?php else : ?>
-                    <li><a href="<?=base_url('Course');?>"><i class="fa fa-file" aria-hidden="true"></i>
+                    <li
+                        class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == '' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Course');?>"><i class="fa fa-file" aria-hidden="true"></i>
                             ส่งแผนการสอน</a>
                     </li>
-                    <li><a href="<?=base_url('Course/LoadPlan');?>"><i class="fa fa-file" aria-hidden="true"></i>
-                           ดาวน์โหลดแผน</a>
+                    <li
+                        class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'LoadPlan' ? 'active' : '' ?>">
+                        <a
+                            href="<?=base_url('Course/LoadPlan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>"><i
+                                class="fa fa-file" aria-hidden="true"></i>
+                            ดาวน์โหลดแผน</a>
                     </li>
                     <?php endif; ?>
 
                     <?php if($this->session->userdata('groupleade') == 1 || $this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002' || $this->session->userdata('login_id') == 'pers_021') : ?>
                     <span class="heading">สำหรับหัวหน้า</span>
-                    <li>
+                    <li
+                        class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'CheckPlan' ? 'active' : '' ?>">
                         <a href="<?=base_url('Course/CheckPlan');?>"> <i class="icon-flask"></i>ตรวจงาน /
                             ดาวน์โหลด </a>
+                    </li>
+                    <li class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'ReportPlan' ? 'active' : '' ?>">
                         <a href="<?=base_url('Course/ReportPlan');?>"> <i class="fa fa-print"
                                 aria-hidden="true"></i>รายงาน </a>
                         <!-- <a href="<?=base_url('Course/DownloadPlan');?>"> <i class="fa fa-print" aria-hidden="true"></i>ดาวน์โหลดแผน </a> -->
+                    </li>
+                    <li class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'SettingTeacher' ? 'active' : '' ?>">
                         <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_021'): ?>
-                        <a  href="<?=base_url('Course/SettingTeacher');?>"> <i class="fa fa-cogs"></i>ตั้งค่าครูผู้สอน </a>
+                        <a href="<?=base_url('Course/SettingTeacher');?>"> <i class="fa fa-cogs"></i>ตั้งค่าครูผู้สอน
+                        </a>
                         <a href="<?=base_url('Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่าระบบ </a>
                         <?php endif; ?>
                     </li>
+
                     <?php endif; ?>
                 </ul>
             </li>

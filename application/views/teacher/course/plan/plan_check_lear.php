@@ -24,7 +24,7 @@
 
             <div class="card-body no-padding">
                 <div class="item d-flex align-items-center">
-                    <div class="image"><img src="https://skj.ac.th/uploads/personnel/<?=$v_techer->pers_img?>"
+                    <div class="image"><img src="https://academic.skj.ac.th/uploads/General/Personnel/<?=$v_techer->pers_img?>"
                             alt="..." class="img-fluid rounded-circle"></div>
                     <div class="text"><a href="<?=base_url('Course/CheckPlan/'.$lean[0]->lear_id.'/'.$v_techer->pers_id)?>">
                             <h3 class="h5">

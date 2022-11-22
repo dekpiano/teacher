@@ -31,7 +31,7 @@ var  $title = "หน้าแรก";
     public function CheckHomeRoomMain(){
         $data['title']  = "หน้าแรกโฮมรูม";       
         $data['teacher'] = $this->TeacRoom();
-        //echo '<pre>';print_r($data['teacher']); exit();
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
 
         if($data['teacher'][0]->Reg_Class == "1" || $data['teacher'][0]->Reg_Class == "2"|| $data['teacher'][0]->Reg_Class == "3" || $data['teacher'][0]->Reg_Class == "4" || $data['teacher'][0]->Reg_Class == "5" || $data['teacher'][0]->Reg_Class == "6"){
             redirect('Teacher/Teaching/CheckHomeRoomDashboard/'.date('d-m-Y'));
@@ -57,7 +57,7 @@ var  $title = "หน้าแรก";
         $data['title'] = "แดชบอร์ดโฮมรูม";
         $data['teacher'] = $this->TeacRoom();
         $data['Time'] = $this->DBaffairs->select('set_homeroom_time')->where('set_homeroom_id',1)->get('tb_checkhomeroom_setting')->result();
-        
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         
         $data['showHR'] = $this->DBaffairs->where('chk_home_date',date('Y-m-d', strtotime($key)))                       ->like('chk_home_room',$data['teacher'][0]->Reg_Class, 'after')
                                 ->order_by('chk_home_room','ASC')
@@ -131,7 +131,7 @@ var  $title = "หน้าแรก";
     public function CheckHomeRoomAdd(){      
         $data['title']  = "เช็คชื่อโฮมรูม";
         $data['teacher'] = $this->TeacRoom();
-        //print_r($data['teacher'][0]->Reg_Class); exit();
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['student'] = $this->db->select('StudentID,
                                                 StudentNumber,
                                                 StudentClass,
@@ -291,7 +291,7 @@ var  $title = "หน้าแรก";
     public function CheckHomeRoomStatistics(){
         $data['title']  = "สถิติโฮมรูม";
         $data['teacher'] = $this->TeacRoom();
-
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $checif = array('chk_home_term'=>'1',
                         'chk_home_yaer'=>'2565',
                         'chk_home_room'=> $data['teacher'][0]->Reg_Class
@@ -309,6 +309,7 @@ var  $title = "หน้าแรก";
 
     public function CheckTeaching(){      
         $data['title']  = "เช็คชื่อการสอน";
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
@@ -324,6 +325,7 @@ var  $title = "หน้าแรก";
 
     public function RoomOnlineMain(){      
         $data['title']  = "หน้าหลักห้องเรียนออนไลน์";
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['RoomOnline'] =$this->db->get('tb_room_online')->result();

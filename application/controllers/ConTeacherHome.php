@@ -17,6 +17,7 @@ var  $title = "หน้าแรก";
     public function TeacherHome(){      
         $data['title']  = "หน้าแรก";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');

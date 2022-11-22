@@ -2,15 +2,31 @@
 <header class="page-header">
     <div class="container-fluid">
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center ">
-            <h2 class="no-margin-bottom">แผนการสอน</h2>  
+            <h2 class="no-margin-bottom">แผนการสอน</h2>
         </div>
     </div>
 </header>
 <!-- Dashboard Counts Section-->
 <section class="">
     <div class="container-fluid">
-    
+
         <?php  $typeplan = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
+        <div class="card p-3">
+            <div cass="card-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <label for="" class="mr-2 mb-0">เลือกปีการศึกษา</label>
+                    <select name="CheckYear" id="CheckYear" class="form-control w-auto">
+                        <?php foreach ($CheckYear as $key => $v_CheckYear): ?>
+                        <option 
+                        <?=$this->uri->segment(3) == $v_CheckYear->seplan_year && $this->uri->segment(4) == $v_CheckYear->seplan_term ?"selected":""?> 
+                        value="<?=$v_CheckYear->seplan_year.'/'.$v_CheckYear->seplan_term;?>">
+                            <?=$v_CheckYear->seplan_term.'/'.$v_CheckYear->seplan_year;?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+            </div>
+        </div>
         <div class="card">
             <div cass="card-body">
                 <div class="p-3">
@@ -32,25 +48,21 @@
                             <?php 
                             foreach ($planNew as $key => $v_planNew):?>
                             <tr>
-                                <td scope="row"><?=$v_planNew->seplan_term?>/<?=$v_planNew->seplan_year?></td>
+                                <td scope="row"><?=$v_planNew->seplan_year?>/<?=$v_planNew->seplan_term?></td>
                                 <td><?=$v_planNew->seplan_coursecode.' '.$v_planNew->seplan_namesubject?></td>
                                 <td>ม.<?=$v_planNew->seplan_gradelevel?></td>
                                 <td><?=$v_planNew->seplan_typesubject?></td>
 
                                 <?php foreach($typeplan as $key => $v_typeplan): ?>
                                 <?php foreach($plan as $key => $v_plan): ?>
-                                <?php if($v_plan->seplan_coursecode == $v_planNew->seplan_coursecode && $v_plan->seplan_typeplan == $v_typeplan):  ?>
+                                <?php if($v_plan->seplan_coursecode == $v_planNew->seplan_coursecode && $v_plan->seplan_typeplan == $v_typeplan && $v_plan->seplan_year == $v_planNew->seplan_year && $v_plan->seplan_term == $v_planNew->seplan_term):  ?>
                                 <td>
-                          
                                     <a href="<?=base_url('uploads/academic/course/plan/'.$v_plan->seplan_year.'/'.$v_plan->seplan_term.'/'.$v_plan->seplan_namesubject.'/'.$v_plan->seplan_file)?>"
                                         target="_blank" rel="noopener noreferrer">
                                         <span class="badge badge-primary h6 text-white"><i class="fa fa-eye"
                                                 aria-hidden="true" data-toggle="popover" data-trigger="hover"
                                                 data-content="เปิดดู" data-placement="top"></i></span>
                                     </a>
-                                  
-
-                                    
                                 </td>
                                 <?php endif; ?>
                                 <?php endforeach; ?>
@@ -105,7 +117,7 @@
 
             <?php else: ?>
             <div class="modal-body">
-                ระบบปิดอยู่  ยังไม่ถึงกำหนดส่งงาน หรือ เกินกำหนดส่งงาน <br>
+                ระบบปิดอยู่ ยังไม่ถึงกำหนดส่งงาน หรือ เกินกำหนดส่งงาน <br>
                 ไม่สามารถเพิ่มไฟล์หรือแก้ไขไฟล์ได้ <br>
                 ติดต่อหัวงานหลักสูตร
             </div>

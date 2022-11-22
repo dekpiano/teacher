@@ -72,7 +72,7 @@
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
           
-          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=21"></script>
+          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=22"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
           <?php if($this->uri->segment(1) === "Teaching"): ?>
@@ -140,7 +140,8 @@ $(document).ready(function() {
     });
     $('#tb_checkplan').DataTable({
         "order": [
-            [6, "desc"]
+            [0, "desc"],
+            [2, "asc"]
         ]
     });
     $('#TableShoowPlan').DataTable({

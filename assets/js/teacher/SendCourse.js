@@ -511,3 +511,9 @@ $(document).on("click", "#sub_comment2", function() {
         }
     });
 });
+
+
+$(document).on("change", "#CheckYear", function() {
+    console.log($(this).val());
+    window.location.href = "../" + $(this).val();
+});

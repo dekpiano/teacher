@@ -18,7 +18,7 @@ var  $title = "หน้าแรก";
         $data['title']  = "หน้าหลักเยี่ยมบ้านนักเรียน";  
         $data['CheckOnOff'] = $this->CheckHomeVisitManager;
         //print_r($CheckHomeVisitManager->homevisit_set_manager); exit();
-
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();
         if(!isset($CClass[0]->Reg_Class)){
             //echo 'ยังไม่ได้ประจำชั้นเรียน กรุณาเพิ่มชั้นเรียนก่อน โดยติดต่อเจ้าหน้าที่'; exit();
@@ -191,7 +191,7 @@ var  $title = "หน้าแรก";
         $data['title']  = "เช็คงานหัวหน้างาน";
         $data['CheckOnOff'] = $this->CheckHomeVisitManager;
         $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();   
-
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year',$year)->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
 
         $data['CheckYear'] = $this->DBaffairs->select('s_homevisit_year')->group_by('s_homevisit_year')->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
@@ -206,7 +206,7 @@ var  $title = "หน้าแรก";
     public function SupStdCheckWorkExecutive(){ 
         $data['title']  = "เช็คงานผู้บริหาร";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
-
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();             
         $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2564')->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();

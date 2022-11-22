@@ -43,15 +43,25 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');        
     }
 
-    public function LoadPlan(){      
+    public function LoadPlan($Year,$Term){      
         $data['title'] = "ดาวน์โหลดแผนการสอน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
-        $CheckYear = $this->db->get('tb_send_plan_setup')->result();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+               
         $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->get('tb_send_plan')->result();
         $data['planNew'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))
-        ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
-     //  echo "<pre>"; print_r($data['plan']); exit();        
+                        ->where('seplan_year',$Year)
+                        ->where('seplan_term',$Term)
+                        ->group_by('seplan_coursecode')
+                        ->group_by('seplan_year')
+                        ->group_by('seplan_term')
+                        ->get('tb_send_plan')->result();
+        $data['CheckYear'] = $this->db->select('seplan_year,seplan_term')
+                                        ->group_by('seplan_year')
+                                        ->group_by('seplan_term')
+                                        ->get('tb_send_plan')->result();
+
+        //echo "<pre>"; print_r($data['CheckYear']); exit();        
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_loadplan.php');
@@ -611,6 +621,7 @@ var  $title = "หน้าแรก";
 
       public function report_plan($key = null){
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['ID'] = $key;
         $data['thai'] = urldecode($key);
         $data['title'] = "รายงาน";       
@@ -676,7 +687,7 @@ var  $title = "หน้าแรก";
         $data['thai'] = urldecode($key);
         $data['title'] = "รายงาน";
         $DBskj = $this->load->database('skj', TRUE); 
-        
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $setupplan = $this->db->get('tb_send_plan_setup')->result();
 
         if($leanKey){
@@ -852,6 +863,7 @@ var  $title = "หน้าแรก";
 
         $data['title'] = "ดาวน์โหลดแผน";  
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager; 
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['teacher'] = $this->DBPers->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_groupleade,pers_learning') 
                                 ->where('pers_learning !=','')
 						        ->get('tb_personnel')->result();    

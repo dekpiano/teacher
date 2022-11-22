@@ -75,6 +75,7 @@ class ConTeacherProfile extends CI_Controller {
 	function profile_teacher(){
 		$data['title'] = $this->title;
 		$data['menu'] =	$this->db->get('tb_adminmenu')->result();		
+		$data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
 		$this->DBPers->select('*');
 		$this->DBPers->from('tb_personnel');
 		$this->DBPers->join($this->DBSKJ->database.'.tb_position','tb_personnel.pers_position = tb_position.posi_id');
