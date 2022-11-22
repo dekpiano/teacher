@@ -94,7 +94,7 @@
                                         <div class="col-md-4">
                                             <div class="text-center">
                                                 <img alt="Andrew Jones"
-                                                    src="https://skj.ac.th/uploads/personnel/<?=$pers[0]->pers_img?>"
+                                                    src="https://academic.skj.ac.th/uploads/General/Personnel/<?=$pers[0]->pers_img?>"
                                                     class="rounded-circle img-responsive mt-2" width="128" height="128">
 
                                             </div>

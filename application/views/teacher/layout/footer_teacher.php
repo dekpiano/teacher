@@ -87,6 +87,11 @@
             <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=14"></script>
           <?php endif; ?>
 
+          <?php if($this->uri->segment(1) === "Profile"): ?>
+          <script src="<?=base_url()?>assets/js/teacher/TeacherProfile.js?v=1"></script>
+          <?php endif; ?>
+
+
           </body>
 
           <script>
