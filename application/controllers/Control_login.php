@@ -86,6 +86,8 @@ class Control_login extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = md5(md5($this->input->post('password')));
 			
+			//print_r($password);exit();
+			
 			
 			if($this->input->server('REQUEST_METHOD') == TRUE){
 				if($this->Model_login->record_count_teacher1($username, $password) == 1)
@@ -198,7 +200,7 @@ class Control_login extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = md5(md5($this->input->post('password')));
 			
-			
+		
 			if($this->input->server('REQUEST_METHOD') == TRUE){
 				if($this->Model_login->record_count_teacher1($username, $password) == 1)
 				{

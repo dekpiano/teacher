@@ -58,11 +58,11 @@
                         <a
                             href="<?=base_url('Course/LoadPlan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>"><i
                                 class="fa fa-file" aria-hidden="true"></i>
-                            ดาวน์โหลดแผน</a>
+                            ดาวน์โหลดแผน <?=$this->session->userdata('groupleade');?></a>
                     </li>
                     <?php endif; ?>
 
-                    <?php if($this->session->userdata('groupleade') == 1 || $this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002' || $this->session->userdata('login_id') == 'pers_021') : ?>
+                    <?php if($this->session->userdata('groupleade') == "หัวหน้ากลุ่มสาระ" || $this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002' || $this->session->userdata('login_id') == 'pers_021') : ?>
                     <span class="heading">สำหรับหัวหน้า</span>
                     <li
                         class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'CheckPlan' ? 'active' : '' ?>">
