@@ -145,7 +145,7 @@
                                     <img src="https://cdn-icons-png.flaticon.com/512/25/25407.png" width="36" />
                                 </div>
                                 <div>
-                                    <a href="<?=base_url('Course/LoadPlan');?>">
+                                    <a href="<?=base_url('Course/LoadPlan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>">
                                         <div class="text">
                                             <h4 class="m-0">ดาวโหลดแผน</h4>
                                         </div>
