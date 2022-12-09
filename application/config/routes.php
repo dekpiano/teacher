@@ -99,3 +99,6 @@ $route['SupStd/CheckWorkManager/(:any)'] = "ConTeacherStudentSupport/SupStdCheck
 $route['SupStd/CheckWorkExecutive'] = "ConTeacherStudentSupport/SupStdCheckWorkExecutive";
 $route['SupStdMain/Add'] = "ConTeacherStudentSupport/SupStdAdd";
 
+
+$route['BudgetPlan/Cooperative/Home'] = "BudgetPlan/ConTeacherCooperative/CooperativeMain";
+$route['BudgetPlan/Cooperative'] = "BudgetPlan/ConTeacherCooperative/CooperativeShareCapital";

@@ -24,7 +24,8 @@
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Teaching' ? 'show' : '' ?>">
                     <li
                         class="<?=$this->uri->segment(2) == 'CheckHomeRoomMain' || $this->uri->segment(2) == 'CheckHomeRoomAdd'|| $this->uri->segment(2) == 'CheckHomeRoomStatistics' ? 'active' : '' ?>">
-                        <a href="<?=base_url('Teaching/CheckHomeRoomMain');?>">เช็ตชื่อโฮมรูม</a></li>
+                        <a href="<?=base_url('Teaching/CheckHomeRoomMain');?>">เช็ตชื่อโฮมรูม</a>
+                    </li>
                     <!-- <li class="<?=$this->uri->segment(2) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
                     <li class="<?=$this->uri->segment(2) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li> -->
                 </ul>
@@ -69,12 +70,14 @@
                         <a href="<?=base_url('Course/CheckPlan');?>"> <i class="icon-flask"></i>ตรวจงาน /
                             ดาวน์โหลด </a>
                     </li>
-                    <li class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'ReportPlan' ? 'active' : '' ?>">
+                    <li
+                        class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'ReportPlan' ? 'active' : '' ?>">
                         <a href="<?=base_url('Course/ReportPlan');?>"> <i class="fa fa-print"
                                 aria-hidden="true"></i>รายงาน </a>
                         <!-- <a href="<?=base_url('Course/DownloadPlan');?>"> <i class="fa fa-print" aria-hidden="true"></i>ดาวน์โหลดแผน </a> -->
                     </li>
-                    <li class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'SettingTeacher' ? 'active' : '' ?>">
+                    <li
+                        class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'SettingTeacher' ? 'active' : '' ?>">
                         <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_021'): ?>
                         <a href="<?=base_url('Course/SettingTeacher');?>"> <i class="fa fa-cogs"></i>ตั้งค่าครูผู้สอน
                         </a>
@@ -109,6 +112,13 @@
                     </li> -->
                     <?php endif; ?>
                 </ul>
+            </li>
+        </ul>
+
+        <span class="heading">งานงบประมาณและแผน</span>
+        <ul class="list-unstyled">
+            <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
+                <a href="<?=base_url('BudgetPlan/Cooperative/Home')?>"> <i class="icon-interface-windows"></i>สหกรณ์โรงเรียน(ครู) </a>
             </li>
         </ul>
 
