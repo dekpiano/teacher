@@ -40,6 +40,7 @@ class ConTeacherRegister extends CI_Controller {
         $data['title']  = "หน้าบันทึกผลการเรียนหลัก";
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $schoolyear = $this->db->select('*')->get('tb_schoolyear')->result();
         $data['check_subject'] = $this->db->select('
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,
@@ -53,7 +54,9 @@ class ConTeacherRegister extends CI_Controller {
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('tb_register.RegisterYear',$schoolyear[0]->schyear_year)
                                 ->group_by('tb_register.SubjectCode')
+                                ->order_by('tb_register.RegisterClass')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();                        
         //echo '<pre>'; print_r($data['onoff']);exit();
@@ -386,6 +389,7 @@ class ConTeacherRegister extends CI_Controller {
         $data['title']  = "หน้าบันทึกผลการเรียน (ซ้ำ)";
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $schoolyear = $this->db->select('*')->get('tb_schoolyear')->result();
         $data['check_subject'] = $this->db->select('
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,
@@ -399,6 +403,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('tb_register.RegisterYear',$schoolyear[0]->schyear_year)
                                 ->group_by('tb_register.SubjectCode')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
