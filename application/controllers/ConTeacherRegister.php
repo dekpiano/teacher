@@ -55,6 +55,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RegisterYear',$schoolyear[0]->schyear_year)
+                                ->where('tb_subjects.SubjectYear',$schoolyear[0]->schyear_year)
                                 ->group_by('tb_register.SubjectCode')
                                 ->order_by('tb_register.RegisterClass')
                                 ->get()->result();
