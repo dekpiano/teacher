@@ -117,7 +117,7 @@ table thead {
                                 <tbody>
                                     <?php 
                                     foreach ($check_student as $key => $v_check_student) :
-                                        if($v_check_student->Grade_Type == 'เรียนซ้ำครั้งที่ 1' || $v_check_student->Grade == "มส"):  
+                                        if($v_check_student->Grade_Type == 'เรียนซ้ำครั้งที่ 1'):  
                                     ?>
                                     <tr>
                                         <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
@@ -126,6 +126,8 @@ table thead {
                                         <td class="align-middle">
                                             <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
                                             <?=$v_check_student->StudentLastName?>
+                                            <br>
+                                           <small>(<?=$v_check_student->Grade_Type?>)</small> 
                                             <input type="text" class="form-control sr-only" id="StudentID"
                                                 name="StudentID[]" value="<?=$v_check_student->StudentID?>">
                                             <input type="text" class="form-control sr-only" id="SubjectCode"

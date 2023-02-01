@@ -422,7 +422,8 @@ class ConTeacherRegister extends CI_Controller {
     public function LearnRepeatAdd($term,$yaer,$subject,$room){      
         $data['title']  = "บันทึกผลการเรียน (ซ้ำ)";
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();
        
         
         $data['check_room'] = $this->db->select('
@@ -507,7 +508,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
                                 ->where('tb_students.StudentClass','ม.'.$sub_room)
-                                ->where('tb_register.Grade','มส')
+                                ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
@@ -518,7 +519,7 @@ class ConTeacherRegister extends CI_Controller {
       
         $data['set_score'] = $this->db->where('regscore_subjectID',$check_idSubject->SubjectID)->get('tb_register_score')->result();
         $data['onoff_savescore'] = $this->db->where('onoff_id >=',2)->where('onoff_id <=',5)->get('tb_register_onoff')->result();   
-        //print_r($data['check_student']); exit();
+        //echo '<pre>'; print_r($data['check_student']); exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
