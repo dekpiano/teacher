@@ -399,6 +399,7 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.TeacherID,
+                                    tb_register.Grade_Type,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
@@ -407,8 +408,10 @@ class ConTeacherRegister extends CI_Controller {
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('tb_register.RegisterYear',$schoolyear[0]->schyear_year)
-                                ->group_by('tb_register.SubjectCode')
+                                ->where('tb_register.Grade_Type !=',"")
+                                //->where('tb_register.RegisterYear <=',$schoolyear[0]->schyear_year)
+                                //->group_by('tb_register.SubjectCode')
+                                ->group_by('tb_register.RegisterYear')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
         //echo '<pre>'; print_r($data['onoff']);exit();
@@ -470,6 +473,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')

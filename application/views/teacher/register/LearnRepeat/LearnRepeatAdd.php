@@ -46,10 +46,10 @@ table thead {
     <div class="container-fluid">
         <div class="col-lg-12">
             <div class="card">
-                <!-- <div class="card-close">
+                <div class="card-close">
                     <a href="#" id="chcek_score" subject-id="<?=@$check_student[0]->SubjectID?>"
                         class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">ตั้งค่าคะแนน</a>
-                </div> -->
+                </div>
                 <div class="card-header d-flex align-items-center">
                     <h3 class="h4">รายวิชาที่สอน <?=@$check_student[0]->SubjectCode?>
                         <?=@$check_student[0]->SubjectName?>
