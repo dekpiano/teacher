@@ -109,7 +109,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?=base_url('Register/RopoetPT');?>" method="post" target="_blank">
+            <form action="<?=base_url('Register/ReportLearnRepeat');?>" method="post" target="_blank">
                 <div class="modal-body">
                     <select name="select_print" id="select_print" class="form-control mb-3">
                         <option value="all">ทั้งหมด</option>
