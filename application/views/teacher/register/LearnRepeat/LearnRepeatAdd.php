@@ -54,7 +54,10 @@ table thead {
                 <div class="card-header d-flex align-items-center">
                     <h3 class="h4">รายวิชาที่สอน <?=@$check_student[0]->SubjectCode?>
                         <?=@$check_student[0]->SubjectName?>
-                        ครูประจำวิชา <?=$this->session->userdata('fullname');?></h3>
+                        ครูประจำวิชา <?=$this->session->userdata('fullname');?>
+                        ปีการศึกษา 
+                        <?php print_r($check_student[0]->RegisterYear); ?>
+                    </h3>
 
                 </div>
                 <div class="card-body">

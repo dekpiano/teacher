@@ -410,11 +410,11 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.Grade_Type !=',"")
                                 //->where('tb_register.RegisterYear <=',$schoolyear[0]->schyear_year)
-                                //->group_by('tb_register.SubjectCode')
-                                ->group_by('tb_register.RegisterYear')
+                                ->group_by('tb_register.SubjectCode')
+                                //->group_by('tb_register.RegisterYear')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
-        //echo '<pre>'; print_r($data['onoff']);exit();
+        //echo '<pre>'; print_r($data['check_subject']);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');

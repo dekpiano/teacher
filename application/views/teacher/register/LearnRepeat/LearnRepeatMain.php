@@ -68,8 +68,7 @@
                                     <td><?=$v_check_subject->SubjectHour?></td>
                                     <td>
                                         <?php if($onoff[0]->onoff_status == 'off'): ?>
-                                        <a href="#" data-toggle="modal"
-                                            data-target="#AlertNoReg"
+                                        <a href="#" data-toggle="modal" data-target="#AlertNoReg"
                                             class="btn btn-danger btn-sm"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i> ยังไม่เปิดให้บันทึก</a>
                                         <?php else: ?>
@@ -79,11 +78,21 @@
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <a href="#" id="chcek_report" class="btn btn-primary btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal"
-                                            report-yaer="<?=$v_check_subject->RegisterYear?>"
-                                            report-subject="<?=$v_check_subject->SubjectCode?>"><i class="fa fa-print"
-                                                aria-hidden="true"></i> พิมพ์รายงาน</a>
+                                        <form action="<?=base_url('Register/ReportLearnRepeat');?>" method="post"
+                                            target="_blank">
+                                            <input type="text" name="report_RegisterYear" id="report_RegisterYear"
+                                                style="display:none" value="<?=$v_check_subject->RegisterYear;?>">
+                                            <input type="text" name="report_SubjectCode" id="report_SubjectCode"
+                                                style="display:none" value="<?=$v_check_subject->SubjectCode;?>">
+                                            
+                                            <input type="text" name="select_print" id="select_print"
+                                                style="display:none" value="all">
+                                            
+
+                                            <button type="submit" class="btn btn-warning  mb-3"><i class="fa fa-print"
+                                                    aria-hidden="true"></i> พิมพ์รายงาน</button>
+
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -96,36 +105,6 @@
 
     </div>
 </section>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">พิมพ์รายงาน</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?=base_url('Register/ReportLearnRepeat');?>" method="post" target="_blank">
-                <div class="modal-body">
-                    <select name="select_print" id="select_print" class="form-control mb-3">
-                        <option value="all">ทั้งหมด</option>
-                    </select>
-
-                    <input type="text" name="report_RegisterYear" id="report_RegisterYear" style="display:none">
-                    <input type="text" name="report_SubjectCode" id="report_SubjectCode" style="display:none">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">พิมพ์</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="AlertNoReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
