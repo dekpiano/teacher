@@ -89,7 +89,7 @@
                                                 style="display:none" value="all">
                                             
 
-                                            <button type="submit" class="btn btn-warning  mb-3"><i class="fa fa-print"
+                                            <button type="submit" class="btn btn-warning"><i class="fa fa-print"
                                                     aria-hidden="true"></i> พิมพ์รายงาน</button>
 
                                         </form>

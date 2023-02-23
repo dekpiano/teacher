@@ -104,7 +104,7 @@ $grade4 = 0;$grade35 = 0;$grade3 = 0;$grade25 = 0;$grade2 = 0;$grade15 = 0;$grad
 
 foreach ($check_student as $key => $v_check_student) {
 
-    if($v_check_student->Grade == "มส" || $v_check_student->Grade_Type != ''){
+    if($v_check_student->Grade_Type != ''){
         $count_all += 1;
         if($v_check_student->Grade == "มส"){
             $gradeMS += 1;

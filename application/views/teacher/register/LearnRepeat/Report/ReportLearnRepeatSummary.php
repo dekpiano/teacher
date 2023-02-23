@@ -80,7 +80,7 @@ td {
     <tbody>
         <?php 
         foreach ($check_student as $key => $v_check_student) :
-            if($v_check_student->Grade == "มส" || $v_check_student->Grade_Type == 'เรียนซ้ำครั้งที่ 1'):
+            if($v_check_student->Grade_Type != ''):
         ?>
         <tr>
             <td class="center"><?=$v_check_student->StudentClass?></td>
