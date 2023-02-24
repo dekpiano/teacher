@@ -411,7 +411,9 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('tb_register.Grade_Type !=',"")
                                 //->where('tb_register.RegisterYear <=',$schoolyear[0]->schyear_year)
                                 ->group_by('tb_register.SubjectCode')
+                                ->group_by('tb_register.RegisterYear')
                                 //->group_by('tb_register.RegisterYear')
+                                ->order_by('tb_register.RegisterYear','ASC')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
         //echo '<pre>'; print_r($data['check_subject']);exit();
