@@ -77,6 +77,8 @@
 
           <?php if($this->uri->segment(1) === "Teaching"): ?>
           <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=9"></script>
+          <script src="<?=base_url()?>assets/js/html5-qrcode.min.js?v=1"></script>
+          <script src="<?=base_url()?>assets/js/teacher/RaedQrcode.js?v=1"></script>
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Register"): ?>
@@ -90,6 +92,8 @@
           <?php if($this->uri->segment(1) === "Profile"): ?>
           <script src="<?=base_url()?>assets/js/teacher/TeacherProfile.js?v=1"></script>
           <?php endif; ?>
+
+          
 
 
           </body>

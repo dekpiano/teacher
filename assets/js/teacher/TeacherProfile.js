@@ -37,7 +37,7 @@ $(document).on('click', '#submit_password', function() {
                 icon: 'success'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    //location.reload();
+                    location.reload();
                 }
             })
         }

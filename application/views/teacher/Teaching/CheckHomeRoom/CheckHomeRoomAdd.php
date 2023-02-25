@@ -99,6 +99,9 @@
 <!-- Dashboard Counts Section-->
 <section class="">
     <div class="container">
+
+    <div style="width: 500px" id="reader"></div>
+
         <?php if(empty(@$ChkHomeRoom[0]->chk_home_ma)): ?>
         <div class="alert alert-danger" role="alert">
             <div class="row">
