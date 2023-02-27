@@ -309,6 +309,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
