@@ -367,14 +367,17 @@ class ConTeacherRegister extends CI_Controller {
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('RegisterYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_register.RegisterYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
                                 ->where('tb_students.StudentClass',$this->input->post('select_print'))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
            
-        //echo '<pre>';print_r($data['check_student']); exit();
+       // echo '<pre>';print_r($data['check_student']); exit();
+        // ->where('tb_register.RegisterYear',$term.'/'.$yaer)
+        //                         ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
         }
 
 
@@ -382,7 +385,7 @@ class ConTeacherRegister extends CI_Controller {
         $ReportFront = $this->load->view('teacher/register/report/ReportFront',$data,true);        
         $live_mpdf->WriteHTML($ReportFront);
 
-      $live_mpdf->AddPage(); 
+        $live_mpdf->AddPage(); 
         $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
         $live_mpdf->WriteHTML($ReportSummary);
         $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE); 
