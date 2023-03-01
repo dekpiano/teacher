@@ -90,7 +90,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Profile"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/TeacherProfile.js?v=1"></script>
+          <script src="<?=base_url()?>assets/js/teacher/TeacherProfile.js?v=3"></script>
           <?php endif; ?>
 
           

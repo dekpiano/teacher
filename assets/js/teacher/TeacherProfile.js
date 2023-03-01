@@ -65,3 +65,21 @@ $(document).on('click', '#update_Privateinfo', function() {
 
     });
 });
+
+$(document).on('submit', '#TeacherSocial', function(e) {
+    e.preventDefault();
+    $.post('../teacher/ConTeacherProfile/updateSocial_teacher', $('form#TeacherSocial').serialize(), function(response) {
+        if (response == 1) {
+            Swal.fire({
+                title: "แจ้งเตือน",
+                text: "เปลี่ยนข้อมูล Social เรียบร้อย",
+                icon: "success"
+            }).then((willDelete) => {
+                if (willDelete) {
+                    //location.reload();
+                }
+            });
+        }
+
+    });
+});

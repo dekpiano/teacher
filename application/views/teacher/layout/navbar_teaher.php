@@ -35,9 +35,9 @@
                         class="icon-interface-windows"></i>งานวัดผล </a>
                 <ul id="TeacherSaveScore"
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Register' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(2) == 'SaveScoreMain' ? 'active' : '' ?>"><a
+                    <li class="<?=$this->uri->segment(2) == 'SaveScoreMain' || $this->uri->segment(2) =='SaveScoreAdd' ? 'active' : '' ?>"><a
                             href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a></li>
-                    <li class="<?=$this->uri->segment(2) == 'LearnRepeatMain' ? 'active' : '' ?>"><a
+                    <li class="<?=$this->uri->segment(2) == 'LearnRepeatMain' || $this->uri->segment(2) =='LearnRepeatAdd' ? 'active' : '' ?>"><a
                             href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a></li>
                 </ul>
             </li>

@@ -105,9 +105,9 @@ class ConTeacherProfile extends CI_Controller {
 						'pers_youtube' => $pers_youtube,
 						'pers_line' => $pers_line ,
 						'pers_twitter' => $pers_twitter);
-		$this->ModTeacherProfile->teacher_UpdateSocial($data);
-		$this->session->set_flashdata(array('msg'=> 'YES','messge' => 'อัปเดพข้อมูลสำเร็จ','status'=>'success'));
-		redirect('Teacher/Profile');
+		echo $this->ModTeacherProfile->teacher_UpdateSocial($data);
+		
+		//redirect('Teacher/Profile');
 	}
 
 	function profile_update_Privateinfo_personnel(){
