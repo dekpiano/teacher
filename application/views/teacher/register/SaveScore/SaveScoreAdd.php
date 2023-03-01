@@ -130,7 +130,7 @@ table thead {
                                                 value="<?=$TimeNum?>">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control study_time KeyEnter" id="study_time"
+                                            <input type="text" class="form-control study_time KeyEnter text-center" id="study_time"
                                                 check-time="<?=$TimeNum;?>" name="study_time[]"
                                                 value="<?=$v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>"
                                                 autocomplete="off">
@@ -150,7 +150,7 @@ table thead {
                                         
                                         ?>
                                         <td>
-                                            <input type="text" class="form-control check_score KeyEnter"
+                                            <input type="text" class="form-control check_score KeyEnter text-center"
                                                 check-score-key="<?=$v_set_score->regscore_score?>"
                                                 id="<?=$v_check_student->StudentID?>"
                                                 name="<?=$v_check_student->StudentID?>[]"

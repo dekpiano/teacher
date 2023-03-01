@@ -193,9 +193,10 @@ class ConTeacherRegister extends CI_Controller {
                     $Grade = $this->check_grade(array_sum($this->input->post($value)));
                 }
             }
+            
 
             $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
-            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num]);
+            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'));
            echo $this->db->update('tb_register',$data,$key);
         }
         
