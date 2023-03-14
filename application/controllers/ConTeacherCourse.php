@@ -92,6 +92,7 @@ var  $title = "หน้าแรก";
         $data['title'] = "แก้ไขงาน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['plan'] = $this->db->where('seplan_ID',$id)->get('tb_send_plan')->result();
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_edit.php');
@@ -417,7 +418,8 @@ var  $title = "หน้าแรก";
 
    // ------------------------------ ตั้งค่าตั้งค่าครูผู้สอน -----------------------------
 
-   function setting_teacher(){         
+   function setting_teacher(){    
+    $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();     
     $data['title'] = "ตั้งค่าครูผู้สอน";
     $array = array('pers_position >=' => 'posi_003', 'pers_position <=' => 'posi_006');
     $data['pers'] = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_id,pers_position,pers_learning')
@@ -508,6 +510,7 @@ var  $title = "หน้าแรก";
      function setting_plan(){         
         $data['title'] = "ตั้งค่า";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['SetPlan'] = $this->db->get('tb_send_plan_setup')->result();
         //print_r($date['SetPlan']); exit();
         $this->load->view('teacher/layout/header_teacher.php',$data);
@@ -517,6 +520,7 @@ var  $title = "หน้าแรก";
      }
 
      function setting_UpdatePlan(){
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
          $dateS = str_replace('/', '-', $this->input->post('seplanset_startdate'));
          $startdate = date('Y-m-d H:i:s',strtotime($this->input->post('seplanset_startdate')));
          $dateE = str_replace('/', '-', $this->input->post('seplanset_enddate'));
