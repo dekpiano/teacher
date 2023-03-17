@@ -77,7 +77,29 @@ td {
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($check_student as $key => $v_check_student) : ?>
+        <?php foreach ($check_student as $key => $v_check_student) : 
+            if($v_check_student->Grade_Type != ""): ?>
+        <tr>
+            <td class="align-middle text-center"><?=$v_check_student->StudentNumber?></td>
+            <td class="align-middle text-center"><?=$v_check_student->StudentCode?></td>
+            <td class="align-middle">
+                <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
+                <?=$v_check_student->StudentLastName?>
+            </td>
+            <td colspan="7" class="center" style="color: #dc3545 !important;"></td>
+                    ** นักเรียน เรียนซ้ำ **
+            </td>
+            <td class="align-middle text-center">
+                <?php 
+                if($v_check_student->StudentBehavior == "ปกติ"){ 
+                    echo '<span class="text-success">'.$v_check_student->StudentBehavior.'</span>';
+                }else{
+                    echo '<span class="text-danger">'.$v_check_student->StudentBehavior.'</span>';
+                }
+                ?>
+            </td>
+        </tr>
+        <?php else:?>
         <tr>
             <td class="center"><?=$v_check_student->StudentNumber?></td>
             <td class="center"><?=$v_check_student->StudentCode?></td>
@@ -96,13 +118,14 @@ td {
             <td class="center"><?=@array_sum($s)?></td>
             <td class="center">
                 <?php if((80*intVal($v_check_student->StudyTime))/100 >= $re_subjuct[0]->SubjectHour || $v_check_student->StudyTime == ""): ?>
-                    มส
+                มส
                 <?php else: ?>
                 <?=$v_check_student->Grade?>
                 <?php endif; ?>
             </td>
             <td class="center"><?=$v_check_student->StudentBehavior?></td>
         </tr>
+        <?php endif; ?>
         <?php endforeach; ?>
     </tbody>
 
