@@ -112,7 +112,40 @@ table thead {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($check_student as $key => $v_check_student) :  ?>
+                                    <?php foreach ($check_student as $key => $v_check_student) : 
+                                    if($v_check_student->Grade_Type != "") : 
+                                        ?>
+                                       <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
+                                        <td class="align-middle text-center"><?=$v_check_student->StudentNumber?></td>
+                                        <td class="align-middle text-center"><?=$v_check_student->StudentCode?></td>
+                                        <td class="align-middle">
+                                            <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
+                                            <?=$v_check_student->StudentLastName?>
+                                            <input type="text" class="form-control sr-only" id="StudentID"
+                                                name="StudentID[]" value="<?=$v_check_student->StudentID?>">
+                                            <input type="text" class="form-control sr-only" id="SubjectCode"
+                                                name="SubjectCode" value="<?=$check_student[0]->SubjectCode?>">
+                                            <input type="text" class="form-control sr-only" id="RegisterYear"
+                                                name="RegisterYear" value="<?=$check_student[0]->RegisterYear?>">
+                                            <input type="text" class="form-control sr-only" id="TimeNum" name="TimeNum"
+                                                value="<?=$TimeNum?>">
+                                        </td>
+                                        <td colspan="7">
+                                            <div class="text-danger text-center"> 
+                                            ** นักเรียน เรียนซ้ำ ** 
+                                            </div>
+                                           
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <?php 
+                                            if($v_check_student->StudentBehavior == "ปกติ"){ 
+                                                echo '<span class="text-success">'.$v_check_student->StudentBehavior.'</span>';
+                                            }else{
+                                                echo '<span class="text-danger">'.$v_check_student->StudentBehavior.'</span>';
+                                            }
+                                            ?>
+                                        </td>
+                                        <?php else:?>
                                     <tr>
                                         <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
                                         <td class="align-middle text-center"><?=$v_check_student->StudentNumber?></td>
@@ -174,6 +207,7 @@ table thead {
                                             ?>
                                         </td>
                                     </tr>
+                                    <?php endif; ?>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>

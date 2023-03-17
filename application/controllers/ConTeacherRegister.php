@@ -111,7 +111,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
                                     tb_students.StudentStatus,
-                                    tb_students.StudentBehavior
+                                    tb_students.StudentBehavior,
+                                    tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -148,7 +149,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
                                     tb_students.StudentStatus,
-                                    tb_students.StudentBehavior
+                                    tb_students.StudentBehavior,
+                                    tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -479,16 +481,17 @@ class ConTeacherRegister extends CI_Controller {
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
-                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID','LEFT')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
+                                //->where('tb_register.Grade_Type !=','')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
-                                // echo '<pre>'; print_r($data['check_student']); exit();
+                               //echo '<pre>'; print_r($data['check_student']); exit();
        
         }else{
             $sub_checkroom = explode('-',$room);
