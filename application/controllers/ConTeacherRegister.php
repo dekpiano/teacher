@@ -382,6 +382,7 @@ class ConTeacherRegister extends CI_Controller {
         //                         ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
         }
 
+       // echo '<pre>';print_r($data['check_student']); exit();
 
         $data['test'] = $this->input->post('report_RegisterYear'); //true
         $ReportFront = $this->load->view('teacher/register/report/ReportFront',$data,true);        
