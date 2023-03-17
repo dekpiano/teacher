@@ -305,7 +305,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
                                     tb_students.StudentStatus,
-                                    tb_students.StudentBehavior
+                                    tb_students.StudentBehavior,
+                                    tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -365,7 +366,8 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
                                     tb_students.StudentStatus,
-                                    tb_students.StudentBehavior
+                                    tb_students.StudentBehavior,
+                                    tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')

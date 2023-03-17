@@ -115,7 +115,8 @@ table thead {
                                     <?php foreach ($check_student as $key => $v_check_student) : 
                                     if($v_check_student->Grade_Type != "") : 
                                         ?>
-                                       <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
+                                    <tr>
+                                        <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
                                         <td class="align-middle text-center"><?=$v_check_student->StudentNumber?></td>
                                         <td class="align-middle text-center"><?=$v_check_student->StudentCode?></td>
                                         <td class="align-middle">
@@ -131,10 +132,10 @@ table thead {
                                                 value="<?=$TimeNum?>">
                                         </td>
                                         <td colspan="7">
-                                            <div class="text-danger text-center"> 
-                                            ** นักเรียน เรียนซ้ำ ** 
+                                            <div class="text-danger text-center">
+                                                ** นักเรียน เรียนซ้ำ **
                                             </div>
-                                           
+
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php 
@@ -145,7 +146,8 @@ table thead {
                                             }
                                             ?>
                                         </td>
-                                        <?php else:?>
+                                    </tr>
+                                    <?php else:?>
                                     <tr>
                                         <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
                                         <td class="align-middle text-center"><?=$v_check_student->StudentNumber?></td>
@@ -163,8 +165,8 @@ table thead {
                                                 value="<?=$TimeNum?>">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control study_time KeyEnter text-center" id="study_time"
-                                                check-time="<?=$TimeNum;?>" name="study_time[]"
+                                            <input type="text" class="form-control study_time KeyEnter text-center"
+                                                id="study_time" check-time="<?=$TimeNum;?>" name="study_time[]"
                                                 value="<?=$v_check_student->StudyTime == "" ?"":$v_check_student->StudyTime?>"
                                                 autocomplete="off">
                                         </td>
@@ -225,18 +227,18 @@ table thead {
                                     style="display:none" value="<?=$check_room[0]->RegisterYear;?>">
                                 <input type="text" name="report_SubjectCode" id="report_SubjectCode"
                                     style="display:none" value="<?=$check_student[0]->SubjectCode;?>">
-                                    <?php if( $this->uri->segment(6) == "all") : ?>
-                                    <input type="text" name="select_print" id="select_print"
-                                    style="display:none" value="all">
-                                    <?php else : ?>
-                                        <input type="text" name="select_print" id="select_print"
-                                    style="display:none" value="<?=$check_student[0]->StudentClass;?>">
-                                    <?php endif; ?>
+                                <?php if( $this->uri->segment(6) == "all") : ?>
+                                <input type="text" name="select_print" id="select_print" style="display:none"
+                                    value="all">
+                                <?php else : ?>
+                                <input type="text" name="select_print" id="select_print" style="display:none"
+                                    value="<?=$check_student[0]->StudentClass;?>">
+                                <?php endif; ?>
 
 
                                 <button type="submit" class="btn btn-warning"><i class="fa fa-print"
                                         aria-hidden="true"></i> พิมพ์รายงาน</button>
-                                
+
                             </form>
                         </div>
 
