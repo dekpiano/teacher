@@ -403,6 +403,7 @@ class ConTeacherRegister extends CI_Controller {
         $data['title']  = "หน้าหลักบันทึกผลการเรียน (ซ้ำ)";
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $register_onoff = $this->db->select('*')->where('onoff_id',7)->get('tb_register_onoff')->result();
         $schoolyear = $this->db->select('*')->get('tb_schoolyear')->result();
         $data['check_subject'] = $this->db->select('
                                     tb_register.SubjectCode,
@@ -419,14 +420,15 @@ class ConTeacherRegister extends CI_Controller {
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.Grade_Type !=',"")
-                                //->where('tb_register.RegisterYear <=',$schoolyear[0]->schyear_year)
+                                ->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
+                                ->where('tb_register.RegisterYear <=',$register_onoff[0]->onoff_year)
                                 ->group_by('tb_register.SubjectCode')
+                                ->group_by('tb_subjects.SubjectName')
                                 ->group_by('tb_register.RegisterYear')
-                                //->group_by('tb_register.RegisterYear')
                                 ->order_by('tb_register.RegisterYear','ASC')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
-        //echo '<pre>'; print_r($data['check_subject']);exit();
+        //echo '<pre>'; print_r($register_onoff[0]->onoff_year);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
