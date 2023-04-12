@@ -87,6 +87,8 @@ $route['Teaching/CheckHomeRoomDashboard/(:any)'] = "ConTeacherTeaching/CheckHome
 $route['Teaching/CheckTeaching'] = "ConTeacherTeaching/CheckTeaching";
 $route['Teaching/RoomOnlineMain'] = "ConTeacherTeaching/RoomOnlineMain";
 
+$route['TeacherJob/CheckNameFrontSchool'] = "ConTeacherTeacherJob/CheckNameFrontSchoolMain";
+
 $route['Register/SaveScoreMain'] = "ConTeacherRegister/SaveScoreMain";
 $route['Register/SaveScoreAdd/(:any)/(:any)/(:any)/(:any)'] = "ConTeacherRegister/SaveScoreAdd/$1/$2/$3/$4";
 $route['Register/RopoetPT'] = "ConTeacherRegister/report_pt";

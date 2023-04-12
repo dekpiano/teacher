@@ -37,6 +37,29 @@
             </div>
             <div class="card-body no-padding">
 
+            <div class="services">
+                    <div class="pt-3">
+                        งานครูเวร
+                    </div>
+                    <hr>
+                    <div class="row" style="padding-top:5px">
+                        <div class="col-md-4 ">
+                            <div class="statistic d-flex align-items-center bg-white has-shadow">
+                                <div class="icon">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" width="36" />
+                                </div>
+                                <div>
+                                    <a href="<?=base_url('TeacherJob/CheckNameFrontSchool');?>">
+                                        <div class="text">
+                                            <h4 class="m-0">เช็คชื่อหน้าประตูโรงเรียน</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="services">
                     <div class="pt-3">
                         งานครูผู้สอน

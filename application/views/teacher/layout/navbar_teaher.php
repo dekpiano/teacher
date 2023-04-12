@@ -18,6 +18,19 @@
         </ul>
         <span class="heading">งานวิชาการ</span>
         <ul class="list-unstyled">
+        <li><a href="#TeacherJob" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>งานครูเวร </a>
+                <ul id="TeacherJob"
+                    class="collapse list-unstyled <?=$this->uri->segment(1) == 'Teaching' ? 'show' : '' ?>">
+                    <li
+                        class="<?=$this->uri->segment(2) == 'CheckHomeRoomMain' || $this->uri->segment(2) == 'CheckHomeRoomAdd'|| $this->uri->segment(2) == 'CheckHomeRoomStatistics' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Teaching/CheckHomeRoomMain');?>">เช็ตชื่อหน้าประตูโรงเรียน</a>
+                    </li>
+                    <!-- <li class="<?=$this->uri->segment(2) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
+                    <li class="<?=$this->uri->segment(2) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li> -->
+                </ul>
+            </li>
+
             <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูผู้สอน </a>
                 <ul id="TeacherLarn"

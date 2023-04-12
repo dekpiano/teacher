@@ -30,15 +30,14 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/jquery.datetimepicker.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/> 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
 </head>
 
 <style>
-
 .se-pre-con {
     position: fixed;
     left: 0px;
@@ -48,10 +47,9 @@
     z-index: 9999;
     background: url(<?= base_url() ?>assets/images/Infinity.gif) center no-repeat #fff;
 }
-
-
 </style>
 <div class="se-pre-con"></div>
+
 <body style="font-family: 'Sarabun', sans-serif;">
 
     <div class="page">
@@ -70,12 +68,20 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header">
                             <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
-                                <div class="brand-text d-none d-lg-inline-block"><span>ระบบงานครู 
+                                <div class="brand-text d-none d-lg-inline-block"><span>ระบบงานครู
                                     </span><strong> SKJ</strong></div>
-                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>INFO SKJ</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>INFO SKJ</strong>
+                                </div>
                             </a>
-                            <!-- Toggle Button--><a id="toggle-btn" href="#"
-                                class="menu-btn active"><span></span><span></span><span></span></a>
+                            <!-- Toggle Button-->
+                            <a id="toggle-btn" href="#" class="menu-btn active">
+                               
+                                    <span></span><span></span><span></span>
+                             
+                                <div class="ml-2 d-none d-sm-inline-block d-lg-none">
+                                ระบบงานครู SKJ
+                                </div>
+                            </a>
                         </div>
                         <!-- Navbar Menu -->
                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">

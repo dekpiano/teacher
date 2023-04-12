@@ -71,13 +71,17 @@
 
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          
+
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=22"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
+          <?php if($this->uri->segment(1) === "TeacherJob"): ?>
+          <script src="<?=base_url()?>assets/js/html5-qrcode.min.js?v=1"></script>
+          <script src="<?=base_url()?>assets/js/teacher/TeacherJob.js?v=1"></script>
+          <?php endif; ?>
+
           <?php if($this->uri->segment(1) === "Teaching"): ?>
           <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=9"></script>
-          <script src="<?=base_url()?>assets/js/html5-qrcode.min.js?v=1"></script>
           <script src="<?=base_url()?>assets/js/teacher/RaedQrcode.js?v=1"></script>
           <?php endif; ?>
 
@@ -86,14 +90,14 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "SupStd"): ?>
-            <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=14"></script>
+          <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=14"></script>
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Profile"): ?>
           <script src="<?=base_url()?>assets/js/teacher/TeacherProfile.js?v=3"></script>
           <?php endif; ?>
 
-          
+
 
 
           </body>
