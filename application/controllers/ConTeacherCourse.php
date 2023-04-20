@@ -744,8 +744,9 @@ var  $title = "หน้าแรก";
                                         ->order_by('pers_firstname')
                                         ->get('tb_send_plan')->result();
         }
-           // echo '<pre>'; print_r($checkplan); exit();
-    //     $this->load->view('teacher/course/plan/plan_report_print.php',$data);
+      
+        $path = dirname(dirname(dirname(dirname(__FILE__))));
+		require $path . '/librarie_skj/spreadsheet/vendor/autoload.php';
     
             $spreadsheet = new Spreadsheet();
             $spreadsheet->getDefaultStyle()->getFont()->setName('TH SarabunPSK');

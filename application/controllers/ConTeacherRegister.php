@@ -264,8 +264,9 @@ class ConTeacherRegister extends CI_Controller {
     }
 
     public function report_pt(){ 
-        require_once (APPPATH. '../vendor/vendor/autoload.php');
-
+        $path = dirname(dirname(dirname(dirname(__FILE__))));
+		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
+        
         $live_mpdf = new \Mpdf\Mpdf(
             array(
                 'format' => 'A4',
@@ -548,7 +549,8 @@ class ConTeacherRegister extends CI_Controller {
     }
 
     public function ReportLearnRepeat(){
-        require_once (APPPATH. '../vendor/vendor/autoload.php');
+        $path = dirname(dirname(dirname(dirname(__FILE__))));
+		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
 
         $live_mpdf = new \Mpdf\Mpdf(
             array(
