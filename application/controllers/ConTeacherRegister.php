@@ -422,7 +422,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.Grade_Type !=',"")
                                 ->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
-                                ->where('tb_register.RegisterYear <=',$register_onoff[0]->onoff_year)
+                                ->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
                                 ->group_by('tb_register.SubjectCode')
                                 ->group_by('tb_subjects.SubjectName')
                                 ->group_by('tb_register.RegisterYear')
