@@ -44,11 +44,16 @@
     top: 0px;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 5555;
     background: url(<?= base_url() ?>assets/images/Infinity.gif) center no-repeat #fff;
 }
+
 </style>
-<div class="se-pre-con"></div>
+
+<div class="se-pre-con">
+
+</div>
+
 
 <body style="font-family: 'Sarabun', sans-serif;">
 

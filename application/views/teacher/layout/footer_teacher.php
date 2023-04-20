@@ -97,14 +97,14 @@
           <script src="<?=base_url()?>assets/js/teacher/TeacherProfile.js?v=3"></script>
           <?php endif; ?>
 
-
-
-
           </body>
 
           <script>
+
+
+
 $(window).on('load', function() {
-    $(".se-pre-con").fadeOut(1000);
+    $(".se-pre-con").fadeOut(1000);   
 });
 $(function() {
     $("#show_date").datepicker({
