@@ -43,19 +43,49 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');        
     }
 
-    public function LoadPlan($Year,$Term){      
+    public function LoadPlan($Year,$Term,$SelTeach){      
         $data['title'] = "ดาวน์โหลดแผนการสอน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
-               
-        $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->get('tb_send_plan')->result();
-        $data['planNew'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))
+        $CheckLearning = $this->DBPers->select('pers_learning')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->row();
+        $data['SelTeacher'] = $this->DBPers->select(
+            'pers_id,pers_prefix,pers_firstname,pers_lastname'
+            )
+            ->where('pers_learning',$CheckLearning->pers_learning)
+            // ->where('pers_status','กำลังใช้งาน')
+            ->get('tb_personnel')->result();
+
+        
+        if($SelTeach === "All"){
+            $data['plan'] = $this->db->where('seplan_learning',$CheckLearning->pers_learning)
+        ->get('tb_send_plan')->result();       
+        
+        $data['planNew'] = $this->db->where('seplan_learning',$CheckLearning->pers_learning)
                         ->where('seplan_year',$Year)
                         ->where('seplan_term',$Term)
                         ->group_by('seplan_coursecode')
                         ->group_by('seplan_year')
                         ->group_by('seplan_term')
                         ->get('tb_send_plan')->result();
+        }else{
+            $data['plan'] = $this->db->where('seplan_learning',$CheckLearning->pers_learning)
+            ->where('seplan_usersend',$SelTeach)
+            ->get('tb_send_plan')->result();       
+            
+            $data['planNew'] = $this->db->where('seplan_learning',$CheckLearning->pers_learning)
+                            ->where('seplan_usersend',$SelTeach)
+                            ->where('seplan_year',$Year)
+                            ->where('seplan_term',$Term)
+                            ->group_by('seplan_coursecode')
+                            ->group_by('seplan_year')
+                            ->group_by('seplan_term')
+                            ->get('tb_send_plan')->result();
+
+        }
+        
+        
+        //echo "<pre>"; print_r($data['planNew']);exit();
+
         $data['CheckYear'] = $this->db->select('seplan_year,seplan_term')
                                         ->group_by('seplan_year')
                                         ->group_by('seplan_term')

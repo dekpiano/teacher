@@ -14,17 +14,30 @@
         <div class="card p-3">
             <div cass="card-body">
                 <div class="d-flex justify-content-center align-items-center">
-                    <label for="" class="mr-2 mb-0">เลือกปีการศึกษา</label>
-                    <select name="CheckYear" id="CheckYear" class="form-control w-auto">
-                        <?php foreach ($CheckYear as $key => $v_CheckYear): ?>
-                        <option 
-                        <?=$this->uri->segment(3) == $v_CheckYear->seplan_year && $this->uri->segment(4) == $v_CheckYear->seplan_term ?"selected":""?> 
-                        value="<?=$v_CheckYear->seplan_year.'/'.$v_CheckYear->seplan_term;?>">
-                            <?=$v_CheckYear->seplan_term.'/'.$v_CheckYear->seplan_year;?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="mr-2">
+                        <select name="SelTeacher" id="SelTeacher" class="form-control w-auto">
+                            <option value="All">เลือกทั้งหมด</option>
+                            <?php foreach ($SelTeacher as $key => $v_SelTeacher): ?>
+                            <option <?=$this->uri->segment(5) == $v_SelTeacher->pers_id ?"selected":""?> value="<?=$v_SelTeacher->pers_id?>">
+                                <?=$v_SelTeacher->pers_prefix.$v_SelTeacher->pers_firstname.' '.$v_SelTeacher->pers_lastname?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="mr-2">                      
+                        <select name="CheckYear" id="CheckYear" class="form-control w-auto">
+                            <?php foreach ($CheckYear as $key => $v_CheckYear): ?>
+                            <option
+                                <?=$this->uri->segment(3) == $v_CheckYear->seplan_year && $this->uri->segment(4) == $v_CheckYear->seplan_term ?"selected":""?>
+                                value="<?=$v_CheckYear->seplan_year.'/'.$v_CheckYear->seplan_term;?>">
+                                <?=$v_CheckYear->seplan_term.'/'.$v_CheckYear->seplan_year;?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="mr-2"> 
+                    <button type="button" id="SearchPlan" class="btn btn-primary"> ค้นหาแผน</button>
+                    </div>
                 </div>
-
             </div>
         </div>
         <div class="card">
@@ -79,49 +92,3 @@
     </div>
 
 </section>
-
-
-<!-- Modal -->
-<div class="modal fade" id="ModalUpdatePlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">เลือกไฟล์</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php if($OnOff[0]->seplanset_startdate < date('Y-m-d H:i:s') && $OnOff[0]->seplanset_enddate >  date('Y-m-d H:i:s') && $OnOff[0]->seplanset_status == "on"): ?>
-            <form class="update_seplan" style="display: contents;">
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <input type="hidden" id="seplan_ID" name="seplan_ID" value="">
-                        <input type="hidden" id="seplan_typeplan" name="seplan_typeplan" value="">
-                        <input type="hidden" id="seplan_coursecode" name="seplan_coursecode" value="">
-                        <input id="seplan_file" name="seplan_file" type="file" class="">
-                    </div>
-                    <div class="form-group">
-                        <label for="seplan_sendcomment">หมายเหตุ</label>
-                        <textarea class="form-control" id="seplan_sendcomment" name="seplan_sendcomment" rows="5"
-                            placeholder="เช่น ส่งแผนครบแล้ว หรือ ส่งแผนที่ 1 - 4 แล้ว"></textarea>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">ส่งไฟล์</button>
-                </div>
-            </form>
-
-
-            <?php else: ?>
-            <div class="modal-body">
-                ระบบปิดอยู่ ยังไม่ถึงกำหนดส่งงาน หรือ เกินกำหนดส่งงาน <br>
-                ไม่สามารถเพิ่มไฟล์หรือแก้ไขไฟล์ได้ <br>
-                ติดต่อหัวงานหลักสูตร
-            </div>
-            <?php endif; ?>
-        </div>
-    </div>
-</div>

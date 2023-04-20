@@ -513,7 +513,7 @@ $(document).on("click", "#sub_comment2", function() {
 });
 
 
-$(document).on("change", "#CheckYear", function() {
-    console.log($(this).val());
-    window.location.href = "../" + $(this).val();
+$(document).on("click", "#SearchPlan", function() {
+    $(this).html('<i class="fa fa-spinner fa-spin"></i> กำลังค้นหา...');
+    window.location.href = '../../' + $('#CheckYear').val() + '/' + $('#SelTeacher').val();
 });

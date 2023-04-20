@@ -70,7 +70,7 @@
                     <li
                         class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'LoadPlan' ? 'active' : '' ?>">
                         <a
-                            href="<?=base_url('Course/LoadPlan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>"><i
+                            href="<?=base_url('Course/LoadPlan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term.'/All');?>"><i
                                 class="fa fa-file" aria-hidden="true"></i>
                             ดาวน์โหลดแผน <?=$this->session->userdata('groupleade');?></a>
                     </li>
