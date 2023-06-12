@@ -36,7 +36,7 @@
                 <ul id="TeacherLarn"
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Teaching' ? 'show' : '' ?>">
                     <li
-                        class="<?=$this->uri->segment(2) == 'CheckHomeRoomMain' || $this->uri->segment(2) == 'CheckHomeRoomAdd'|| $this->uri->segment(2) == 'CheckHomeRoomStatistics' ? 'active' : '' ?>">
+                        class="<?=$this->uri->segment(2) == 'CheckHomeRoomMain' || $this->uri->segment(2) == 'CheckHomeRoomAdd'|| $this->uri->segment(2) == 'CheckHomeRoomDashboard' ? 'active' : '' ?>">
                         <a href="<?=base_url('Teaching/CheckHomeRoomMain');?>">เช็ตชื่อโฮมรูม</a>
                     </li>
                     <!-- <li class="<?=$this->uri->segment(2) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
@@ -115,7 +115,7 @@
                     <li class="<?=$this->uri->segment(2) == 'Main' ? 'active' : '' ?>">
                         <a href="<?=base_url('SupStd/Main');?>">เยี่ยมบ้าน / SDQ</a>
                     </li>
-                    <?php if('pers_006' == $this->session->userdata('login_id')): ?>
+                    <?php if('pers_006' == $this->session->userdata('login_id') || 'pers_021' == $this->session->userdata('login_id')): ?>
                     <span class="heading">ตรวจงาน</span>
                     <li class="<?=$this->uri->segment(2) == 'CheckWorkManager' ? 'active' : '' ?>">
                         <a href="<?=base_url('SupStd/CheckWorkManager/2565');?>">หัวหน้างาน</a>

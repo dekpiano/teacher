@@ -20,10 +20,35 @@
         <div class="row justify-content-center">
             <div class="col-lg-4">
                 <p>ค้นหาตามวันที่</p>
-                <input type="text" class="form-control show_date" id="show_date" value="<?=$this->uri->segment(4)?>"
-                    style="text-align: center">
+                <input type="text" class="form-control show_date" id="show_date" value="<?=$this->uri->segment(3)?>"
+                    style="text-align: center" autocomplete="off">
             </div>
         </div>
+
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-0 h-100">
+                <div class="card-header d-flex align-items-center">
+                    <div class="card-close">
+                        <div class="dropdown">
+                            <button class="dropdown-toggle text-sm" type="button" id="closeCard1"
+                                data-bs-toggle="dropdown" aria-expanded="false"><i
+                                    class="fas fa-ellipsis-v"></i></button>
+                            <div class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="closeCard1"><a
+                                    class="dropdown-item py-1 px-3 remove" href="#"> <i
+                                        class="fas fa-times"></i>Close</a><a class="dropdown-item py-1 px-3 edit"
+                                    href="#"> <i class="fas fa-cog"></i>Edit</a></div>
+                        </div>
+                    </div>
+                    <h3 class="h4 mb-0">สถิตินักเรียน</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart" style="height:40vh; width:80vw"></canvas>
+                </div>
+            </div>
+        </div>
+        </div>
+      
 
         <div class="card">
             <div class="card-body">
@@ -37,7 +62,7 @@
                                 <th class="cell">สาย</th>
                                 <th class="cell">ลา</th>
                                 <th class="cell">กิจกรรม</th>
-                                <th clv_showHRass="cell">ไม่เข้าเรียน</th>
+                                <th clv_showHRass="cell">ไม่เข้า</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +75,9 @@
                                       $v_showHR->chk_home_hnee !== "" ? $data_hnee =  count(explode('|', $v_showHR->chk_home_hnee)) : $data_hnee = 0;    
                                     ?>
                             <tr>
-                                <td class="cell">มัธยมศึกษาปีที่ <?=$v_showHR->chk_home_room?></td>
+                                <td class="cell">มัธยมศึกษาปีที่ <?=$v_showHR->chk_home_room?>
+                                    นักเรียน <?=$data_ma+$data_khad+$data_sahy+$data_la+$data_kid+$data_hnee?> คน
+                                </td>
                                 <td class="cell ShowStudentLeader" homeroom-id="<?=$v_showHR->chk_home_id?>"
                                     homeroom-keyword="chk_home_ma">
                                     <?=$data_ma;?></span>

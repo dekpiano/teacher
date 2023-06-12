@@ -35,11 +35,13 @@ var  $title = "หน้าแรก";
         $data['teacher'] = $this->TeacRoom();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
 
+        //ครูห้วหน้าระดับ
         if($data['teacher'][0]->Reg_Class == "1" || $data['teacher'][0]->Reg_Class == "2"|| $data['teacher'][0]->Reg_Class == "3" || $data['teacher'][0]->Reg_Class == "4" || $data['teacher'][0]->Reg_Class == "5" || $data['teacher'][0]->Reg_Class == "6"){
-            redirect('Teacher/Teaching/CheckHomeRoomDashboard/'.date('d-m-Y'));
+            redirect('Teaching/CheckHomeRoomDashboard/'.date('d-m-Y'));
         }else{
+            //ครูที่ปรึกษา
             $checif = array('chk_home_term'=>'1',
-            'chk_home_yaer'=>'2565',
+            'chk_home_yaer'=>'2566',
             'chk_home_room'=> $data['teacher'][0]->Reg_Class
                 );                                        
         $data['ChkHomeRoom'] = $this->DBaffairs->select('*')
@@ -54,6 +56,38 @@ var  $title = "หน้าแรก";
         }
        
     }
+
+    public function bar_chart_js(){
+        $data['teacher'] = $this->TeacRoom();
+        $data['showHR'] = $this->DBaffairs->where('chk_home_date',date('Y-m-d', strtotime(date('Y-m-d'))))
+                                ->like('chk_home_room',$data['teacher'][0]->Reg_Class, 'after')
+                                ->order_by('chk_home_room','ASC')
+                                ->get('tb_checkhomeroom')                                
+                                ->result();
+        $data1 = [];
+        //$data1['label'][] = [1,2,3,4];
+        $home_ma=[];$home_khad=[];$home_sahy=[];  $home_la=[]; $home_kid=[]; $home_hnee=[];
+        foreach($data['showHR'] as $row) {
+           
+
+                $row->chk_home_ma !== "" ? $home_ma[] += count(explode('|', $row->chk_home_ma)) : $home_ma[] += 0;
+                $row->chk_home_khad !== "" ? $home_khad[] +=  count(explode('|', $row->chk_home_khad)) : $home_khad[] += 0;
+                $row->chk_home_sahy !== "" ? $home_sahy[] +=  count(explode('|', $row->chk_home_sahy)) : $home_sahy[] += 0;
+                $row->chk_home_la !== "" ? $home_la[] +=  count(explode('|', $row->chk_home_la)) : $home_la[] += 0;            
+                $row->chk_home_kid !== "" ? $home_kid[] +=  count(explode('|', $row->chk_home_kid)) : $home_kid[] += 0;
+                $row->chk_home_hnee !== "" ? $home_hnee[] +=  count(explode('|', $row->chk_home_hnee)) : $home_hnee[] += 0;
+
+                
+        }     
+        $data1['ma'][] =$home_ma;
+        $data1['khad'][] =($home_khad);
+        $data1['la'][] =($home_la);
+        $data1['sahy'][] =($home_sahy);
+        $data1['hnee'][] =($home_hnee);
+        $data1['kid'][] =($home_kid); 
+        echo json_encode($data1) ;
+    }
+
 
     public function CheckHomeRoomDashboard($key){ 
         $data['title'] = "แดชบอร์ดโฮมรูม";
@@ -75,7 +109,7 @@ var  $title = "หน้าแรก";
     function ChartHomeRoomAll(){
         $data['teacher'] = $this->TeacRoom();
         $checif = array('chk_home_term'=>'1',
-                            'chk_home_yaer'=>'2565'
+                            'chk_home_yaer'=>'2566'
                         );                                        
         $ChkHomeRoom = $this->DBaffairs->select('*')
                 ->where($checif)
@@ -111,7 +145,7 @@ var  $title = "หน้าแรก";
     function ChartHomeRoom(){
         $data['teacher'] = $this->TeacRoom();
         $checif = array('chk_home_term'=>'1',
-                            'chk_home_yaer'=>'2565',
+                            'chk_home_yaer'=>'2566',
                             'chk_home_room'=> @$data['teacher'][0]->Reg_Class
                         );                                        
         $ChkHomeRoom = $this->DBaffairs->select('*')
@@ -133,6 +167,11 @@ var  $title = "หน้าแรก";
     public function CheckHomeRoomAdd(){      
         $data['title']  = "เช็คชื่อโฮมรูม";
         $data['teacher'] = $this->TeacRoom();
+
+        $SchoolYear = $this->db->select('schyear_year')->where('schyear_id',1)->get('tb_schoolyear')->result();
+        $data['SubSchoolYear'] = explode('/',$SchoolYear[0]->schyear_year);
+
+        //print_r($data['teacher']);exit();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['studentAdd'] = $this->db->select('StudentID,
                                                 StudentNumber,
@@ -148,7 +187,7 @@ var  $title = "หน้าแรก";
                                                 ->get('tb_students')->result(); 
          
         $checif = array('chk_home_term'=>'1',
-                        'chk_home_yaer'=>'2565',
+                        'chk_home_yaer'=>'2566',
                         'chk_home_room'=> $data['teacher'][0]->Reg_Class
                        );                                        
         $data['ChkHomeRoom1'] = $this->DBaffairs->select('*')
@@ -295,7 +334,7 @@ var  $title = "หน้าแรก";
         $data['teacher'] = $this->TeacRoom();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $checif = array('chk_home_term'=>'1',
-                        'chk_home_yaer'=>'2565',
+                        'chk_home_yaer'=>'2566',
                         'chk_home_room'=> $data['teacher'][0]->Reg_Class
                        );                                        
         $data['ChkHomeRoom'] = $this->DBaffairs->select('*')

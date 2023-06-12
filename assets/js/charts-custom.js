@@ -1,28 +1,38 @@
-/*global $, document*/
-$(document).ready(function() {
+"use strict";
+let ma;
+let values = [];
+$.post('../../ConTeacherTeaching/bar_chart_js', {},
+    function(data, status) {
+        $.each(data, function(key, value) {
+            console.log(value[0]);
+            values.push({
+                label: 'ห้อง 1',
+                data: [5, 6, 4],
+                borderWidth: 1,
+                backgroundColor: [
+                    "#22A699",
+                ]
+            });
+        });
 
-    'use strict';
+    },
+    'json');
 
+console.log(values);
 
-    // ------------------------------------------------------- //
-    // Charts Gradients
-    // ------------------------------------------------------ //
-    var ctx1 = $("canvas").get(0).getContext("2d");
-    var gradient1 = ctx1.createLinearGradient(150, 0, 150, 300);
-    gradient1.addColorStop(0, 'rgba(133, 180, 242, 0.91)');
-    gradient1.addColorStop(1, 'rgba(255, 119, 119, 0.94)');
+const ctx = document.getElementById('myChart');
 
-    var gradient2 = ctx1.createLinearGradient(146.000, 0.000, 154.000, 300.000);
-    gradient2.addColorStop(0, 'rgba(104, 179, 112, 0.85)');
-    gradient2.addColorStop(1, 'rgba(76, 162, 205, 0.85)');
-
-
-    // ------------------------------------------------------- //
-    // Bar Chart
-    // ------------------------------------------------------ //
-
-
-
-
-
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['มา', 'ขาด', 'สาย', 'ลา', 'กิจกรรม', 'ไม่เข้า'],
+        datasets: [values]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
 });

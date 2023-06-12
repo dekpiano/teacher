@@ -159,7 +159,7 @@
                         <input type="hidden" name="chk_home_room" id="chk_home_room"
                             value="<?=$teacher[0]->Reg_Class;?>">
                         <input type="hidden" name="chk_home_term" id="chk_home_term" value="1">
-                        <input type="hidden" name="chk_home_yaer" id="chk_home_yaer" value="2565">
+                        <input type="hidden" name="chk_home_yaer" id="chk_home_yaer" value="<?=$SubSchoolYear[1]?>">
 
                         <div class="item align-items-center col-lg-4 d-flex offset-lg-2" style="padding: 5px 20px;">
                             <div class="image"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
