@@ -15,6 +15,8 @@ var  $title = "หน้าแรก";
 
     public function TeacRoom(){
         $DBpersonnel = $this->load->database('personnel', TRUE);
+        $SchoolYear = $this->db->select('schyear_year')->where('schyear_id',1)->get('tb_schoolyear')->result();
+        $SubSchoolYear = explode('/',$SchoolYear[0]->schyear_year);
         $teacher = $this->db->select('skjacth_personnel.tb_personnel.pers_prefix,
         skjacth_personnel.tb_personnel.pers_firstname,
         skjacth_personnel.tb_personnel.pers_lastname,
@@ -23,7 +25,7 @@ var  $title = "หน้าแรก";
         skjacth_academic.tb_regclass.Reg_Class')
         ->join($DBpersonnel->database.'.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
         ->where('pers_id',$this->session->userdata('login_id'))
-        ->where('Reg_Year','2565')
+        ->where('Reg_Year',$SubSchoolYear[1])
         ->get('tb_regclass')->result();
 
         return $teacher;
@@ -132,7 +134,7 @@ var  $title = "หน้าแรก";
         $data['title']  = "เช็คชื่อโฮมรูม";
         $data['teacher'] = $this->TeacRoom();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
-        $data['student'] = $this->db->select('StudentID,
+        $data['studentAdd'] = $this->db->select('StudentID,
                                                 StudentNumber,
                                                 StudentClass,
                                                 StudentCode,

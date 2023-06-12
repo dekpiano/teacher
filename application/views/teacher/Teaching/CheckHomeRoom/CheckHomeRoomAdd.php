@@ -152,7 +152,7 @@
                 <form class="form-horizontal" action="<?=$Action;?>" method="post">
 
                     <div class="row justify-content-md-center mt-3">
-                        <?php foreach ($student as $key => $v_stu) : ?>
+                        <?php foreach ($studentAdd as $key => $v_stu) : ?>
 
                         <input type="hidden" name="chk_home_teacher" id="chk_home_teacher"
                             value="<?=$this->session->userdata('login_id')?>">
