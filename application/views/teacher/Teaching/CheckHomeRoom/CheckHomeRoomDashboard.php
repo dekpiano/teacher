@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <div class="card mb-0 h-100">
                     <div class="card-header d-flex align-items-center">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
 
         <div class="card">

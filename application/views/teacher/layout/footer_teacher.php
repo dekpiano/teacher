@@ -83,7 +83,7 @@
           <?php if($this->uri->segment(1) === "Teaching"): ?>
           <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=9"></script>
           <script src="<?=base_url()?>assets/js/teacher/RaedQrcode.js?v=1"></script>
-          <script src="<?=base_url()?>assets/js/charts-custom.js?v=9"></script>       
+          <script src="<?=base_url()?>assets/js/charts-custom.js?v=11"></script>       
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Register"): ?>

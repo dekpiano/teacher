@@ -79,12 +79,12 @@ var  $title = "หน้าแรก";
 
                 
         }     
-        $data1['ma'][] =$home_ma;
-        $data1['khad'][] =($home_khad);
-        $data1['la'][] =($home_la);
-        $data1['sahy'][] =($home_sahy);
-        $data1['hnee'][] =($home_hnee);
-        $data1['kid'][] =($home_kid); 
+        $data1['ma'] =$home_ma;
+        $data1['khad'] =($home_khad);
+        $data1['la'] =($home_la);
+        $data1['sahy'] =($home_sahy);
+        $data1['hnee'] =($home_hnee);
+        $data1['kid'] =($home_kid); 
         echo json_encode($data1) ;
     }
 
