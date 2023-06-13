@@ -99,7 +99,46 @@ var  $title = "หน้าแรก";
                                 ->order_by('chk_home_room','ASC')
                                 ->get('tb_checkhomeroom')                                
                                 ->result();
-        //echo '<pre>'; print_r($data['showHR']); exit();
+
+        $data['shoKhod'] = $this->DBaffairs->select('chk_home_room,chk_home_khad,chk_home_la,chk_home_sahy,chk_home_kid,chk_home_hnee')
+        ->where('chk_home_date',date('Y-m-d', strtotime($key)))                       
+        ->like('chk_home_room',$data['teacher'][0]->Reg_Class, 'after')
+        ->order_by('chk_home_room','ASC')
+        ->get('tb_checkhomeroom')                                
+        ->result();  
+
+       // echo '<pre>'; print_r($data['shoKhod']);
+        $all = [];
+        foreach ($data['shoKhod'] as $key => $value) {
+            $home_khad = explode('|',$value->chk_home_khad);
+            $home_la = explode('|',$value->chk_home_la);
+            $home_sahy = explode('|',$value->chk_home_sahy);
+            $home_kid = explode('|',$value->chk_home_kid);
+            $home_hnee = explode('|',$value->chk_home_hnee);
+            $subboy = [];
+            $Boy = 0; $Gird = 0;
+            $status = array($home_khad,$home_la,$home_sahy,$home_kid,$home_hnee);
+            foreach ($status as $key => $v_status) {
+                for ($i=0; $i < count($v_status); $i++) { 
+                    $checkSex = $this->db->select('StudentPrefix')->where('StudentCode',$v_status[$i])->get('tb_students')->result();
+                    if(@$checkSex[0]->StudentPrefix == 'นาย' || @$checkSex[0]->StudentPrefix == 'เด็กชาย'){
+                        $Boy +=1;
+                    }elseif(@$checkSex[0]->StudentPrefix == 'นางสาว' || @$checkSex[0]->StudentPrefix == 'เด็กหญิง'){
+                        $Gird += 1;
+                    }
+                }
+            }
+            
+            $subboy['Room'] = $value->chk_home_room;
+            $subboy['home_khad'] = $Boy.'/'.$Gird;                    
+            $all[] = $subboy;
+        } 
+
+        $data['all'] = $all; 
+
+        // echo '<pre>'; print_r($all);        
+        // exit();
+       
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');        
         $this->load->view('teacher/Teaching/CheckHomeRoom/CheckHomeRoomDashboard.php');
@@ -211,6 +250,8 @@ var  $title = "หน้าแรก";
                                 ->get('tb_checkhomeroom')->result();
         }   
         $data['ChkHomeRoomSet'] = $this->DBaffairs->where('set_homeroom_id',1)->get('tb_checkhomeroom_setting')->result();
+
+        //echo "<pre>"; print_r($data['ChkHomeRoom']);
 
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');

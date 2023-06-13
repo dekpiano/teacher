@@ -181,6 +181,7 @@
                                             $chkKid = explode("|",@$ChkHomeRoom[0]->chk_home_kid);
                                             $chkHnee = explode("|",@$ChkHomeRoom[0]->chk_home_hnee);
                                             $chkKhad = explode("|",@$ChkHomeRoom[0]->chk_home_khad);
+                                            
                                             ?>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-primary active">
@@ -191,7 +192,7 @@
                                 <label class="btn btn-outline-primary">
                                     <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
                                         value="ขาด" autocomplete="off" <?php 
-                                                    if($chkKhad[0] == ""){
+                                                    if(!isset($ChkHomeRoom[0]->chk_home_date)){
                                                         echo "checked";
                                                     }else{
                                                         if(in_array($v_stu->StudentCode, $chkKhad)){echo "checked";}  
