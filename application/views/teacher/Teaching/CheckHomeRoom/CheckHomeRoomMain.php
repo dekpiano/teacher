@@ -124,6 +124,7 @@
     <div class="container-fluid">
         <h2>สถิติการมาเข้าแถวตอนเช้า วันที่
             <?=$this->datethai->thai_date_fullmonth(strtotime(date('Y-m-d')))?>
+            <input type="text" name="DateToDay" id="DateToDay" value="<?=date('Y-m-d');?>" style="display:none">
         </h2>
         <?php 
         

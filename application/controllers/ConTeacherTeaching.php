@@ -186,7 +186,8 @@ var  $title = "หน้าแรก";
         $data['teacher'] = $this->TeacRoom();
         $checif = array('chk_home_term'=>'1',
                             'chk_home_yaer'=>'2566',
-                            'chk_home_room'=> @$data['teacher'][0]->Reg_Class
+                            'chk_home_room'=> @$data['teacher'][0]->Reg_Class,
+                            'chk_home_date' => $this->input->post('DateToDay')
                         );                                        
         $ChkHomeRoom = $this->DBaffairs->select('*')
                 ->where($checif)

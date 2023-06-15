@@ -109,16 +109,16 @@ if (pathArray[5]) {
 var pathArray = window.location.pathname.split('/');
 console.log(pathArray[3]);
 if (pathArray[3] != 'CheckHomeRoomDashboard') {
+    console.log($('#DateToDay').val());
+    $.post('../ConTeacherTeaching/ChartHomeRoom', { DateToDay: $('#DateToDay').val() }, function(show) {
 
-    $.post('../ConTeacherTeaching/ChartHomeRoom', function(show) {
-        console.log(show);
         var BARCHARTEXMPLE = $('#barChartExample');
         var barChartExample = new Chart(BARCHARTEXMPLE, {
             type: 'bar',
             data: {
                 labels: ["มา", "ขาด", "สาย", "ลา", "กิจกรรม", "ไม่เข้าแถว"],
                 datasets: [{
-                    label: 'จำนวน',
+                    label: 'จำนวนของวันนี้',
                     data: show,
                     backgroundColor: [
                         'rgba(121, 106, 238, 1)',
