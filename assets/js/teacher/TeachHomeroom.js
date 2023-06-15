@@ -3,7 +3,7 @@ $(document).on("change", "#show_date", function() {
 
 });
 
-$('#ShowDashborad').DataTable({
+$('.ShowDashborad').DataTable({
     paging: false,
     dom: 'Bfrtip',
     buttons: [
@@ -106,6 +106,7 @@ if (pathArray[5]) {
         });
 }
 
+//ครูที่ปรึกษา
 var pathArray = window.location.pathname.split('/');
 console.log(pathArray[3]);
 if (pathArray[3] != 'CheckHomeRoomDashboard') {
@@ -226,7 +227,9 @@ var myChart = new Chart(ctx, {
 });
 
 //alert(pathArray[4]);
-ChartStatisticsHomeRoom(pathArray[4]);
+
+ChartStatisticsHomeRoom($('#show_date').val());
+
 
 function ChartStatisticsHomeRoom(Day) {
 

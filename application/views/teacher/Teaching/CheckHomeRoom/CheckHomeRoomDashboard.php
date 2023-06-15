@@ -18,7 +18,7 @@
 <section class="dashboard-counts no-padding-bottom">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-lg-4">
+            <div class="col-lg-2">
                 <p>ค้นหาตามวันที่</p>
                 <input type="text" class="form-control show_date" id="show_date" value="<?=$this->uri->segment(3)?>"
                     style="text-align: center" autocomplete="off">
@@ -37,7 +37,7 @@
                                 class="dropdown-item py-1 px-3 edit" href="#"> <i class="fas fa-cog"></i>Edit</a></div>
                     </div>
                 </div>
-                <h3 class="h4 mb-0">สถิตินักเรียน</h3>
+                <h3 class="h4 mb-0">สถิตินักเรียน วันที่ <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3>
             </div>
             <div class="card-body">
                 <canvas id="myChart" style="height:40vh; width:80vw"></canvas>
@@ -48,11 +48,11 @@
 
         <div class="card">
             <div class="card-header">
-                สถิตินักเรียน รายประเภท วันที่ <?=$this->uri->segment(3)?>
+               <h3>สถิตินักเรียน รายประเภท วันที่ <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3> 
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table  mb-0 text-left" id="ShowDashborad">
+                    <table class="table  mb-0 text-left ShowDashborad" id="ShowDashborad">
                         <thead>
                             <tr>
                                 <th class="cell">ระดับชั้น</th>
@@ -123,11 +123,11 @@
 
         <div class="card">
             <div class="card-header">
-                สถิตินักเรียนที่ขาดเข้าแถว วันที่ <?=$this->uri->segment(3)?>
+              <h3>สถิตินักเรียนที่ขาดเข้าแถว วันที่ <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3>  
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table  mb-0 text-left" id="ShowDashborad">
+                    <table class="table  mb-0 text-left ShowDashborad" id="ShowDashborad">
                         <thead>
                             <tr>
                                 <th class="cell">ระดับชั้น</th>
@@ -157,8 +157,9 @@
                             <?php endforeach; ?>
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th class="text-center">รวม</th>
+                            <tr class="text-center">
+                                <th>รวม</th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
