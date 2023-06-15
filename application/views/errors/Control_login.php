@@ -3,28 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Control_login extends CI_Controller {
 
-	private $google_client = null;
-    private $GoogleButton = "";
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Model_login');
-
-		require APPPATH . "libraries/vendor/autoload.php";
-		$this->google_client = new Google_Client();
-
-		$this->google_client->setClientId('29638025169-aeobhq04v0lvimcjd27osmhlpua380gl.apps.googleusercontent.com');
-		$this->google_client->setClientSecret('RSANANTRl84lnYm54Hi0icGa');
-		$this->google_client->setRedirectUri(base_url('LoginTeacher'));
-		$this->google_client->addScope('email');
-		$this->google_client->addScope('profile');
-
-		$this->GoogleButton = '
-			<a href="'.$this->google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
-			';
-
 	}
 
 	public static $title = "เข้าสู่ระบบ";
@@ -130,7 +114,7 @@ class Control_login extends CI_Controller {
 
 	function LoginTeacherMain(){
 		$login_button = '
-			<a href="'.$this->google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
+			<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
 			';
 		$data['login_button'] = $login_button;
 		$data['title'] = "Login สำหรับครูผู้สอน";
@@ -143,23 +127,32 @@ class Control_login extends CI_Controller {
 	}
 	
 	function LoginTeacher(){
-		
+		include_once APPPATH . "libraries/vendor/autoload.php";
+		$google_client = new Google_Client();
+
+		$google_client->setClientId('29638025169-aeobhq04v0lvimcjd27osmhlpua380gl.apps.googleusercontent.com');
+		$google_client->setClientSecret('RSANANTRl84lnYm54Hi0icGa');
+		$google_client->setRedirectUri('https://teacher.skj.ac.th/LoginTeacher');
+		$google_client->addScope('email');
+		$google_client->addScope('profile');
+
+		$login_button = '
+			<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
+			';
 		
 		if(isset($_GET["code"])){
-			//$this->google_client->authenticate($_GET['code']);	
-			//$this->google_client->getAccessToken();		
-			$token = $this->google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+			$token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
 			if(!isset($token["error"])){				
 				$this->session->set_userdata('access_token',$token['access_token']);
-				$google_service = new Google_Service_Oauth2($this->google_client);
+				$google_service = new Google_Service_Oauth2($google_client);
 
 				$data = $google_service->userinfo->get();
 				$current_datetime = date('Y-m-d H:i:s');			
-				//echo '<pre>';print_r($this->google_client->getAccessToken());
+
 				// echo $this->Model_login->check_login_teacher($data['email']); 
 				if($this->Model_login->check_login_teacher($data['email']) == 1)
    				 {
-					$this->google_client->setAccessToken($token['access_token']);
+					$google_client->setAccessToken($token['access_token']);
 					$user_data = array(				 
 						'pers_username' => $data['email'],
 						'updated_at' => $current_datetime,
@@ -174,14 +167,17 @@ class Control_login extends CI_Controller {
 					$this->session->unset_userdata('access_token');
 
 					$this->session->set_flashdata(array('msg'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียนที่ลงทะเบียนเท่านั้น กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
-					//echo $this->google_client->createAuthUrl();				
-					redirect('LoginTeacher');
+				
 				}
 			}
 		}
 					
 			
-			$data['login_button'] = $this->GoogleButton;
+			$data['login_button'] = $login_button;
+			$data['title'] = "Login สำหรับครูผู้สอน";
+			$data['description'] = "Login สำหรับครูผู้สอน";  
+			$data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+			$data['banner'] = "";
 
 			// $this->load->view('user/layout/HeaderUser.php',$data);
 			// $this->load->view('user/Login/PageLoginTeacher.php');

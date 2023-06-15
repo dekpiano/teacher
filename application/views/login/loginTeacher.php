@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบงานครู SKJ | สวนกุหลายวิทยาลัย (จิรประวัติ) นครสวรรค์</title>
+    <title>ระบบงานครู SKJ | สวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -56,7 +56,7 @@
                         <div class="form d-flex align-items-center">
                             <div class="content ">
                                 <h3 class="mb-3 text-center">เข้าสู่ระบบ งานครู SKJ </h3>
-                                <form method="post" action="<?=base_url('control_login/check_teacher');?>"
+                                <!-- <form method="post" action="<?=base_url('control_login/check_teacher');?>"
                                     class="form-validate">
                                     <div class="form-group">
                                         <input id="login-username" type="email" name="username" id="username" required
@@ -70,22 +70,22 @@
                                     </div><button id="login" type="submit" class="btn btn-primary"><i
                                             class="fas fa-sign-in-alt"></i> Login</button>
                                   
-                                </form>
+                                </form> -->
                                 <hr>
                                 <?php
-                                if(!isset($login_button))
-                                {                                
-                                    echo '<h3><a href="'.base_url().'Control_login/LoginGoogleTeacher">Logout</h3></div>';
-                                }
-                                else
-                                {
+                                // if(!isset($login_button))
+                                // {                                
+                                //     echo '<div align="center">'.$login_button . '</div>';
+                                // }
+                                // else
+                                // {
                                     echo '<div align="center">'.$login_button . '</div>';
-                                }
+                                //}
                                 ?>
-                                <div class="text-center mt-5">
+                                <!-- <div class="text-center mt-5">
                                 <a class="btn btn-outline-primary"
                                     href="https://academic.skj.ac.th/">กลับสู่หน้าหลัก</a>
-                                </div>
+                                </div> -->
                                
                             </div>
 
@@ -109,11 +109,11 @@
     <script src="<?=base_url();?>assets/js/front.js"></script>
     <script src="<?=base_url();?>assets/js/all.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <?php if ($this->session->flashdata('status', 1) == "OK") :?>
+    <?php if ($this->session->flashdata('msg', 1) == "OK") :?>
     <script>
-    Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('msgerr')?>", "<?=$this->session->flashdata('alert')?>");
+    Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')?>", "<?=$this->session->flashdata('alert')?>");
     </script>
-    <?php $this->session->mark_as_temp(array('status'), 2); endif; ?>
+    <?php $this->session->mark_as_temp(array('msg'), 2); endif; ?>
 </body>
 
 </html>
