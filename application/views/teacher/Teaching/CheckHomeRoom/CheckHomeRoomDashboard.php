@@ -25,29 +25,25 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card mb-0 h-100">
-                    <div class="card-header d-flex align-items-center">
-                        <div class="card-close">
-                            <div class="dropdown">
-                                <button class="dropdown-toggle text-sm" type="button" id="closeCard1"
-                                    data-bs-toggle="dropdown" aria-expanded="false"><i
-                                        class="fas fa-ellipsis-v"></i></button>
-                                <div class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="closeCard1"><a
-                                        class="dropdown-item py-1 px-3 remove" href="#"> <i
-                                            class="fas fa-times"></i>Close</a><a class="dropdown-item py-1 px-3 edit"
-                                        href="#"> <i class="fas fa-cog"></i>Edit</a></div>
-                            </div>
-                        </div>
-                        <h3 class="h4 mb-0">สถิตินักเรียน</h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myChart" style="height:40vh; width:80vw"></canvas>
+
+        <div class="card mb-0 h-100 mb-3">
+            <div class="card-header d-flex align-items-center">
+                <div class="card-close">
+                    <div class="dropdown">
+                        <button class="dropdown-toggle text-sm" type="button" id="closeCard1" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                        <div class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="closeCard1"><a
+                                class="dropdown-item py-1 px-3 remove" href="#"> <i class="fas fa-times"></i>Close</a><a
+                                class="dropdown-item py-1 px-3 edit" href="#"> <i class="fas fa-cog"></i>Edit</a></div>
                     </div>
                 </div>
+                <h3 class="h4 mb-0">สถิตินักเรียน</h3>
+            </div>
+            <div class="card-body">
+                <canvas id="myChart" style="height:40vh; width:80vw"></canvas>
             </div>
         </div>
+
 
 
         <div class="card">
@@ -59,7 +55,7 @@
                     <table class="table  mb-0 text-left" id="ShowDashborad">
                         <thead>
                             <tr>
-                                <th class="cell">ระดับชั้น</th>                               
+                                <th class="cell">ระดับชั้น</th>
                                 <th class="cell text-center">มา</th>
                                 <th class="cell text-center">ขาด</th>
                                 <th class="cell text-center">สาย</th>
@@ -110,7 +106,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th class="text-center">รวม</th>                                
+                                <th class="text-center">รวม</th>
                                 <th class="text-center"></th>
                                 <th class="text-center"></th>
                                 <th class="text-center"></th>
@@ -134,7 +130,7 @@
                     <table class="table  mb-0 text-left" id="ShowDashborad">
                         <thead>
                             <tr>
-                                <th class="cell">ระดับชั้น</th>                               
+                                <th class="cell">ระดับชั้น</th>
                                 <th class="cell text-center">ชายขาด</th>
                                 <th class="cell text-center">หญิงขาด</th>
                                 <th class="cell text-center"> ขาดรวม </th>
@@ -142,27 +138,27 @@
                         </thead>
                         <tbody>
                             <?php foreach ($all as $key => $v_showHR) : ?>
-                            <tr >
+                            <tr>
                                 <td class="cell">
-                                    มัธยมศึกษาปีที่ <?=$v_showHR['Room']?>     
-                                </td>            
+                                    มัธยมศึกษาปีที่ <?=$v_showHR['Room']?>
+                                </td>
                                 <?php $subB = explode('/',$v_showHR['home_khad'])?>
                                 <td class="text-center">
-                                <?=$subB[0]?>
+                                    <?=$subB[0]?>
                                 </td>
                                 <td class="text-center">
-                                <?=$subB[1]?>
+                                    <?=$subB[1]?>
                                 </td>
                                 <td class="text-center">
-                                <?=$subB[0]+$subB[1]?>
+                                    <?=$subB[0]+$subB[1]?>
                                 </td>
-                                
+
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th class="text-center">รวม</th>                                
+                                <th class="text-center">รวม</th>
                                 <th></th>
                                 <th></th>
                             </tr>

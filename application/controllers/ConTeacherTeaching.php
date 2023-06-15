@@ -58,25 +58,25 @@ var  $title = "หน้าแรก";
     }
 
     public function bar_chart_js(){
+        $KeyDay = $this->input->post('KeyDay');
         $data['teacher'] = $this->TeacRoom();
-        $data['showHR'] = $this->DBaffairs->where('chk_home_date',date('Y-m-d', strtotime(date('Y-m-d'))))
+        $data['showHR'] = $this->DBaffairs->where('chk_home_date',date('Y-m-d', strtotime($KeyDay)))
                                 ->like('chk_home_room',$data['teacher'][0]->Reg_Class, 'after')
                                 ->order_by('chk_home_room','ASC')
                                 ->get('tb_checkhomeroom')                                
                                 ->result();
         $data1 = [];
         //$data1['label'][] = [1,2,3,4];
+        $home_room=[];
         $home_ma=[];$home_khad=[];$home_sahy=[];  $home_la=[]; $home_kid=[]; $home_hnee=[];
-        foreach($data['showHR'] as $row) {
-           
-
+        foreach($data['showHR'] as $row) {           
+                $home_room[] = $row->chk_home_room;
                 $row->chk_home_ma !== "" ? $home_ma[] += count(explode('|', $row->chk_home_ma)) : $home_ma[] += 0;
                 $row->chk_home_khad !== "" ? $home_khad[] +=  count(explode('|', $row->chk_home_khad)) : $home_khad[] += 0;
                 $row->chk_home_sahy !== "" ? $home_sahy[] +=  count(explode('|', $row->chk_home_sahy)) : $home_sahy[] += 0;
                 $row->chk_home_la !== "" ? $home_la[] +=  count(explode('|', $row->chk_home_la)) : $home_la[] += 0;            
                 $row->chk_home_kid !== "" ? $home_kid[] +=  count(explode('|', $row->chk_home_kid)) : $home_kid[] += 0;
                 $row->chk_home_hnee !== "" ? $home_hnee[] +=  count(explode('|', $row->chk_home_hnee)) : $home_hnee[] += 0;
-
                 
         }     
         $data1['ma'] =$home_ma;
@@ -85,6 +85,7 @@ var  $title = "หน้าแรก";
         $data1['sahy'] =($home_sahy);
         $data1['hnee'] =($home_hnee);
         $data1['kid'] =($home_kid); 
+        $data1['room'] =($home_room); 
         echo json_encode($data1) ;
     }
 

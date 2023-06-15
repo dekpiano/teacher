@@ -76,14 +76,14 @@
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
           <?php if($this->uri->segment(1) === "TeacherJob"): ?>
-          <script src="<?=base_url()?>assets/js/html5-qrcode.min.js?v=1"></script>
+          <script src="<?=base_url()?>assets/js/html5-qrcode.min.js?v=2"></script>
           <script src="<?=base_url()?>assets/js/teacher/TeacherJob.js?v=1"></script>
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Teaching"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=9"></script>
+          <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=10"></script>
           <script src="<?=base_url()?>assets/js/teacher/RaedQrcode.js?v=1"></script>
-          <script src="<?=base_url()?>assets/js/charts-custom.js?v=11"></script>       
+          <!-- <script src="<?=base_url()?>assets/js/charts-custom.js?v=17"></script>        -->
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Register"): ?>

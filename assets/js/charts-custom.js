@@ -49,24 +49,24 @@ var myChart = new Chart(ctx, {
     }
 });
 
-$.post('../../ConTeacherTeaching/bar_chart_js', {},
-    function(data, status) {
-        var ma = data;
-        var result = [data.ma, data.khad, data.la, data.sahy, data.kid, data.hnee];
-        //console.log(ma);
-        myChart.data.labels.push('มา', 'ขาด', 'สาย', 'ลา', 'กิจกรรม', 'ไม่เข้า');
+ChartStatisticsHomeRoom();
 
-        $.each(result, function(key, value) {
-            //console.log(value[0]);
-            myChart.data.datasets[0].data.push(value[0]);
-            myChart.data.datasets[1].data.push(value[1]);
-            myChart.data.datasets[2].data.push(value[2]);
-            myChart.data.datasets[3].data.push(value[3]);
-        });
+function ChartStatisticsHomeRoom(params) {
+    $.post('../../ConTeacherTeaching/bar_chart_js', {},
+        function(data, status) {
+            var ma = data;
+            var result = [data.ma, data.khad, data.la, data.sahy, data.kid, data.hnee];
+            //console.log(ma);
+            myChart.data.labels.push('มา', 'ขาด', 'สาย', 'ลา', 'กิจกรรม', 'ไม่เข้า');
 
-
-
-
-        myChart.update();
-    },
-    'json');
+            $.each(result, function(key, value) {
+                //console.log(value[0]);
+                myChart.data.datasets[0].data.push(value[0]);
+                myChart.data.datasets[1].data.push(value[1]);
+                myChart.data.datasets[2].data.push(value[2]);
+                myChart.data.datasets[3].data.push(value[3]);
+            });
+            myChart.update();
+        },
+        'json');
+}
