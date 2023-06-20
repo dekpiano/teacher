@@ -10,7 +10,7 @@
 <section class="">
     <div class="container-fluid">
 
-        <?php  $typeplan = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
+        <?php  $typeplan = array('แบบตรวจแผนการจัดการเรียนรู้','บันทึกตรวจใช้แผน','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
         <div class="card p-3">
             <div cass="card-body">
                 <div class="d-flex justify-content-center align-items-center">

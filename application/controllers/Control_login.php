@@ -173,7 +173,7 @@ class Control_login extends CI_Controller {
 				}else{
 					$this->session->unset_userdata('access_token');
 
-					$this->session->set_flashdata(array('msg'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียนที่ลงทะเบียนเท่านั้น กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
+					$this->session->set_flashdata(array('msg'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียน @skj.ac.th ที่ลงทะเบียนเท่านั้น กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
 					//echo $this->google_client->createAuthUrl();				
 					redirect('LoginTeacher');
 				}
