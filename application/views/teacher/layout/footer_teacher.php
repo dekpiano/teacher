@@ -81,7 +81,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Teaching"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=16"></script>
+          <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=17"></script>
           <script src="<?=base_url()?>assets/js/teacher/RaedQrcode.js?v=1"></script>
           <!-- <script src="<?=base_url()?>assets/js/charts-custom.js?v=17"></script>        -->
           <?php endif; ?>

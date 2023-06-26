@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover ShowDashborad">
                             <thead>
                                 <tr>
                                     <th>วันที่</th>
@@ -65,6 +65,17 @@
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
+                            <tfoot>
+                            <tr>
+                                <th class="text-center">รวม</th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </tfoot>
                         </table>
                     </div>
                 </div>

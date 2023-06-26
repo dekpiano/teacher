@@ -4,10 +4,15 @@ $(document).on("change", "#show_date", function() {
 });
 
 $('.ShowDashborad').DataTable({
-    paging: false,
+    order: [
+        [0, "desc"]
+    ],
     dom: 'Bfrtip',
     buttons: [
         'copyHtml5', 'excelHtml5', 'print'
+    ],
+    columnDefs: [
+        { className: 'text-center', targets: '_all' },
     ],
     "autoWidth": true,
     "footerCallback": function(row, data, start, end, display) {
