@@ -163,8 +163,12 @@
                                 aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                         </div>
                     </div>
-                    <div class="number"><strong><?=$stu_ma;?></strong></div>
+                    <div class="number">
+                        <strong><?=$stu_ma;?></strong>    
+                        <div class="text-center" style="font-size: 14px;">ช:<?=$BoyMa;?> | ญ:<?=$GirlMa;?></div>                 
+                    </div>                    
                 </div>
+                 
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
@@ -177,8 +181,13 @@
                                 aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
                         </div>
                     </div>
-                    <div class="number"><strong><?=$stu_khad;?></strong></div>
+                    <div class="number">
+                        <strong><?=$stu_khad;?></strong>
+                        <div class="text-center" style="font-size: 14px;">ช:<?=$BoyKhad;?> | ญ:<?=$GirlKhad;?></div>
+                    </div>
+                    
                 </div>
+                
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
@@ -191,8 +200,13 @@
                                 aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
                         </div>
                     </div>
-                    <div class="number"><strong><?=$stu_sahy;?></strong></div>
+                    <div class="number">
+                        <strong><?=$stu_sahy;?></strong>
+                        <div class="text-center" style="font-size: 14px;">ช:<?=$BoySahy;?> | ญ:<?=$GirlSahy;?></div> 
+                    </div>     
+                                  
                 </div>
+                
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
@@ -205,8 +219,13 @@
                                 aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
                         </div>
                     </div>
-                    <div class="number"><strong><?=$stu_la;?></strong></div>
+                    <div class="number">                    
+                        <strong><?=$stu_la;?></strong>
+                        <div class="text-center" style="font-size: 14px;">ช:<?=$BoyLa;?> | ญ:<?=$GirlLa;?></div>
+                    </div>
+                   
                 </div>
+                
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
@@ -220,8 +239,13 @@
                                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar"></div>
                         </div>
                     </div>
-                    <div class="number"><strong><?=$stu_kid;?></strong></div>
+                    <div class="number">
+                        <strong><?=$stu_kid;?></strong>
+                        <div class="text-center" style="font-size: 14px;">ช:<?=$BoyKid?> | ญ:<?=$GirlKid;?></div>
+                    </div>
+                    
                 </div>
+                
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
@@ -235,8 +259,13 @@
                                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar"></div>
                         </div>
                     </div>
-                    <div class="number"><strong><?=$stu_hnee;?></strong></div>
+                    <div class="number">
+                        <strong><?=$stu_hnee;?></strong>
+                        <div class="text-center" style="font-size: 14px;">ช:<?=$BoyHnee;?> | ญ:<?=$GirlHnee;?></div>
+                    </div>
+                   
                 </div>
+                
             </div>
         </div>
     </div>

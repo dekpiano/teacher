@@ -49,6 +49,48 @@ var  $title = "หน้าแรก";
         ->order_by('chk_home_date','DESC')
         ->get('tb_checkhomeroom')->row();
 
+        $checkMa = explode('|',$data['ChkHomeRoom']->chk_home_ma);
+        $checkKhad = explode('|',$data['ChkHomeRoom']->chk_home_khad);
+        $checkLa = explode('|',$data['ChkHomeRoom']->chk_home_la);
+        $checkSahy = explode('|',$data['ChkHomeRoom']->chk_home_sahy);
+        $checkKid = explode('|',$data['ChkHomeRoom']->chk_home_kid);
+        $checkHnee = explode('|',$data['ChkHomeRoom']->chk_home_hnee);
+
+        $ArrayStatus = array('Ma'=>$checkMa ,
+                            'Khad' => $checkKhad,
+                            'La' => $checkLa,
+                            'Sahy' => $checkSahy,
+                            'Kid' => $checkKid,
+                            'Hnee' => $checkHnee
+                        );
+
+        foreach ($ArrayStatus as $key_AStatus => $v_AStatus) {
+            $boy[$key_AStatus] = 0;
+            $girl[$key_AStatus]=0;
+        }
+        
+        //$boyma = 0;$girlma=0;$boykhad = 0;$girlkhad=0;
+
+        foreach ($ArrayStatus as $key_AStatus => $v_AStatus) {            
+            foreach ($v_AStatus as $key_value => $value) {
+                $CheckStu = $this->db->select('StudentPrefix')->where('StudentCode',$value)->get('tb_students')->result();
+                if(@$CheckStu[0]->StudentPrefix == "นาย" || @$CheckStu[0]->StudentPrefix == "เด็กชาย"){
+                    $boy[$key_AStatus] += 1;
+                }elseif(@$CheckStu[0]->StudentPrefix == "นางสาว" || @$CheckStu[0]->StudentPrefix == "เด็กหญิง"){
+                    $girl[$key_AStatus] +=1;
+                }
+                else{
+                    
+                }
+            }
+        }
+        foreach ($ArrayStatus as $key_AStatus => $v_AStatus) {
+            $data['Boy'.$key_AStatus] = $boy[$key_AStatus];
+            $data['Girl'.$key_AStatus] = $girl[$key_AStatus];
+        }
+     
+        //exit();
+
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');        
         $this->load->view('teacher/Teaching/CheckHomeRoom/CheckHomeRoomMain.php');
