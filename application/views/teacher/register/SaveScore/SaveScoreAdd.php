@@ -94,6 +94,7 @@ table thead {
                                         if(floatval($check_student[0]->SubjectUnit) == 0.5){ $TimeNum = 20; }
                                         elseif(floatval($check_student[0]->SubjectUnit) == 1){$TimeNum = 40;}
                                         elseif(floatval($check_student[0]->SubjectUnit) == 1.5){$TimeNum = 60;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 2.0){$TimeNum = 80;}
                                         ?>
                                         <th width="">เวลาเรียน<br> <small>(<?=intval($TimeNum);?> ชั่วโมง)</small> </th>
                                         <?php 

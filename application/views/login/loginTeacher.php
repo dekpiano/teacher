@@ -56,7 +56,7 @@
                         <div class="form d-flex align-items-center">
                             <div class="content ">
                                 <h3 class="mb-3 text-center">เข้าสู่ระบบ งานครู SKJ </h3>
-                                <!-- <form method="post" action="<?=base_url('control_login/check_teacher');?>"
+                                <form method="post" action="<?=base_url('control_login/check_teacher');?>"
                                     class="form-validate">
                                     <div class="form-group">
                                         <input id="login-username" type="email" name="username" id="username" required
@@ -70,7 +70,7 @@
                                     </div><button id="login" type="submit" class="btn btn-primary"><i
                                             class="fas fa-sign-in-alt"></i> Login</button>
                                   
-                                </form> -->
+                                </form>
                                 <hr>
                                 <?php
                                 // if(!isset($login_button))
