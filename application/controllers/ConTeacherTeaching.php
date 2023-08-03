@@ -49,12 +49,12 @@ var  $title = "หน้าแรก";
         ->order_by('chk_home_date','DESC')
         ->get('tb_checkhomeroom')->row();
 
-        $checkMa = explode('|',$data['ChkHomeRoom']->chk_home_ma);
-        $checkKhad = explode('|',$data['ChkHomeRoom']->chk_home_khad);
-        $checkLa = explode('|',$data['ChkHomeRoom']->chk_home_la);
-        $checkSahy = explode('|',$data['ChkHomeRoom']->chk_home_sahy);
-        $checkKid = explode('|',$data['ChkHomeRoom']->chk_home_kid);
-        $checkHnee = explode('|',$data['ChkHomeRoom']->chk_home_hnee);
+        $checkMa = explode('|',@$data['ChkHomeRoom']->chk_home_ma);
+        $checkKhad = explode('|',@$data['ChkHomeRoom']->chk_home_khad);
+        $checkLa = explode('|',@$data['ChkHomeRoom']->chk_home_la);
+        $checkSahy = explode('|',@$data['ChkHomeRoom']->chk_home_sahy);
+        $checkKid = explode('|',@$data['ChkHomeRoom']->chk_home_kid);
+        $checkHnee = explode('|',@$data['ChkHomeRoom']->chk_home_hnee);
 
         $ArrayStatus = array('Ma'=>$checkMa ,
                             'Khad' => $checkKhad,

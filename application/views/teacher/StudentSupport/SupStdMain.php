@@ -44,10 +44,10 @@
                             <tr>
                                 <th>ปีการศึกษา</th>
                                 <th>ระดับชั้น</th>
-                                <th>ใบปะหน้า</th>
-                                <th>SDQ</th>
-                                <th>แบบบันทึก</th>
-                                <th>สรุปข้อมูล</th>
+                                <!-- <th>ใบปะหน้า</th>
+                                <th>SDQ</th> -->
+                                <th>แบบบันทึกรายงานเยี่ยมบ้าน</th>
+                                <!-- <th>สรุปข้อมูล</th> -->
                                 <th>หัวหน้าระดับ</th>
                                 <th>หัวหน้างาน</th>
                             </tr>
@@ -64,7 +64,7 @@
                             <tr>
                                 <th scope="row"><?=$v_Aff->s_homevisit_year?></th>
                                 <td>ม.<?=$v_Aff->s_homevisit_class?></td>
-                                <td>
+                                <!-- <td>
                                     <form class="add_filecoversheet"
                                         id="add_filecoversheet<?=$v_Aff->s_homevisit_id;?>">
                                         <div class="CheckTruefilecoversheet<?=$v_Aff->s_homevisit_id;?>">
@@ -122,7 +122,7 @@
                                             <?php endif; ?>
                                         </div>
                                     </form>
-                                </td>
+                                </td> -->
                                 <td>
 
                                     <form class="add_homevisit_filerecordform"
@@ -153,7 +153,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <form class="add_homevisit_filesummary"
                                         id="add_homevisit_filesummary<?=$v_Aff->s_homevisit_id;?>">
                                         <div class="CheckTruehomevisit_filesummary<?=$v_Aff->s_homevisit_id;?>">
@@ -181,7 +181,7 @@
                                             <?php endif; ?>
                                         </div>
                                     </form>
-                                </td>
+                                </td> -->
                                 <td>
                                     <?php 
                                     if($IfLen == 1):
@@ -228,7 +228,7 @@
                             <tr>
                                 <th scope="row"><?=$v_Aff->s_homevisit_year?></th>
                                 <td>ม.<?=$v_Aff->s_homevisit_class?></td>
-                                <td>
+                                <!-- <td>
                                     <form class="add_filecoversheet"
                                         id="add_filecoversheet<?=$v_Aff->s_homevisit_id;?>">
                                         <div class="CheckTruefilecoversheet<?=$v_Aff->s_homevisit_id;?>">
@@ -316,7 +316,7 @@
                                                 <?php endif; ?>
                                         </div>
                                     </form>
-                                </td>
+                                </td> -->
                                 <td>
 
                                     <form class="add_homevisit_filerecordform"
@@ -361,7 +361,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <form class="add_homevisit_filesummary"
                                         id="add_homevisit_filesummary<?=$v_Aff->s_homevisit_id;?>">
                                         <div class="CheckTruehomevisit_filesummary<?=$v_Aff->s_homevisit_id;?>">
@@ -403,7 +403,7 @@
                                                 <?php endif; ?>
                                         </div>
                                     </form>
-                                </td>
+                                </td> -->
                                 <td>
                                     <?php if($IfLen == 1):?>
                                     <form class="ConfrimStatus needs-validation" method="post" novalidate>

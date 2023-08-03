@@ -37,7 +37,8 @@
                                 class="dropdown-item py-1 px-3 edit" href="#"> <i class="fas fa-cog"></i>Edit</a></div>
                     </div>
                 </div>
-                <h3 class="h4 mb-0">สถิตินักเรียน วันที่ <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3>
+                <h3 class="h4 mb-0">สถิตินักเรียน วันที่
+                    <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3>
             </div>
             <div class="card-body">
                 <canvas id="myChart" style="height:40vh; width:80vw"></canvas>
@@ -48,7 +49,8 @@
 
         <div class="card">
             <div class="card-header">
-               <h3>สถิตินักเรียน รายประเภท วันที่ <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3> 
+                <h3>สถิตินักเรียน รายประเภท วันที่
+                    <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -121,9 +123,25 @@
             </div>
         </div>
 
+        <div class="row">
+        <div class="col-lg-6">
+            <div class="card">            
+                <div class="card-header d-flex align-items-center">
+                    <h2 class="h3">Trending Articles </h2>
+                    <div class="badge badge-rounded bg-green">4 New </div>
+                </div>
+                <div class="card-body">
+                   
+                </div>
+            </div>
+        </div>
+        </div>
+        
+
         <div class="card">
             <div class="card-header">
-              <h3>สถิตินักเรียนที่ขาดเข้าแถว วันที่ <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3>  
+                <h3>สถิตินักเรียนที่ขาดเข้าแถว วันที่
+                    <?=$this->datethai->thai_date_fullmonth(strtotime($this->uri->segment(3)))?></h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
