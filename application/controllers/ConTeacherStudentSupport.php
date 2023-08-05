@@ -17,7 +17,8 @@ var  $title = "หน้าแรก";
     public function SupStdMain(){      
         $data['title']  = "หน้าหลักเยี่ยมบ้านนักเรียน";  
         $data['CheckOnOff'] = $this->CheckHomeVisitManager;
-        //print_r($CheckHomeVisitManager->homevisit_set_manager); exit();
+        $schoolyear = $this->db->select('*')->get('tb_schoolyear')->result();
+        $ValueSchoolYear = explode('/',$schoolyear[0]->schyear_year);
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();
         if(!isset($CClass[0]->Reg_Class)){
@@ -33,7 +34,10 @@ var  $title = "หน้าแรก";
                 ->order_by('s_homevisit_year','DESC')->get('tb_homevisit_send')->result();
                //echo '<pre>'; print_r($data['AllAffairs']); exit();
             }elseif($checkStatus == 1){           
-                $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2564')->order_by('s_homevisit_year','DESC')->get('tb_homevisit_send')->result();
+                $data['AllAffairs'] = $this->DBaffairs
+                ->where('s_homevisit_year',$ValueSchoolYear[1])
+                ->order_by('s_homevisit_year','DESC')
+                ->get('tb_homevisit_send')->result();
             }
         }
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
@@ -226,7 +230,7 @@ var  $title = "หน้าแรก";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['CClass'] = $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();             
-        $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2564')->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
+        $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2566')->order_by('s_homevisit_class')->get('tb_homevisit_send')->result();
         $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
 
         $this->load->view('teacher/layout/header_teacher.php',$data);

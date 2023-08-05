@@ -58,7 +58,7 @@
                             <?php 
                                 foreach ($AllAffairs as $key => $v_Aff) : 
                                     $c = explode('/',$v_Aff->s_homevisit_class);
-                                    //echo $c[0];
+                                    //echo $CClass[0]->Reg_Class;
                                     if($c[0] == $CClass[0]->Reg_Class):
                             ?>
                             <tr>
