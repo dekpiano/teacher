@@ -37,7 +37,7 @@
             </div>
             <div class="card-body no-padding">
 
-            <div class="services">
+                <!-- <div class="services">
                     <div class="pt-3">
                         งานครูเวร
                     </div>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="services">
                     <div class="pt-3">
@@ -168,7 +168,8 @@
                                     <img src="https://cdn-icons-png.flaticon.com/512/25/25407.png" width="36" />
                                 </div>
                                 <div>
-                                    <a href="<?=base_url('Course/LoadPlan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term).'/All';?>">
+                                    <a
+                                        href="<?=base_url('Course/LoadPlan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term).'/All';?>">
                                         <div class="text">
                                             <h4 class="m-0">ดาวโหลดแผน</h4>
                                         </div>

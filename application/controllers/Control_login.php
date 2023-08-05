@@ -168,8 +168,10 @@ class Control_login extends CI_Controller {
 				   $this->Model_login->Update_user_data($user_data, $data['email']);
 
 				   $result = $this->Model_login->fetch_teacher_login($data['email']);
-				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
-				   redirect('Home');
+				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade,'class' => $result->Reg_Class));
+				   //echo "<pre>"; print_r($result);
+				  redirect('Home');
+
 				}else{
 					$this->session->unset_userdata('access_token');
 

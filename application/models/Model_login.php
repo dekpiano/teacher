@@ -66,9 +66,27 @@ class Model_login extends CI_Model
 
 	function fetch_teacher_login($id)
 	{
+		$YearThis = $this->db->select('schyear_year')->get('tb_schoolyear')->row();
+		$Year = explode('/',$YearThis->schyear_year); 		
 		$DBpersonnel = $this->load->database('personnel', TRUE); 
-		$DBpersonnel->where('pers_username', $id);
-		$query = $DBpersonnel->get('tb_personnel');
+		$query = $DBpersonnel->select('
+		skjacth_academic.tb_regclass.Reg_Class,
+		skjacth_academic.tb_regclass.Reg_Year,
+		skjacth_personnel.tb_personnel.pers_id,
+		skjacth_personnel.tb_personnel.pers_prefix,
+		skjacth_personnel.tb_personnel.pers_firstname,
+		skjacth_personnel.tb_personnel.pers_lastname,
+		skjacth_personnel.tb_personnel.pers_position,
+		skjacth_personnel.tb_personnel.pers_department,
+		skjacth_personnel.tb_personnel.pers_learning,
+		skjacth_personnel.tb_personnel.pers_img,
+		skjacth_personnel.tb_personnel.pers_groupleade
+		')
+		->from('skjacth_personnel.tb_personnel')
+		->join('skjacth_academic.tb_regclass','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
+		->where('pers_username', $id)
+		->where('Reg_Year', $Year[1])
+		->get();
 		if($query->num_rows() > 0)
 		{
 			return $query->row();

@@ -27,7 +27,11 @@ var  $title = "หน้าแรก";
         }else{
             $checkStatus = strlen($CClass[0]->Reg_Class);
             if($checkStatus == 3){
-                $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_class',$CClass[0]->Reg_Class)->order_by('s_homevisit_year','DESC')->get('tb_homevisit_send')->result();
+                $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_teac_id',$this->session->userdata('login_id'))
+                ->or_where('s_homevisit_teac_id2',$this->session->userdata('login_id'))
+                ->or_where('s_homevisit_teac_id3',$this->session->userdata('login_id'))
+                ->order_by('s_homevisit_year','DESC')->get('tb_homevisit_send')->result();
+               //echo '<pre>'; print_r($data['AllAffairs']); exit();
             }elseif($checkStatus == 1){           
                 $data['AllAffairs'] = $this->DBaffairs->where('s_homevisit_year','2564')->order_by('s_homevisit_year','DESC')->get('tb_homevisit_send')->result();
             }
@@ -42,22 +46,36 @@ var  $title = "หน้าแรก";
     }
 
     public function SupStdAdd(){  
+        $YearThis = $this->db->select('schyear_year')->get('tb_schoolyear')->row();
+		$Year = explode('/',$YearThis->schyear_year); 		
+
         $CClass = $this->db->where('class_teacher',$this->session->userdata('login_id'))->get('tb_regclass')->result();
+        $TeacherCare = $this->db->select('class_teacher')
+        ->where('Reg_Class',$this->session->userdata('class'))
+        ->where('Reg_Year',$Year[1])
+        ->get('tb_regclass')->result();
+        $Value_TeacherCare = array();
+        foreach ($TeacherCare as $key => $value) {
+            array_push($Value_TeacherCare,$value->class_teacher);
+        }
+        
         $CheckClsss = $this->DBaffairs
                         ->where('s_homevisit_class',$CClass[0]->Reg_Class)
                         ->where('s_homevisit_year',$this->input->post('s_homevisit_year'))
                         ->get('tb_homevisit_send')
                         ->num_rows();
-        //echo '<pre>'; print_r($CheckClsss);  exit();
+       // echo '<pre>'; print_r(count($TeacherCare) <= 2 ? 0 : $Value_TeacherCare[2]);  exit();
         if($CheckClsss > 0){
             $this->session->set_flashdata(array('status'=>'info','msg'=>'YES','messge'=>'ข้อมูลซ้ำ ,ได้บันทึกไว้แล้ว กรุณาตรวจสอบอีกครั้ง'));
             redirect('SupStd/Main');
         }else{
             $data = array('s_homevisit_year' => $year = $this->input->post('s_homevisit_year'),
-            's_homevisit_class' => $CClass[0]->Reg_Class,
+            's_homevisit_class' => $this->session->userdata('class'),
             's_homevisit_date' => date('Y-m-d H:i:s'),
             's_homevisit_statuslevelhead' => "รอตรวจ",
-            's_homevisit_teac_id' => $this->session->userdata('login_id')); 
+            's_homevisit_teac_id' => $Value_TeacherCare[0],
+            's_homevisit_teac_id2' => $Value_TeacherCare[1],
+            's_homevisit_teac_id3' => count($TeacherCare) <= 2 ? 0 : $Value_TeacherCare[2]); 
             $add = $this->DBaffairs->insert('tb_homevisit_send',$data);
             if($add){
             $this->session->set_flashdata(array('status'=>'success','msg'=>'YES','messge'=>'บันทึกข้อมูลไว้แล้ว และให้เพิ่มไฟล์ตามเมนูที่กำหนด โดยคลิกไอคอน <label class="badge badge-warning h6"><i class="fa fa-upload" aria-hidden="true"></i></label>  อัพโหลดไฟล์'));

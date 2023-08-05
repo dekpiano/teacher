@@ -8,7 +8,7 @@
                     alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
                 <h1 class="h4"><?=$this->session->userdata('fullname');?> </h1>
-                <p><?=$this->session->userdata('class');?></p>
+                <p>ครูประจำชั้น ม.<?=$this->session->userdata('class');?></p>
             </div>
         </div>
         <ul class="list-unstyled">
@@ -18,7 +18,7 @@
         </ul>
         <span class="heading">งานวิชาการ</span>
         <ul class="list-unstyled">
-        <li><a href="#TeacherJob" aria-expanded="false" data-toggle="collapse"> <i
+            <!-- <li><a href="#TeacherJob" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูเวร </a>
                 <ul id="TeacherJob"
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Teaching' ? 'show' : '' ?>">
@@ -26,10 +26,10 @@
                         class="<?=$this->uri->segment(2) == 'CheckHomeRoomMain' || $this->uri->segment(2) == 'CheckHomeRoomAdd'|| $this->uri->segment(2) == 'CheckHomeRoomStatistics' ? 'active' : '' ?>">
                         <a href="<?=base_url('Teaching/CheckHomeRoomMain');?>">เช็ตชื่อหน้าประตูโรงเรียน</a>
                     </li>
-                    <!-- <li class="<?=$this->uri->segment(2) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
-                    <li class="<?=$this->uri->segment(2) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li> -->
+                    <li class="<?=$this->uri->segment(2) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
+                    <li class="<?=$this->uri->segment(2) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li>
                 </ul>
-            </li>
+            </li> -->
 
             <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูผู้สอน </a>
@@ -48,10 +48,12 @@
                         class="icon-interface-windows"></i>งานวัดผล </a>
                 <ul id="TeacherSaveScore"
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Register' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(2) == 'SaveScoreMain' || $this->uri->segment(2) =='SaveScoreAdd' ? 'active' : '' ?>"><a
-                            href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a></li>
-                    <li class="<?=$this->uri->segment(2) == 'LearnRepeatMain' || $this->uri->segment(2) =='LearnRepeatAdd' ? 'active' : '' ?>"><a
-                            href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a></li>
+                    <li
+                        class="<?=$this->uri->segment(2) == 'SaveScoreMain' || $this->uri->segment(2) =='SaveScoreAdd' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a></li>
+                    <li
+                        class="<?=$this->uri->segment(2) == 'LearnRepeatMain' || $this->uri->segment(2) =='LearnRepeatAdd' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a></li>
                 </ul>
             </li>
 
@@ -131,7 +133,8 @@
         <span class="heading">งานงบประมาณและแผน</span>
         <ul class="list-unstyled">
             <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
-                <a href="<?=base_url('BudgetPlan/Cooperative/Home')?>"> <i class="icon-interface-windows"></i>สหกรณ์โรงเรียน(ครู) </a>
+                <a href="<?=base_url('BudgetPlan/Cooperative/Home')?>"> <i
+                        class="icon-interface-windows"></i>สหกรณ์โรงเรียน(ครู) </a>
             </li>
         </ul>
 

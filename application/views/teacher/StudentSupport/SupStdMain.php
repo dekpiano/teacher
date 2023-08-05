@@ -15,7 +15,7 @@
         <div class="statistic align-items-center bg-white has-shadow">
             <div class="text">
                 <strong>คุณใช้งานในสถานะ :
-                    <?=$IfLen != 1 ? 'ครูที่ปรึกษา '.$CClass[0]->Reg_Class : 'หัวหน้าระดับ ม.'.$CClass[0]->Reg_Class ?>
+                    <?=$IfLen != 1 ? 'ครูที่ปรึกษา '.$this->session->userdata('class') : 'หัวหน้าระดับ ม.'.$CClass[0]->Reg_Class ?>
                     <div class="float-right">
                         <small><a target="_blank"
                                 href="<?=base_url('uploads/affairs/helpstd/คู่มือ/คู่มือการใช้งานระบบส่งงานเยี่ยมบ้านSDQ.pdf')?>">คู่มือการใช้งาน</a>
