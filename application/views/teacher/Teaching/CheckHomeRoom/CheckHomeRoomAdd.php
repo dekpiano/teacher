@@ -187,17 +187,24 @@
                                 <label class="btn btn-outline-primary active">
                                     <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
                                         value="มา" autocomplete="off"
-                                        <?php if(in_array($v_stu->StudentCode, $chkMa)){echo "checked";}?>> มา
+                                        <?php 
+                                         if(!isset($ChkHomeRoom[0]->chk_home_date)){
+                                            echo "checked";
+                                        }
+                                        else{
+                                            if(in_array($v_stu->StudentCode, $chkMa)){
+                                                echo "checked";
+                                            }
+                                        }
+                                        ?>
+                                        > มา
                                 </label>
                                 <label class="btn btn-outline-primary">
                                     <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
-                                        value="ขาด" autocomplete="off" <?php 
-                                                    if(!isset($ChkHomeRoom[0]->chk_home_date)){
-                                                        echo "checked";
-                                                    }else{
-                                                        if(in_array($v_stu->StudentCode, $chkKhad)){echo "checked";}  
-                                                    }
-                                                    ?>>
+                                        value="ขาด" autocomplete="off" <?php
+                                        if(in_array($v_stu->StudentCode, $chkKhad)){
+                                                            echo "checked";}
+                                                            ?>>
                                     ขาด
                                 </label>
                                 <label class="btn btn-outline-primary">
