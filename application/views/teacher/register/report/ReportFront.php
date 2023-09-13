@@ -221,7 +221,7 @@ $avg3_up = $avg3 + $avg35 + $avg4;
     </tbody>
 </table>
 
-<div class="text-center b" style="margin-top: 3rem;font-size: 24px;">
+<div class="text-center b" style="margin-top: 2rem;font-size: 24px;">
     <div>การอนุมัติผลการพัฒนาคุณภาพผู้เรียน</div>
 </div>
 
@@ -243,9 +243,13 @@ $avg3_up = $avg3 + $avg35 + $avg4;
     <tbody>
         <tr>
             <td>
+           
                 <div class="b">เรียนเสนอเพื่อโปรดพิจารณา</div>
+              
                 <div style="height: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรอนุมัติ
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรนำไปปรับปรุงแก้ไข</div>
+              
+               
                 <br>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ..........................................ครู ปฏิบัติหน้าที่รองผู้อำนวยการสถานศึกษา
                 </p>
@@ -253,19 +257,25 @@ $avg3_up = $avg3 + $avg35 + $avg4;
                     (นางสาวอรอุมา  ฉวีทอง)
                 </p>
             </td>
-            <td>
-                <div class="b">การพิจารณา/สั่งการ</div>
+            <td style="text-align: center;">
+                <div class="b" style="text-align: left;">การพิจารณา/สั่งการ</div>
                 <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรอนุมัติ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇
                     ไม่อนุมัติ/ให้นำไปปรับปรุงแก้ไข</div>
                 <br>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ..........................................ผู้อำนวยการสถานศึกษา
+                <!-- <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    ลงชื่อ..........................................
                 </p>
                 <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    (นายอภิรักษ์ อุ่นใจ)
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    (นางสาวอร่าม  วัฒนะ)<br>
+                    <div>
+                    ผู้อำนวยการกองการศึกษา ศาสนาและวัฒนธรรม รักษาการในตำแหน่ง<br>
+                    ผู้อำนวยการสถานศึกษา โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์
+                    </div>
+                   
                 </p>
                 <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                     ......../........../..........
                 </p>
             </td>
