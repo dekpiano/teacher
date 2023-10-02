@@ -42,7 +42,16 @@
         </tr>
         <tr>
             <td style="width: 50%;text-align: right;padding-right: 10px;">ชั้นมัธยมศึกษาปีที่
-                <?php $sub_room = explode(".",$re_room); echo $sub_room[1];?></td>
+                <?php if($CheckPrint == 'all'): ?>
+                <?php 
+                $sub_room = explode(".",$re_room); 
+                $tub = explode('/',$sub_room[1]);
+                echo $tub[0];
+                ?>
+                <?php else: ?>
+                    <?php $sub_room = explode(".",$re_room); echo $sub_room[1];?>
+                <?php endif; ?>
+            </td>
             <td style="padding-left: 10px;">
                 ระดับมัธยมศึกษา<?php 
             $sub_level = explode("/",$sub_room[1]);
@@ -243,18 +252,19 @@ $avg3_up = $avg3 + $avg35 + $avg4;
     <tbody>
         <tr>
             <td>
-           
+
                 <div class="b">เรียนเสนอเพื่อโปรดพิจารณา</div>
-              
+
                 <div style="height: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรอนุมัติ
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรนำไปปรับปรุงแก้ไข</div>
-              
-               
+
+
                 <br>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ..........................................ครู ปฏิบัติหน้าที่รองผู้อำนวยการสถานศึกษา
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ..........................................ครู
+                    ปฏิบัติหน้าที่รองผู้อำนวยการสถานศึกษา
                 </p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    (นางสาวอรอุมา  ฉวีทอง)
+                    (นางสาวอรอุมา ฉวีทอง)
                 </p>
             </td>
             <td style="text-align: center;">
@@ -263,16 +273,16 @@ $avg3_up = $avg3 + $avg35 + $avg4;
                     ไม่อนุมัติ/ให้นำไปปรับปรุงแก้ไข</div>
                 <br>
                 <!-- <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-                    ลงชื่อ..........................................
+                ลงชื่อ..........................................
                 </p>
                 <p>
                     <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-                    (นางสาวอร่าม  วัฒนะ)<br>
-                    <div>
+                    (นางสาวอร่าม วัฒนะ)<br>
+                <div>
                     ผู้อำนวยการกองการศึกษา ศาสนาและวัฒนธรรม รักษาการในตำแหน่ง<br>
                     ผู้อำนวยการสถานศึกษา โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์
-                    </div>
-                   
+                </div>
+
                 </p>
                 <p>
                     <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->

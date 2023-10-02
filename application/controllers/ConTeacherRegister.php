@@ -277,7 +277,7 @@ class ConTeacherRegister extends CI_Controller {
         );
 
         if($this->input->post('select_print') == "all"){
-            
+            $data['CheckPrint'] = "all";
             $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
                             ->where('SubjectCode',$this->input->post('report_SubjectCode'))
@@ -286,7 +286,26 @@ class ConTeacherRegister extends CI_Controller {
             $data['re_teacher'] = "";
             $data['set_score'] = $this->db->where('regscore_subjectID',$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
 
-            $data['check_student'] = $this->db->select('
+            $data['check_level'] = $this->db->select('
+                                    tb_students.StudentClass
+                                ')
+                                ->from('tb_register')
+                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('RegisterYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->order_by('tb_students.StudentClass','ASC')
+                                ->order_by('tb_students.StudentNumber','ASC')
+                                ->group_by('tb_students.StudentClass')
+                                ->get()->result();
+
+                                
+
+            foreach ($data['check_level'] as $key => $value_level) {
+
+                $data['check_student'] = $this->db->select('
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
@@ -320,9 +339,60 @@ class ConTeacherRegister extends CI_Controller {
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
 
-            //echo "<pre>";print_r($data['check_student']); exit();
+            $data['re_room'] = $value_level->StudentClass;
+            $data['check_student1'] = $this->db->select('
+                                    tb_register.SubjectCode,
+                                    tb_register.RegisterYear,
+                                    tb_register.RegisterClass,
+                                    tb_register.Score100,
+                                    tb_register.Grade,
+                                    tb_register.TeacherID,
+                                    tb_register.StudyTime,
+                                    tb_subjects.SubjectName,
+                                    tb_subjects.SubjectID,
+                                    tb_subjects.SubjectUnit,
+                                    tb_subjects.SubjectHour,
+                                    tb_students.StudentID,
+                                    tb_students.StudentPrefix,
+                                    tb_students.StudentFirstName,
+                                    tb_students.StudentLastName,
+                                    tb_students.StudentNumber,
+                                    tb_students.StudentClass,
+                                    tb_students.StudentCode,
+                                    tb_students.StudentStatus,
+                                    tb_students.StudentBehavior,
+                                    tb_register.Grade_Type
+                                ')
+                                ->from('tb_register')
+                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('StudentClass',$value_level->StudentClass)
+                                ->where('RegisterYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->order_by('tb_students.StudentClass','ASC')
+                                ->order_by('tb_students.StudentNumber','ASC')
+                                ->get()->result();
+ //echo "<pre>";print_r($data['check_student']);
+         
+                                if($key == 0){
+                                    $data['test'] = $this->input->post('report_RegisterYear'); //true
+                                    $ReportFront = $this->load->view('teacher/register/report/ReportFront',$data,true);        
+                                    $live_mpdf->WriteHTML($ReportFront);  
+                                }
+                               
+                                $live_mpdf->AddPage(); 
 
+                                $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
+                                $live_mpdf->WriteHTML($ReportSummary);
+                                
+           }
+
+                                $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE);
+          
         }else{
+            $data['CheckPrint'] = "";
              $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
                             ->where('SubjectCode',$this->input->post('report_SubjectCode'))
@@ -382,21 +452,18 @@ class ConTeacherRegister extends CI_Controller {
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
            
-       // echo '<pre>';print_r($data['check_student']); exit();
-        // ->where('tb_register.RegisterYear',$term.'/'.$yaer)
-        //                         ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
+                                $data['test'] = $this->input->post('report_RegisterYear'); //true
+                                $ReportFront = $this->load->view('teacher/register/report/ReportFront',$data,true);        
+                                $live_mpdf->WriteHTML($ReportFront);
+                        
+                                $live_mpdf->AddPage(); 
+                                $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
+                                $live_mpdf->WriteHTML($ReportSummary);
+                                $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE);
         }
 
        // echo '<pre>';print_r($data['check_student']); exit();
 
-        $data['test'] = $this->input->post('report_RegisterYear'); //true
-        $ReportFront = $this->load->view('teacher/register/report/ReportFront',$data,true);        
-        $live_mpdf->WriteHTML($ReportFront);
-
-        $live_mpdf->AddPage(); 
-        $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
-        $live_mpdf->WriteHTML($ReportSummary);
-        $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE); 
     }
 
 
