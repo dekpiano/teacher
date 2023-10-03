@@ -52,7 +52,10 @@
           <script src="<?=base_url()?>assets/vendor/jquery.cookie/jquery.cookie.js"> </script>
           <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
           <script src="<?=base_url()?>assets/vendor/jquery-validation/jquery.validate.min.js"></script>
-          
+          <script
+              src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js">
+          </script>
+
           <!-- Main File -->
           <script src="<?=base_url()?>assets/js/front.js"></script>
           <script src="<?=base_url()?>assets/js/jquery.datetimepicker.js"></script>
@@ -101,12 +104,15 @@
           </body>
 
           <script>
+// $(window).on('load', function() {
+//     $(".se-pre-con").fadeOut(1000);
+// });
 
-
-
-$(window).on('load', function() {
-    $(".se-pre-con").fadeOut(1000);   
+$('.Loader').on('click', function() {
+    $.LoadingOverlay("show");    
 });
+$.LoadingOverlay("hide");
+
 $(function() {
     $("#show_date").datepicker({
         dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
