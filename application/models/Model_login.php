@@ -70,13 +70,13 @@ class Model_login extends CI_Model
 		$Year = explode('/',$YearThis->schyear_year); 		
 		$DBpersonnel = $this->load->database('personnel', TRUE); 
 		$CheckTeac = $DBpersonnel->select('pers_id')->where('pers_username',$id)->get('tb_personnel')->row();
-		$CheckRoom = $this->db->where('class_teacher',$CheckTeac->pers_id)->get('tb_regclass')->num_rows();
+		$CheckRoom = $this->db
+		->where('class_teacher',$CheckTeac->pers_id)
+		->where('Reg_Year',$Year[1])
+		->get('tb_regclass')->num_rows();
 		if($CheckRoom > 0){
 			$arrayName = array('pers_username'=> $id,'Reg_Year'=> $Year[1]);
-		}else{
-			$arrayName = array('pers_username'=> $id);
-		}
-		$query = $DBpersonnel->select('
+			$query = $DBpersonnel->select('
 		skjacth_academic.tb_regclass.Reg_Class,
 		skjacth_academic.tb_regclass.Reg_Year,
 		skjacth_personnel.tb_personnel.pers_id,
@@ -93,6 +93,26 @@ class Model_login extends CI_Model
 		->join('skjacth_academic.tb_regclass','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher','LEFT')
 		->where($arrayName)
 		->get();
+
+		}else{
+			$arrayName = array('pers_username'=> $id);
+			$query = $DBpersonnel->select('
+		skjacth_personnel.tb_personnel.pers_id,
+		skjacth_personnel.tb_personnel.pers_prefix,
+		skjacth_personnel.tb_personnel.pers_firstname,
+		skjacth_personnel.tb_personnel.pers_lastname,
+		skjacth_personnel.tb_personnel.pers_position,
+		skjacth_personnel.tb_personnel.pers_department,
+		skjacth_personnel.tb_personnel.pers_learning,
+		skjacth_personnel.tb_personnel.pers_img,
+		skjacth_personnel.tb_personnel.pers_groupleade
+		')
+		->from('skjacth_personnel.tb_personnel')
+		->join('skjacth_academic.tb_regclass','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher','LEFT')
+		->where($arrayName)
+		->get();
+		}
+		
 		if($query->num_rows() > 0)
 		{
 			return $query->row();

@@ -158,7 +158,7 @@ class Control_login extends CI_Controller {
 				//echo '<pre>';print_r($this->google_client->getAccessToken());
 				// echo $this->Model_login->check_login_teacher($data['email']); 
 				if($this->Model_login->check_login_teacher($data['email']) == 1)
-   				 {
+   				{
 					$this->google_client->setAccessToken($token['access_token']);
 					$user_data = array(				 
 						'pers_username' => $data['email'],
@@ -168,10 +168,10 @@ class Control_login extends CI_Controller {
 				   $this->Model_login->Update_user_data($user_data, $data['email']);
 
 				   $result = $this->Model_login->fetch_teacher_login($data['email']);
+				//    echo "<pre>"; print_r($result);exit();
 				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade,'class' => $result->Reg_Class));
-				   //echo "<pre>"; print_r($result);
+				  
 				  redirect('Home');
-
 				}else{
 					$this->session->unset_userdata('access_token');
 
