@@ -164,7 +164,7 @@
 
                         <div class="col-md-4 ">
                             <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                <div class="icon"></div>
+                                <div class="icon">
                                     <img src="https://cdn-icons-png.flaticon.com/512/25/25407.png" width="36" />
                                 </div>
                                 <div>
