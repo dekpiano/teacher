@@ -56,7 +56,7 @@ table thead {
                         <?=@$check_student[0]->SubjectName?>
                         ครูประจำวิชา <?=$this->session->userdata('fullname');?>
                         ปีการศึกษา 
-                        <?php print_r($check_student[0]->RegisterYear); ?>
+                        <?php print_r(@$check_student[0]->RegisterYear); ?>
                     </h3>
 
                 </div>

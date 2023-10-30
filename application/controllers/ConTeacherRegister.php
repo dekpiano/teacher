@@ -192,13 +192,21 @@ class ConTeacherRegister extends CI_Controller {
                 if(in_array("ร",$this->input->post($value))){
                     $Grade = "ร";
                 }else{
-                    $Grade = $this->check_grade(array_sum($this->input->post($value)));
+                    $GradeCheck = $this->check_grade(array_sum($this->input->post($value)));
+                    if($GradeCheck > 0){
+                        $Grade = $GradeCheck;
+                        $Grade_Type = "";
+                    }else{
+                        $Grade = "";
+                        $Grade_Type = "เรียนซ้ำครั้งที่ 1";
+                        // กำลังจะดึงข้อมูลเรียนซ้ำมา
+                    }
                 }
             }
             
 
             $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
-            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'));
+            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'),'Grade_Type'=>$Grade_Type);
            echo $this->db->update('tb_register',$data,$key);
         }
         
@@ -492,7 +500,7 @@ class ConTeacherRegister extends CI_Controller {
                                 //->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
                                 ->group_by('tb_register.SubjectCode')
                                 ->group_by('tb_subjects.SubjectName')
-                                ->group_by('tb_register.RegisterYear')
+                                //->group_by('tb_register.RegisterYear')
                                 ->order_by('tb_register.RegisterYear','ASC')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
@@ -559,7 +567,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
-                                //->where('tb_register.Grade_Type !=','')
+                                ->where('tb_register.Grade_Type !=','')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();

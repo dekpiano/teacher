@@ -49,8 +49,8 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>ปีการศึกษา</th>
-                                    <th>ชั้นที่สอน</th>
+                                    <!-- <th>ปีการศึกษา</th> -->
+                                    <!-- <th>ชั้นที่สอน</th> -->
                                     <th>วิชา</th>
                                     <th>หน่วยกิจ</th>
                                     <th>ชั่วโมง</th>
@@ -61,8 +61,8 @@
                             <tbody>
                                 <?php foreach ($check_subject as $key => $v_check_subject) : ?>
                                 <tr>
-                                    <th><?=$v_check_subject->RegisterYear?></th>
-                                    <td><?=$v_check_subject->RegisterClass?></td>
+                                    <!-- <th><?=$v_check_subject->RegisterYear?></th> -->
+                                    <!-- <td><?=$v_check_subject->RegisterClass?></td> -->
                                     <td><?=$v_check_subject->SubjectCode?> <?=$v_check_subject->SubjectName?></td>
                                     <td><?=$v_check_subject->SubjectUnit?></td>
                                     <td><?=$v_check_subject->SubjectHour?></td>
