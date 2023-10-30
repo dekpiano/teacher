@@ -4,7 +4,7 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <div class="avatar"><img
-                    src="https://academic.skj.ac.th/uploads/General/Personnel/<?=$this->session->userdata('img');?>"
+                    src="https://general.skj.ac.th/uploads/admin/Personnal/<?=$this->session->userdata('img');?>"
                     alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
                 <h1 class="h4"><?=$this->session->userdata('fullname');?> </h1>
