@@ -524,10 +524,11 @@ class ConTeacherRegister extends CI_Controller {
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
-                                ->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('tb_register.Grade_Type !=',"")
-                                //->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
-                                //->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
+                                //->where('TeacherID',$this->session->userdata('login_id'))
+                                //->where('tb_register.Grade_Type !=',"")
+                                ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
+                                ->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
+                                ->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
                                 ->group_by('tb_register.SubjectCode')
                                 ->group_by('tb_subjects.SubjectName')
                                 //->group_by('tb_register.RegisterYear')
@@ -592,8 +593,9 @@ class ConTeacherRegister extends CI_Controller {
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID','LEFT')
-                                ->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('tb_register.RegisterYear',$term.'/'.$yaer)
+                                //->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
+                                //->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
@@ -654,9 +656,12 @@ class ConTeacherRegister extends CI_Controller {
     }
 
     public function ReportLearnRepeat(){
-        $path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+        
+      
+        $path = dirname(dirname(dirname(dirname(dirname(__FILE__))))); 
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
 
+        //echo '<pre>'; print_r($path);exit();    
         $live_mpdf = new \Mpdf\Mpdf(
             array(
                 'format' => 'A4',
@@ -666,14 +671,16 @@ class ConTeacherRegister extends CI_Controller {
             )
         );
 
+        
+
         if($this->input->post('select_print') == "all"){
-            
+           
             $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
                             ->where('SubjectCode',$this->input->post('report_SubjectCode'))
                             ->get('tb_subjects')->result();
             $data['CheckRepeat'] = $this->db->select('onoff_detail,onoff_year')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();  
-
+           
             $data['re_room'] = $data['re_subjuct'][0]->SubjectClass; 
             $data['re_teacher'] = "";
             $data['set_score'] = $this->db->where('regscore_subjectID',$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
@@ -684,7 +691,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
-                                ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('RepeatTeacher',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
@@ -693,6 +700,8 @@ class ConTeacherRegister extends CI_Controller {
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->group_by('StudentClass')
                                 ->get()->result();
+
+           
 
             foreach ($data['check_Level'] as $key => $v_check_Level) {
        
@@ -722,8 +731,8 @@ class ConTeacherRegister extends CI_Controller {
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
-                                ->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
+                                ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
+                                //->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
                                 ->where('tb_students.StudentClass',$v_check_Level->StudentClass)
@@ -731,13 +740,13 @@ class ConTeacherRegister extends CI_Controller {
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
-
+          
            if($key == 0){
-           $live_mpdf->SetTitle('รายงาน ปถ.05:เรียนซ้ำ');
+             $live_mpdf->SetTitle('รายงาน ปถ.05:เรียนซ้ำ');
 
            $data['test'] = $this->input->post('report_RegisterYear'); //true
            $ReportFront = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatFront',$data,true);        
-           $live_mpdf->WriteHTML($ReportFront);
+            $live_mpdf->WriteHTML($ReportFront);
            }   
            $live_mpdf->AddPage(); 
            $ReportSummary = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatSummary',$data,true); 
