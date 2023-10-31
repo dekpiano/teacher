@@ -205,7 +205,7 @@ class ConTeacherRegister extends CI_Controller {
 
     public function insert_score_repeat(){ 
 
-        $CheckRepeat = $this->db->select('onoff_detail')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
+        $CheckRepeat = $this->db->select('onoff_detail,onoff_year')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
         $TimeNum = $this->input->post('TimeNum');
         foreach ($this->input->post('StudentID') as $num => $value) {
            //print_r($this->input->post('TimeNum'));
@@ -678,6 +678,24 @@ class ConTeacherRegister extends CI_Controller {
             $data['re_teacher'] = "";
             $data['set_score'] = $this->db->where('regscore_subjectID',$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
 
+            $data['check_Level'] = $this->db->select('                                   
+                                    tb_students.StudentClass
+                                ')
+                                ->from('tb_register')
+                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
+                                ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_students.StudentBehavior !=','จำหน่าย')
+                                ->order_by('tb_students.StudentClass','ASC')
+                                ->order_by('tb_students.StudentNumber','ASC')
+                                ->group_by('StudentClass')
+                                ->get()->result();
+
+            foreach ($data['check_Level'] as $key => $v_check_Level) {
+       
             $data['check_student'] = $this->db->select('
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,
@@ -708,13 +726,25 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_students.StudentClass',$v_check_Level->StudentClass)
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
 
-            //echo "<pre>";print_r($data['CheckRepeat']); exit();
+           if($key == 0){
+           $live_mpdf->SetTitle('รายงาน ปถ.05:เรียนซ้ำ');
 
+           $data['test'] = $this->input->post('report_RegisterYear'); //true
+           $ReportFront = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatFront',$data,true);        
+           $live_mpdf->WriteHTML($ReportFront);
+           }   
+           $live_mpdf->AddPage(); 
+           $ReportSummary = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatSummary',$data,true); 
+           $live_mpdf->WriteHTML($ReportSummary);
+
+            }
+            $live_mpdf->Output('เรียนซ้ำ.pdf', \Mpdf\Output\Destination::INLINE);
         }else{
              $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
@@ -776,16 +806,9 @@ class ConTeacherRegister extends CI_Controller {
            
         //echo '<pre>';print_r($data['check_student']); exit();
         }
-        $live_mpdf->SetTitle('รายงาน ปถ.05:เรียนซ้ำ');
 
-        $data['test'] = $this->input->post('report_RegisterYear'); //true
-        $ReportFront = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatFront',$data,true);        
-        $live_mpdf->WriteHTML($ReportFront);
 
-        $live_mpdf->AddPage(); 
-        $ReportSummary = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatSummary',$data,true); 
-        $live_mpdf->WriteHTML($ReportSummary);
-        $live_mpdf->Output('เรียนซ้ำ.pdf', \Mpdf\Output\Destination::INLINE); 
+       
 
     }
 
