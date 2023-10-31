@@ -192,13 +192,43 @@ class ConTeacherRegister extends CI_Controller {
                 if(in_array("ร",$this->input->post($value))){
                     $Grade = "ร";
                 }else{
+                    $Grade = $this->check_grade(array_sum($this->input->post($value)));
+                }
+            }
+            
+
+            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
+            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'));
+           echo $this->db->update('tb_register',$data,$key);
+        }
+    }
+
+    public function insert_score_repeat(){ 
+
+        $CheckRepeat = $this->db->select('onoff_detail')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
+        $TimeNum = $this->input->post('TimeNum');
+        foreach ($this->input->post('StudentID') as $num => $value) {
+           //print_r($this->input->post('TimeNum'));
+            // print_r($this->input->post('SubjectCode'));
+            $study_time = $this->input->post('study_time');
+            // print_r(); exit();
+            if((($TimeNum*80)/100) > $study_time[$num]){
+                $Grade = "มส";
+            }else{
+                if(in_array("ร",$this->input->post($value))){
+                    $Grade = "ร";
+                }else{
                     $GradeCheck = $this->check_grade(array_sum($this->input->post($value)));
                     if($GradeCheck > 0){
                         $Grade = $GradeCheck;
-                        $Grade_Type = "";
+                        $RepeatStatus = "ผ่าน";
+                        $Grade_Type = $CheckRepeat[0]->onoff_detail;
+                        $RepeatYear = $CheckRepeat[0]->onoff_year;
                     }else{
-                        $Grade = "";
-                        $Grade_Type = "เรียนซ้ำครั้งที่ 1";
+                        $Grade = 0;
+                        $Grade_Type = $CheckRepeat[0]->onoff_detail;
+                        $RepeatStatus = "ไม่ผ่าน";
+                        $RepeatYear = $CheckRepeat[0]->onoff_year;
                         // กำลังจะดึงข้อมูลเรียนซ้ำมา
                     }
                 }
@@ -206,7 +236,7 @@ class ConTeacherRegister extends CI_Controller {
             
 
             $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
-            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'),'Grade_Type'=>$Grade_Type);
+            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'),'Grade_Type'=>$Grade_Type,'RepeatStatus' => $RepeatStatus,'RepeatYear'=>$RepeatYear);
            echo $this->db->update('tb_register',$data,$key);
         }
         
@@ -642,6 +672,8 @@ class ConTeacherRegister extends CI_Controller {
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
                             ->where('SubjectCode',$this->input->post('report_SubjectCode'))
                             ->get('tb_subjects')->result();
+            $data['CheckRepeat'] = $this->db->select('onoff_detail,onoff_year')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();  
+
             $data['re_room'] = $data['re_subjuct'][0]->SubjectClass; 
             $data['re_teacher'] = "";
             $data['set_score'] = $this->db->where('regscore_subjectID',$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
@@ -681,7 +713,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
 
-           // echo "<pre>";print_r($data['check_student']); exit();
+            //echo "<pre>";print_r($data['CheckRepeat']); exit();
 
         }else{
              $data['re_subjuct'] = $this->db

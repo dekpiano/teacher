@@ -41,7 +41,7 @@
 <table class="b" style="width: 100%;margin-top: 10px;">
     <tbody>
         <tr>
-            <?php $sub_year = explode("/",$re_subjuct[0]->SubjectYear);?>
+            <?php $sub_year = explode("/",$CheckRepeat[0]->onoff_year);?>
             <td style="width: 50%;text-align: right;padding-right: 10px;">ภาคเรียนที่ <?=$sub_year[0];?></td>
             <td style="padding-left: 10px;">ปีการศึกษา <?=$sub_year[1];?></td>
         </tr>
@@ -227,7 +227,7 @@ $avg3_up = $avg3 + $avg35 + $avg4;
     </tbody>
 </table>
 
-<div class="text-center b" style="margin-top: 3rem;font-size: 24px;">
+<div class="text-center b" style="margin-top: 2rem;font-size: 24px;">
     <div>การอนุมัติผลการพัฒนาคุณภาพผู้เรียน</div>
 </div>
 
@@ -259,19 +259,28 @@ $avg3_up = $avg3 + $avg35 + $avg4;
                     (นางสาวอรอุมา  ฉวีทอง)
                 </p>
             </td>
-            <td>
-                <div class="b">การพิจารณา/สั่งการ</div>
+            <td style="text-align: center;">
+                <div class="b" style="text-align: left;">การพิจารณา/สั่งการ</div>
                 <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรอนุมัติ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇
                     ไม่อนุมัติ/ให้นำไปปรับปรุงแก้ไข</div>
                 <br>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ..........................................ผู้อำนวยการสถานศึกษา
+                <!-- <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                ลงชื่อ..........................................
                 </p>
                 <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    (นายอภิรักษ์ อุ่นใจ)
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    (นางสาวอร่าม วัฒนะ)<br>
+                <div>
+                    <small>
+                    ผู้อำนวยการกองการศึกษา ศาสนาและวัฒนธรรม รักษาการในตำแหน่ง<br>
+                    ผู้อำนวยการสถานศึกษา โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์
+                    </small>
+                    
+                </div>
+
                 </p>
                 <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                     ......../........../..........
                 </p>
             </td>

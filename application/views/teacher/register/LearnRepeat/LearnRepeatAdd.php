@@ -83,7 +83,7 @@ table thead {
                         </div>
                     </div> -->
                     <div class="table-responsive bg-white">
-                        <form class="form_score">
+                        <form class="form_score_repeat">
                             <table id="tb_score" class="table table-hover table-bordered">
                                 <thead class="text-center">
                                     <tr>

@@ -280,7 +280,38 @@ $(document).on('submit', '.form_score', function(e) {
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus);
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+
+$(document).on('submit', '.form_score_repeat', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: '../../../../../ConTeacherRegister/insert_score_repeat',
+        type: "post",
+        data: $(this).serialize(), //this is formData
+        success: function(data) {
+            console.log(data);
+            if (data > 0) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'บันทึกคะแนนสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        //window.location.reload();
+                    }
+                })
+            } else {
+                // window.location.reload();
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
         }
     });
 });

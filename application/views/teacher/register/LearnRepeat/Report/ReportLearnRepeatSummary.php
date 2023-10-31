@@ -34,7 +34,7 @@ td {
     <div>รายวิชา <?=$re_subjuct[0]->SubjectCode?> <?=$re_subjuct[0]->SubjectName?> ครูประจำวิชา
         <?=$this->session->userdata('fullname');?></div>
     <div>ชั้นมัธยมศึกษาปีที่ <?php $sub_room = explode(".",$re_room); echo $sub_room[1];?>
-        <?php $sub_year = explode("/",$re_subjuct[0]->SubjectYear);?>
+        <?php $sub_year = explode("/",$CheckRepeat[0]->onoff_year);?>
         ภาคเรียนที่ <?=$sub_year[0];?> ปีการศึกษา <?=$sub_year[1];?></div>
     <div>อำเภอเมืองนครสวรรค์ จังหวัดนครสวรรค์ สังกัดองค์การบริหารส่วนจังหวัดนครสวรรค์</div>
 </div>
