@@ -527,15 +527,15 @@ class ConTeacherRegister extends CI_Controller {
                                 //->where('TeacherID',$this->session->userdata('login_id'))
                                 //->where('tb_register.Grade_Type !=',"")
                                 ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
-                                ->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
-                                ->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
+                                //->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
+                                //->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
                                 ->group_by('tb_register.SubjectCode')
                                 ->group_by('tb_subjects.SubjectName')
                                 //->group_by('tb_register.RegisterYear')
                                 ->order_by('tb_register.RegisterYear','ASC')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
-        //echo '<pre>'; print_r($register_onoff[0]->onoff_year);exit();
+        //echo '<pre>'; print_r($data['check_subject']);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -661,7 +661,7 @@ class ConTeacherRegister extends CI_Controller {
         $path = dirname(dirname(dirname(dirname(dirname(__FILE__))))); 
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
 
-        //echo '<pre>'; print_r($path);exit();    
+        
         $live_mpdf = new \Mpdf\Mpdf(
             array(
                 'format' => 'A4',
@@ -735,25 +735,63 @@ class ConTeacherRegister extends CI_Controller {
                                 //->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                //->where('tb_students.StudentClass',$v_check_Level->StudentClass)
+                                ->where('tb_students.StudentBehavior !=','จำหน่าย')
+                                ->order_by('tb_students.StudentClass','ASC')
+                                ->order_by('tb_students.StudentNumber','ASC')
+                                ->get()->result();
+
+                $data['check_student1'] = $this->db->select('
+                                    tb_register.SubjectCode,
+                                    tb_register.RegisterYear,
+                                    tb_register.RegisterClass,
+                                    tb_register.Score100,
+                                    tb_register.Grade,
+                                    tb_register.TeacherID,
+                                    tb_register.StudyTime,
+                                    tb_subjects.SubjectName,
+                                    tb_subjects.SubjectID,
+                                    tb_subjects.SubjectUnit,
+                                    tb_subjects.SubjectHour,
+                                    tb_students.StudentID,
+                                    tb_students.StudentPrefix,
+                                    tb_students.StudentFirstName,
+                                    tb_students.StudentLastName,
+                                    tb_students.StudentNumber,
+                                    tb_students.StudentClass,
+                                    tb_students.StudentCode,
+                                    tb_students.StudentStatus,
+                                    tb_students.StudentBehavior,
+                                    tb_register.Grade_Type
+                                ')
+                                ->from('tb_register')
+                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
+                                //->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
+                                ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
                                 ->where('tb_students.StudentClass',$v_check_Level->StudentClass)
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
+
+                                //echo '<pre>'; print_r($data['check_student']);exit();    
           
            if($key == 0){
-             $live_mpdf->SetTitle('รายงาน ปถ.05:เรียนซ้ำ');
+                $live_mpdf->SetTitle('รายงาน ปถ.05:เรียนซ้ำ');
 
-           $data['test'] = $this->input->post('report_RegisterYear'); //true
-           $ReportFront = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatFront',$data,true);        
-            $live_mpdf->WriteHTML($ReportFront);
+                $data['test'] = $this->input->post('report_RegisterYear'); //true
+                $ReportFront = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatFront',$data,true);        
+                $live_mpdf->WriteHTML($ReportFront);
            }   
-           $live_mpdf->AddPage(); 
-           $ReportSummary = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatSummary',$data,true); 
-           $live_mpdf->WriteHTML($ReportSummary);
+                $live_mpdf->AddPage(); 
+                $ReportSummary = $this->load->view('teacher/register/LearnRepeat/Report/ReportLearnRepeatSummary',$data,true); 
+                $live_mpdf->WriteHTML($ReportSummary);
 
             }
-            $live_mpdf->Output('เรียนซ้ำ.pdf', \Mpdf\Output\Destination::INLINE);
+                $live_mpdf->Output('เรียนซ้ำ.pdf', \Mpdf\Output\Destination::INLINE);
         }else{
              $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))

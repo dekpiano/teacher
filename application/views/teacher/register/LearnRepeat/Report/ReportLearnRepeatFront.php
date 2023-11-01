@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td style="width: 50%;text-align: right;padding-right: 10px;">ชั้นมัธยมศึกษาปีที่
-                <?php $sub_room = explode(".",$re_room); echo $sub_room[1];?></td>
+                <?php $sub_room = explode(".",$re_room); //echo $sub_room[1];?></td>
             <td style="padding-left: 10px;">
                 ระดับมัธยมศึกษา<?php 
             $sub_level = explode("/",$sub_room[1]);
@@ -102,7 +102,9 @@
 $count_all = 0;
 $grade4 = 0;$grade35 = 0;$grade3 = 0;$grade25 = 0;$grade2 = 0;$grade15 = 0;$grade1 = 0;$grade0 = 0;$gradeR=0;$gradeMS=0;
 
+
 foreach ($check_student as $key => $v_check_student) {
+   
 
     if($v_check_student->Grade_Type != ''){
         $count_all += 1;
