@@ -215,14 +215,12 @@ class ConTeacherRegister extends CI_Controller {
             // print_r(); exit();
             if((($TimeNum*80)/100) > $study_time[$num]){
                 $Grade = "มส";
-                $Grade = 0;
                 $Grade_Type = $CheckRepeat[0]->onoff_detail;
                 $RepeatStatus = "ไม่ผ่าน";
                 $RepeatYear = $CheckRepeat[0]->onoff_year;
             }else{
                 if(in_array("ร",$this->input->post($value))){
                     $Grade = "ร";
-                    $Grade = 0;
                     $Grade_Type = $CheckRepeat[0]->onoff_detail;
                     $RepeatStatus = "ไม่ผ่าน";
                     $RepeatYear = $CheckRepeat[0]->onoff_year;
@@ -246,7 +244,7 @@ class ConTeacherRegister extends CI_Controller {
             $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'),'Grade_Type' => $Grade_Type,'RepeatStatus' => $RepeatStatus,'RepeatYear' => $RepeatYear);
            //echo print_r($data);
-            echo $this->db->update('tb_register',$data,$key);
+           echo $this->db->update('tb_register',$data,$key);
         }
         
         
