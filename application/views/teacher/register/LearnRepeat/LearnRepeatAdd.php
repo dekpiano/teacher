@@ -31,7 +31,7 @@ table thead {
 }
 </style>
 <header class="page-header">
-<div class="container-fluid d-flex justify-content-between">
+    <div class="container-fluid d-flex justify-content-between">
         <h2 class="no-margin-bottom"><?=$title?> </h2>
         <h2><u>สถานะ : <?=$onoff[0]->onoff_detail?></u></h2>
     </div>
@@ -55,7 +55,7 @@ table thead {
                     <h3 class="h4">รายวิชาที่สอน <?=@$check_student[0]->SubjectCode?>
                         <?=@$check_student[0]->SubjectName?>
                         ครูประจำวิชา <?=$this->session->userdata('fullname');?>
-                        ปีการศึกษา 
+                        ปีการศึกษา
                         <?php print_r(@$check_student[0]->RegisterYear); ?>
                     </h3>
 
@@ -131,7 +131,7 @@ table thead {
                                             <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
                                             <?=$v_check_student->StudentLastName?>
                                             <br>
-                                           <small>(<?=$v_check_student->Grade_Type?>)</small> 
+                                            <small>(<?=$v_check_student->Grade_Type?>)</small>
                                             <input type="text" class="form-control sr-only" id="StudentID"
                                                 name="StudentID[]" value="<?=$v_check_student->StudentID?>">
                                             <input type="text" class="form-control sr-only" id="SubjectCode"
@@ -230,10 +230,13 @@ table thead {
                                 <?php endif; ?>
 
 
-                                <button type="submit" class="btn btn-warning  mb-3"><i class="fa fa-print"
-                                        aria-hidden="true"></i> พิมพ์รายงาน</button>
+                                <!-- <button type="submit" class="btn btn-warning  mb-3"><i class="fa fa-print"
+                                        aria-hidden="true"></i> พิมพ์รายงาน</button> -->
 
                             </form>
+                            <div class="alert alert-warning" role="alert">
+                                กรณี ที่นักเรียนไม่มาติดต่อเลย ให้คะแนนเป็น 0 ทุกช่อง
+                            </div>
                         </div>
                         <?php endif; ?>
                     </div>

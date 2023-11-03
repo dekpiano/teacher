@@ -31,6 +31,11 @@
     <div class="container-fluid">
 
         <div class="col-lg-12">
+            <?php if($onoff[0]->onoff_status == 'off'): ?>
+            <div class="alert alert-danger" role="alert">
+                ทางวิชาการขอ ปรับปรุง หรือ อัพเดตข้อมูลสักครู่... กรุณารอ ^/\^ !
+            </div>
+            <?php endif; ?>
             <div class="card">
                 <div class="card-close">
                     <div class="dropdown">
@@ -84,10 +89,10 @@
                                                 style="display:none" value="<?=$v_check_subject->RegisterYear;?>">
                                             <input type="text" name="report_SubjectCode" id="report_SubjectCode"
                                                 style="display:none" value="<?=$v_check_subject->SubjectCode;?>">
-                                            
+
                                             <input type="text" name="select_print" id="select_print"
                                                 style="display:none" value="all">
-                                            
+
 
                                             <button type="submit" class="btn btn-warning"><i class="fa fa-print"
                                                     aria-hidden="true"></i> พิมพ์รายงาน</button>

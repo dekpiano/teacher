@@ -255,10 +255,10 @@ $avg3_up = $avg3 + $avg35 + $avg4;
                 <div style="height: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรอนุมัติ
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรนำไปปรับปรุงแก้ไข</div>
                 <br>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ..........................................ครู ปฏิบัติหน้าที่รองผู้อำนวยการสถานศึกษา
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ.......................................... รองผู้อำนวยการสถานศึกษา
                 </p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    (นางสาวอรอุมา  ฉวีทอง)
+                    (นางสาวศรินทร์ทิพย์  กริมเขียว)
                 </p>
             </td>
             <td style="text-align: center;">

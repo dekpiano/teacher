@@ -30,6 +30,8 @@ td {
     font-weight: bold;
 }
 </style>
+
+
 <div class="text-center b" style="padding-top: -50px;">
     <div>รายวิชา <?=$re_subjuct[0]->SubjectCode?> <?=$re_subjuct[0]->SubjectName?> ครูประจำวิชา
         <?=$this->session->userdata('fullname');?></div>
@@ -79,6 +81,7 @@ td {
     </thead>
     <tbody>
         <?php 
+        
         foreach ($check_student1 as $key => $v_check_student) :
             if($v_check_student->Grade_Type != ''):
         ?>
@@ -117,3 +120,5 @@ td {
 
 
 </table>
+
+<?php //print_r($check_student1); ?>
