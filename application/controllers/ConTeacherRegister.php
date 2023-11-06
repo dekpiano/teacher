@@ -241,9 +241,9 @@ class ConTeacherRegister extends CI_Controller {
                 }
             }  
 
-            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
+            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'));
            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'),'Grade_Type' => $Grade_Type,'RepeatStatus' => $RepeatStatus,'RepeatYear' => $RepeatYear);
-           //echo print_r($data);
+           //echo print_r($key);
            echo $this->db->update('tb_register',$data,$key);
         }
         
@@ -309,7 +309,7 @@ class ConTeacherRegister extends CI_Controller {
     }
 
     public function report_pt(){ 
-        $path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+        $path = (dirname(dirname(dirname(dirname(__FILE__)))));
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
         
         $live_mpdf = new \Mpdf\Mpdf(
@@ -665,7 +665,7 @@ class ConTeacherRegister extends CI_Controller {
     public function ReportLearnRepeat(){
         
       
-        $path = dirname(dirname(dirname(dirname(dirname(__FILE__))))); 
+        $path = (dirname(dirname(dirname(dirname(__FILE__))))); 
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
 
         
