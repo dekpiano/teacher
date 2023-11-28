@@ -50,6 +50,21 @@
                 </div>
             </div>
         </div>
+        <?php $Y = $this->uri->segment(2).'/'.$this->uri->segment(3); ?>
+        <div class="row justify-content-center">
+            <div class="d-flex mb-3">
+                <div class=" align-self-center" style="width: 150px;">เลือกปีการศึกษา</div>
+                <select class="form-control w-auto" id="CheckYearSendPlan">
+                    <?php 
+                    $SelYear = array('2566/1','2566/2');
+                    foreach ($SelYear as $key => $v_SelYear) : ?>
+                    <option <?php echo ($Y == $v_SelYear ?"selected":"") ?> value="<?=$v_SelYear?>"><?=$v_SelYear?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+
+
         <?php  $typeplan = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
         <div class="card">
             <div cass="card-body">
@@ -163,6 +178,9 @@
                         <input type="hidden" id="seplan_ID" name="seplan_ID" value="">
                         <input type="hidden" id="seplan_typeplan" name="seplan_typeplan" value="">
                         <input type="hidden" id="seplan_coursecode" name="seplan_coursecode" value="">
+                        <input type="hidden" id="seplan_year" name="seplan_year" value="<?=$this->uri->segment(2)?>">
+                        <input type="hidden" id="seplan_term" name="seplan_term" value="<?=$this->uri->segment(3)?>">
+
                         <input id="seplan_file" name="seplan_file" type="file" class="">
                     </div>
                     <div class="form-group">

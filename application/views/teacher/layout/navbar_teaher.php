@@ -66,7 +66,7 @@
                     <?php else : ?>
                     <li
                         class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == '' ? 'active' : '' ?>">
-                        <a class="Loader" href="<?=base_url('Course');?>"><i class="fa fa-file" aria-hidden="true"></i>
+                        <a class="Loader" href="<?=base_url('Course/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>"><i class="fa fa-file" aria-hidden="true"></i>
                             ส่งแผนการสอน</a>
                     </li>
                     <li

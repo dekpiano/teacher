@@ -23,18 +23,18 @@ var  $title = "หน้าแรก";
     }
 
 
-    public function Course(){      
-        $data['title'] = "แผนการสอน";
+    public function Course($year = null,$term = null){      
+        $data['title'] = "ส่งแผนการสอน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $CheckYear = $this->db->get('tb_send_plan_setup')->result();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))
-        ->where('seplan_year',$CheckYear[0]->seplanset_year)
-        ->where('seplan_term',$CheckYear[0]->seplanset_term)
+        ->where('seplan_year',$year)
+        ->where('seplan_term',$term)
         ->get('tb_send_plan')->result();
         $data['planNew'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))
-        ->where('seplan_year',$CheckYear[0]->seplanset_year)
-        ->where('seplan_term',$CheckYear[0]->seplanset_term)
+        ->where('seplan_year',$year)
+        ->where('seplan_term',$term)
         ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
        //echo "<pre>"; print_r($data['planNew']); exit();        
         $this->load->view('teacher/layout/header_teacher.php',$data);
@@ -386,9 +386,9 @@ var  $title = "หน้าแรก";
         $seplan_coursecode = $plan->seplan_coursecode; 
         $seplan_namesubject = $plan->seplan_namesubject;     
         $seplan_createdate = $plan->seplan_createdate;
-        $folder = $year->seplanset_year.'/'.$year->seplanset_term;
+        $folder = $this->input->post('seplan_year').'/'.$this->input->post('seplan_term');
 
-        //echo strtotime($seplan_createdate); exit();
+       
         
         if (!is_dir('uploads/academic/course/plan/'.$folder.'/'.$seplan_namesubject)) {
             mkdir('./uploads/academic/course/plan/'.$folder.'/'.$seplan_namesubject, 0777, TRUE);

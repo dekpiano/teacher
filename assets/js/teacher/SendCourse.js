@@ -172,10 +172,10 @@ $('#FromUpdateTeacher').submit(function(e) {
 });
 
 ////////////---------------------------------------------
-$('.update_seplan').submit(function(e) {
+$(document).on('submit', '.update_seplan', function(e) {
     e.preventDefault();
     $.ajax({
-        url: 'ConTeacherCourse/UpdatePlan',
+        url: '../../ConTeacherCourse/UpdatePlan',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
@@ -516,4 +516,8 @@ $(document).on("click", "#sub_comment2", function() {
 $(document).on("click", "#SearchPlan", function() {
     $(this).html('<i class="fa fa-spinner fa-spin"></i> กำลังค้นหา...');
     window.location.href = '../../' + $('#CheckYear').val() + '/' + $('#SelTeacher').val();
+});
+
+$(document).on("change", "#CheckYearSendPlan", function() {
+    window.location.href = '../' + $(this).val();
 });

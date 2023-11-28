@@ -667,7 +667,6 @@ class ConTeacherRegister extends CI_Controller {
       
         $path = dirname(dirname(dirname(dirname(dirname(__FILE__))))); 
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
-
         
         $live_mpdf = new \Mpdf\Mpdf(
             array(
@@ -677,8 +676,6 @@ class ConTeacherRegister extends CI_Controller {
                 'default_font_size' => 16
             )
         );
-
-        
 
         if($this->input->post('select_print') == "all"){
            

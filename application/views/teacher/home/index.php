@@ -153,7 +153,7 @@
                                     <img src="https://cdn-icons-png.flaticon.com/512/7679/7679989.png" width="36" />
                                 </div>
                                 <div>
-                                    <a class="Loader" href="<?=base_url('Course');?>">
+                                    <a class="Loader" href="<?=base_url('Course/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>">
                                         <div class="text">
                                             <h4 class="m-0">ส่งแผนการสอน</h4>
                                         </div>
