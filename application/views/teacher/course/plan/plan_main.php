@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <?php $Y = $this->uri->segment(2).'/'.$this->uri->segment(3); ?>
+        <?php $Y = $this->uri->segment(3).'/'.$this->uri->segment(4); ?>
         <div class="row justify-content-center">
             <div class="d-flex mb-3">
                 <div class=" align-self-center" style="width: 150px;">เลือกปีการศึกษา</div>
@@ -178,8 +178,8 @@
                         <input type="hidden" id="seplan_ID" name="seplan_ID" value="">
                         <input type="hidden" id="seplan_typeplan" name="seplan_typeplan" value="">
                         <input type="hidden" id="seplan_coursecode" name="seplan_coursecode" value="">
-                        <input type="hidden" id="seplan_year" name="seplan_year" value="<?=$this->uri->segment(2)?>">
-                        <input type="hidden" id="seplan_term" name="seplan_term" value="<?=$this->uri->segment(3)?>">
+                        <input type="hidden" id="seplan_year" name="seplan_year" value="<?=$this->uri->segment(3)?>">
+                        <input type="hidden" id="seplan_term" name="seplan_term" value="<?=$this->uri->segment(4)?>">
 
                         <input id="seplan_file" name="seplan_file" type="file" class="">
                     </div>

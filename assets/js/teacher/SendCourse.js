@@ -175,7 +175,7 @@ $('#FromUpdateTeacher').submit(function(e) {
 $(document).on('submit', '.update_seplan', function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../ConTeacherCourse/UpdatePlan',
+        url: '../../../ConTeacherCourse/UpdatePlan',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
