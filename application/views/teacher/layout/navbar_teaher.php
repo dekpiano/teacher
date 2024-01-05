@@ -78,7 +78,7 @@
                     </li>
                     <?php endif; ?>
 
-                    <?php if($this->session->userdata('groupleade') == "หัวหน้ากลุ่มสาระ" || $this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002' || $this->session->userdata('login_id') == 'pers_021') : ?>
+                    <?php if($this->session->userdata('groupleade') == "หัวหน้ากลุ่มสาระ" || $this->session->userdata('login_id') == 'pers_047' || $this->session->userdata('login_id') == 'pers_051' || $this->session->userdata('login_id') == 'pers_021') : ?>
                     <span class="heading">สำหรับหัวหน้า</span>
                     <li
                         class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'CheckPlan' ? 'active' : '' ?>">
@@ -91,14 +91,14 @@
                                 aria-hidden="true"></i>รายงาน </a>
                         <!-- <a class="Loader" href="<?=base_url('Course/DownloadPlan');?>"> <i class="fa fa-print" aria-hidden="true"></i>ดาวน์โหลดแผน </a> -->
                     </li>
-                    <li
+                    <!-- <li
                         class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'SettingTeacher' ? 'active' : '' ?>">
                         <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_021'): ?>
                         <a class="Loader" href="<?=base_url('Course/SettingTeacher');?>"> <i class="fa fa-cogs"></i>ตั้งค่าครูผู้สอน
                         </a>
                         <a class="Loader" href="<?=base_url('Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่าระบบ </a>
                         <?php endif; ?>
-                    </li>
+                    </li> -->
 
                     <?php endif; ?>
                 </ul>
