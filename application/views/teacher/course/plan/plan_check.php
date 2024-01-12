@@ -15,7 +15,7 @@
 
         <div class="row">
             <?php foreach ($lean as $key => $v_lean): ?>
-            <?php if($this->session->userdata('pers_learning') == $v_lean->lear_id || $this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_002' || $this->session->userdata('login_id') == 'pers_003'): ?>
+            <?php if($this->session->userdata('pers_learning') == $v_lean->lear_id || $this->session->userdata('login_id') == 'pers_047' || $this->session->userdata('login_id') == 'pers_021' || $this->session->userdata('login_id') == 'pers_051'): ?>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body statistic">
