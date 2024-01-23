@@ -76,8 +76,8 @@
         
 
         <?php if(isset($ID)): ?>
-            <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_003'): ?>
-        <form method="get" action="<?=base_url('Course/ReportPlan/'.$this->uri->segment('4'));?>" class="needs-validation" novalidate>
+            <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_051' || $this->session->userdata('login_id') == 'pers_021'): ?>
+        <form method="get" action="<?=base_url('Course/ReportPlan/'.$this->uri->segment('3'));?>" class="needs-validation mb-2" novalidate>
         <div class="form-row justify-content-center">
             <div class="col-auto my-1">
             <select class="form-control" id="select_lean" name="select_lean" required>
@@ -88,6 +88,16 @@
                             </select>
                             <div class="invalid-feedback">กรุณาเลือกกลุ่มสาระการเรียนรู้</div>
             </div>  
+            <div class="col-auto my-1">
+            <select class="form-control" id="CheckYear" name="CheckYear" required>
+                            <option value="">เลือกปีการศึกษา</option>
+                            <?php foreach ($CheckYear as $key => $v_CheckYear) : ?>
+                            <option value="<?=$v_CheckYear->seplan_term.'-'.$v_CheckYear->seplan_year?>"><?=$v_CheckYear->seplan_term.'/'.$v_CheckYear->seplan_year?></option>
+                            <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback">กรุณาเลือกปีการศึกษา</div>
+            </div>  
+
             <div class="col-auto my-1">
             <button type="submit" class="btn btn-primary">ค้นหา</button>
             </div>
@@ -106,8 +116,8 @@
                                 <td colspan="9">กลุ่มสาระการเรียนรู้<?=@$leanUser[0]->lear_namethai?></td>
                             </tr>
                             <tr class="text-center">
-                                <td colspan="9">ภาคเรียนที่ <?=$setupplan[0]->seplanset_term?> ปีการศึกษา
-                                    <?=$setupplan[0]->seplanset_year?></td>
+                                <td colspan="9">ภาคเรียนที่ <?=$seplanset_term?> ปีการศึกษา
+                                    <?= $seplanset_year ?></td>
                             </tr>
                             <tr class="text-center">
                                 <th rowspan="2">ที่</th>
@@ -164,7 +174,7 @@
                     </table>
                     <div class="text-center">
                         <?php if(isset($_GET['select_lean'])): ?>
-                        <a class="btn btn-primary" href="<?=base_url('ConTeacherCourse/report_plan_print/'.$thai.'/'.$_GET['select_lean'])?>"><i
+                        <a class="btn btn-primary" href="<?=base_url('ConTeacherCourse/report_plan_print/'.$thai.'/'.$_GET['select_lean'].'/'.$_GET['CheckYear'])?>"><i
                                 class="fa fa-print" aria-hidden="true"></i> ดาวโหลดรายงาน .xlsx</a> 
                         <?php else: ?>  
                             <a class="btn btn-primary" href="<?=base_url('ConTeacherCourse/report_plan_print/'.$thai)?>"><i

@@ -664,12 +664,25 @@ var  $title = "หน้าแรก";
         $data['leanUser'] = $DBskj->where('lear_id',$this->session->userdata('pers_learning'))->get('tb_learning')->result();
         $data['setupplan'] = $this->db->get('tb_send_plan_setup')->result();
         
+        $data['CheckYear'] = $this->db->select('seplan_year,seplan_term')->group_by('seplan_year,seplan_term')->get('tb_send_plan')->result();
+        //echo "<pre>"; print_r($CheckYear); exit();
+
         if(isset($_GET['select_lean'])){
             $data['leanUser'] = $DBskj->where('lear_id',$_GET['select_lean'])->get('tb_learning')->result();
             $idLearn = $_GET['select_lean'];
         }else{
             $idLearn = $this->session->userdata('pers_learning');
         }
+
+        if(isset($_GET['CheckYear'])){
+            $exp = explode('-',$_GET['CheckYear']);
+            $data['seplanset_year'] = $exp[1];
+            $data['seplanset_term'] = $exp[0];
+        }else{
+            $data['seplanset_year']  = $data['setupplan'][0]->seplanset_year;
+            $data['seplanset_term'] = $data['setupplan'][0]->seplanset_term;
+        }
+
         if($idLearn == 'lear_009'){
             $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
                                                     skjacth_personnel.tb_personnel.pers_id,
@@ -679,8 +692,8 @@ var  $title = "หน้าแรก";
                                                     ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                                         ->where('seplan_learning',$idLearn)  
                                         ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$data['setupplan'][0]->seplanset_year)
-                                        ->where('seplan_term',$data['setupplan'][0]->seplanset_term)     
+                                        ->where('seplan_year',$data['seplanset_year'])
+                                        ->where('seplan_term',$data['seplanset_term'])     
                                         ->or_where('seplan_coursecode','ก23100')                       
                                         ->or_where('seplan_coursecode','ก23101')    
                                         ->or_where('seplan_coursecode','ก23102')
@@ -698,8 +711,8 @@ var  $title = "หน้าแรก";
                                                     ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                                         ->where('seplan_learning',$idLearn)  
                                         ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$data['setupplan'][0]->seplanset_year)
-                                        ->where('seplan_term',$data['setupplan'][0]->seplanset_term)   
+                                        ->where('seplan_year',$data['seplanset_year'])
+                                        ->where('seplan_term',$data['seplanset_term'])   
                                         ->group_by('seplan_namesubject')
                                         ->group_by('seplan_coursecode')
                                         ->group_by('pers_id')
@@ -715,7 +728,7 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');
     }
 
-    public function report_plan_print($key = null,$leanKey = null){
+    public function report_plan_print($key = null,$leanKey = null,$CheckYear = null){
        
         $data['ID'] = $key;
         $data['thai'] = urldecode($key);
@@ -723,20 +736,32 @@ var  $title = "หน้าแรก";
         $DBskj = $this->load->database('skj', TRUE); 
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $setupplan = $this->db->get('tb_send_plan_setup')->result();
-
+      
         if($leanKey){
             $idLearn = $leanKey;
 
-        $leade = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_groupleade,pers_learning') ->where('pers_groupleade','1')
+        $leade = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_groupleade,pers_learning')
+                        ->where('pers_groupleade','หัวหน้ากลุ่มสาระ')
                         ->where('pers_learning',$leanKey)
 						->get('tb_personnel')->result();
+        
          $groupleade = $leade[0]->pers_prefix.$leade[0]->pers_firstname.' '.$leade[0]->pers_lastname;
-         
+        
         }else{
             $idLearn = $this->session->userdata('pers_learning');
             $groupleade = $this->session->userdata('fullname');
         }
         $lean = $DBskj->where('lear_id',$idLearn)->get('tb_learning')->result();
+
+        if(isset($CheckYear)){
+            $exp = explode('-',$CheckYear);
+            $data['seplanset_year'] = $exp[1];
+            $data['seplanset_term'] = $exp[0];
+        }else{
+            $data['seplanset_year']  = $setupplan[0]->seplanset_year;
+            $data['seplanset_term'] = $setupplan[0]->seplanset_term;
+        }
+
 
         if($idLearn == 'lear_009'){
             $checkplan = $this->db->select("skjacth_academic.tb_send_plan.*,
@@ -747,8 +772,8 @@ var  $title = "หน้าแรก";
                                                     ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                                         ->where('seplan_learning',$idLearn)  
                                         ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$setupplan[0]->seplanset_year)
-                                        ->where('seplan_term',$setupplan[0]->seplanset_term)     
+                                        ->where('seplan_year',$data['seplanset_year'])
+                                        ->where('seplan_term',$data['seplanset_term'])     
                                         ->or_where('seplan_coursecode','ก23100')                       
                                         ->or_where('seplan_coursecode','ก23101')    
                                         ->or_where('seplan_coursecode','ก23102')
@@ -766,8 +791,8 @@ var  $title = "หน้าแรก";
                                                     ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                                         ->where('seplan_learning',$idLearn)  
                                         ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$setupplan[0]->seplanset_year)
-                                        ->where('seplan_term',$setupplan[0]->seplanset_term)   
+                                        ->where('seplan_year',$data['seplanset_year'])
+                                        ->where('seplan_term',$data['seplanset_term'])   
                                         ->group_by('seplan_namesubject')
                                         ->group_by('seplan_coursecode')
                                         ->group_by('pers_id')
@@ -775,9 +800,9 @@ var  $title = "หน้าแรก";
                                         ->get('tb_send_plan')->result();
         }
       
-        $path = dirname(dirname(dirname(dirname(__FILE__))));
+        $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
 		require $path . '/librarie_skj/spreadsheet/vendor/autoload.php';
-    
+
             $spreadsheet = new Spreadsheet();
             $spreadsheet->getDefaultStyle()->getFont()->setName('TH SarabunPSK');
             $spreadsheet->getDefaultStyle()->getFont()->setSize(16);
@@ -812,7 +837,7 @@ var  $title = "หน้าแรก";
             $sheet->mergeCells('A1:I1');
             $sheet->setCellValue('A2', 'กลุ่มสาระการเรียนรู้'.$lean[0]->lear_namethai);
             $sheet->mergeCells('A2:I2');
-            $sheet->setCellValue('A3', 'ภาคเรียนที่ '.$setupplan[0]->seplanset_term.' ปีการศึกษา '.$setupplan[0]->seplanset_year);
+            $sheet->setCellValue('A3', 'ภาคเรียนที่ '.$data['seplanset_term'].' ปีการศึกษา '.$data['seplanset_year']);
             $sheet->mergeCells('A3:I3');
             
             $sheet->setCellValue('A4', 'ที่');

@@ -21,7 +21,7 @@ header("Expires: 0");
                                 <td colspan="9">กลุ่มสาระการเรียนรู้<?=$lean[0]->lear_namethai?></td>
                             </tr>
                             <tr class="text-center">
-                                <td colspan="9">ภาคเรียนที่ <?=$setupplan[0]->seplanset_term?> ปีการศึกษา <?=$setupplan[0]->seplanset_year?></td>
+                                <td colspan="9">ภาคเรียนที่ <?=$seplanset_term?> ปีการศึกษา <?=$seplanset_year?></td>
                             </tr>
                             <tr class="text-center">
                                 <th rowspan="2">ที่</th>
