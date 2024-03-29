@@ -141,6 +141,7 @@
                     </div>
 
                     <div class="col-lg-4">
+                        <input type="date" name="" id="" class="form-control" value="<?php echo date('Y-m-d');?>">
                         <h3>
                             <?=$this->datethai->thai_date_and_time(strtotime(date('d-m-Y H:i:s')));?>
                         </h3>

@@ -201,6 +201,7 @@ var  $title = "หน้าแรก";
         $data['IDlear'] = $idlear;
         $check_guide = $this->session->userdata('login_id');
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        //print_r($data['OnOff']);exit();
         if($check_guide == "pers_052"){
             $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
                                                 skjacth_personnel.tb_personnel.pers_id,
@@ -233,12 +234,14 @@ var  $title = "หน้าแรก";
                                 ->where('seplan_learning',$idlear)
                                 ->where('pers_id',$idTech)
                                 ->where('seplan_year',$data['OnOff'][0]->seplanset_year)
+                                ->where('seplan_term',$data['OnOff'][0]->seplanset_term)
                                 ->group_by(array('seplan_coursecode','pers_id'))
                                 ->get('tb_send_plan')->result();
             $data['checkplan'] = $this->db->select("*")
                                 ->where('seplan_learning',$idlear)
                                 ->where('seplan_usersend',$idTech)
                                 ->where('seplan_year',$data['OnOff'][0]->seplanset_year)
+                                ->where('seplan_term',$data['OnOff'][0]->seplanset_term)
                                 ->get('tb_send_plan')->result();
         }
        
