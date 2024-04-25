@@ -527,22 +527,25 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
-                                    tb_subjects.SubjectHour
+                                    tb_subjects.SubjectHour,
+                                    tb_register.RepeatYear
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 //->where('TeacherID',$this->session->userdata('login_id'))
                                 //->where('tb_register.Grade_Type !=',"")
+                                ->where('tb_register.RepeatYear',$register_onoff[0]->onoff_year)
+                                ->where('tb_register.Grade_Type',$register_onoff[0]->onoff_detail)
                                 ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
                                 //->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
                                 //->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
-                                ->group_by('tb_register.SubjectCode')
+                                ->group_by('tb_register.SubjectCode')   
                                 //->group_by('tb_subjects.SubjectName')
                                 //->group_by('tb_register.RegisterYear')
                                 ->order_by('tb_register.RegisterYear','ASC')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
-        //echo '<pre>'; print_r($data['check_subject']);exit();
+        echo '<pre>'; print_r($data['check_subject']);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -567,7 +570,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
-                                // ->where('tb_students.StudentClass','ม.6/3')
+                                //->where('tb_students.StudentClass','ม.6/3')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->group_by('tb_students.StudentClass')
                                 ->get()->result();
@@ -605,8 +608,9 @@ class ConTeacherRegister extends CI_Controller {
                                 //->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))
-                                ->where('tb_students.StudentBehavior !=','จำหน่าย')
-                                ->where('tb_register.Grade_Type !=','')
+                                ->where('tb_students.StudentBehavior !=','จำหน่าย')                                
+                                ->where('tb_register.Grade_Type',$data['onoff'][0]->onoff_detail)
+                                ->where('tb_register.RepeatYear',$data['onoff'][0]->onoff_year)
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();

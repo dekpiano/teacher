@@ -263,7 +263,7 @@ $avg3_up = $avg3 + $avg35 + $avg4;
             </td>
             <td style="text-align: center;">
                 <div class="b" style="text-align: left;">การพิจารณา/สั่งการ</div>
-                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 เห็นควรอนุมัติ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇 อนุมัติ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;〇
                     ไม่อนุมัติ/ให้นำไปปรับปรุงแก้ไข</div>
                 <br>
                 <!-- <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
