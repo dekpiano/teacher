@@ -309,7 +309,7 @@ class ConTeacherRegister extends CI_Controller {
     }
 
     public function report_pt(){ 
-        $path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+        $path = (dirname(dirname(dirname(dirname(__FILE__)))));
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
         
         $live_mpdf = new \Mpdf\Mpdf(
@@ -545,7 +545,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->order_by('tb_register.RegisterYear','ASC')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',7)->get('tb_register_onoff')->result();                        
-        echo '<pre>'; print_r($data['check_subject']);exit();
+        //echo '<pre>'; print_r($data['check_subject']);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -669,7 +669,7 @@ class ConTeacherRegister extends CI_Controller {
     public function ReportLearnRepeat(){
         
       
-        $path = dirname(dirname(dirname(dirname(dirname(__FILE__))))); 
+        $path = (dirname(dirname(dirname(dirname(__FILE__))))); 
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
         
         $live_mpdf = new \Mpdf\Mpdf(

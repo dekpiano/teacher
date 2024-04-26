@@ -87,7 +87,7 @@ td {
                 <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
                 <?=$v_check_student->StudentLastName?>
             </td>
-            <td colspan="7" class="center" style="color: #dc3545 !important;"></td>
+            <td colspan="7" class="center" style="color: #dc3545 !important;">
             ** นักเรียน เรียนซ้ำ **
             </td>
             <td class="align-middle text-center">
@@ -140,7 +140,7 @@ td {
                 <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
                 <?=$v_check_student->StudentLastName?>
             </td>
-            <td colspan="7" class="center" style="color: #dc3545 !important;"></td>
+            <td colspan="7" class="center" style="color: #dc3545 !important;">
             ** นักเรียน เรียนซ้ำ **
             </td>
             <td class="align-middle text-center">
