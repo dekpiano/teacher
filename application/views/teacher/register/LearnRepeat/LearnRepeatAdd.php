@@ -33,7 +33,7 @@ table thead {
 <header class="page-header">
     <div class="container-fluid d-flex justify-content-between">
         <h2 class="no-margin-bottom"><?=$title?> </h2>
-        <h2><u>สถานะ : <?=$onoff[0]->onoff_detail?></u></h2>
+        <h2><u>สถานะ : <?=$onoff[0]->onoff_detail?> </u> ปีการศึกษา <?=$onoff[0]->onoff_year?></h2>
     </div>
 </header>
 <div class="breadcrumb-holder container-fluid">
@@ -55,8 +55,8 @@ table thead {
                     <h3 class="h4">รายวิชาที่สอน <?=@$check_student[0]->SubjectCode?>
                         <?=@$check_student[0]->SubjectName?>
                         ครูประจำวิชา <?=$this->session->userdata('fullname');?>
-                        ปีการศึกษา
-                        <?php print_r(@$check_student[0]->RegisterYear); ?>
+                        <!-- ปีการศึกษา -->
+                        <?php //print_r(@$check_student[0]->RegisterYear); ?>
                     </h3>
 
                 </div>

@@ -23,7 +23,7 @@
 <header class="page-header">
     <div class="container-fluid d-flex justify-content-between">
         <h2 class="no-margin-bottom"><?=$title?> </h2>
-        <h2><u>สถานะ : <?=$onoff[0]->onoff_detail?></u></h2>
+        <h2><u>สถานะ : <?=$onoff[0]->onoff_detail?></u> ปีการศึกษา <?=$onoff[0]->onoff_year?></h2>
     </div>
 </header>
 <!-- Dashboard Counts Section-->
