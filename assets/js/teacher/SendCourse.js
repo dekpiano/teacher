@@ -521,3 +521,7 @@ $(document).on("click", "#SearchPlan", function() {
 $(document).on("change", "#CheckYearSendPlan", function() {
     window.location.href = '../' + $(this).val();
 });
+
+$(document).on("change", "#CheckYearCheckPlan", function() {
+    window.location.href = '../' + $(this).val();
+});

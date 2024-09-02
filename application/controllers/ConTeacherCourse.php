@@ -67,10 +67,12 @@ var  $title = "หน้าแรก";
                         ->group_by('seplan_year')
                         ->group_by('seplan_term')
                         ->get('tb_send_plan')->result();
+            $data['CheckTeach'] = $SelTeach;
         }else{
             $data['plan'] = $this->db->where('seplan_learning',$CheckLearning->pers_learning)
             ->where('seplan_usersend',$SelTeach)
             ->get('tb_send_plan')->result();       
+            $data['CheckTeach'] = $SelTeach;
             
             $data['planNew'] = $this->db->where('seplan_learning',$CheckLearning->pers_learning)
                             ->where('seplan_usersend',$SelTeach)
@@ -194,7 +196,7 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');
     }
 
-    public function check_plan_lear_techer($idlear = null,$idTech = null){
+    public function check_plan_lear_techer($idlear = null,$idTech = null,$Year = null,$term = null){
         $data['title'] = "ตรวจสอบงานตามกลุ่มสาระการเรียนรู้";
         $DBskj = $this->load->database('skj', TRUE); 
         $data['lean'] = $DBskj->where('lear_id',$idlear)->get('tb_learning')->result();
@@ -233,20 +235,23 @@ var  $title = "หน้าแรก";
                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                                 ->where('seplan_learning',$idlear)
                                 ->where('pers_id',$idTech)
-                                ->where('seplan_year',$data['OnOff'][0]->seplanset_year)
-                                ->where('seplan_term',$data['OnOff'][0]->seplanset_term)
+                                ->where('seplan_year',$Year)
+                                ->where('seplan_term',$term)
                                 ->group_by(array('seplan_coursecode','pers_id'))
                                 ->get('tb_send_plan')->result();
             $data['checkplan'] = $this->db->select("*")
                                 ->where('seplan_learning',$idlear)
                                 ->where('seplan_usersend',$idTech)
-                                ->where('seplan_year',$data['OnOff'][0]->seplanset_year)
-                                ->where('seplan_term',$data['OnOff'][0]->seplanset_term)
+                                ->where('seplan_year',$Year)
+                                ->where('seplan_term',$term)
                                 ->get('tb_send_plan')->result();
         }
        
-      
-        //echo '<pre>'; print_r($this->session->userdata('login_id')); exit();
+        $data['CheckYear'] = $this->db->select('seplan_year,seplan_term')
+        ->group_by('seplan_year')
+        ->group_by('seplan_term')
+        ->get('tb_send_plan')->result();
+        //echo '<pre>'; print_r($data['CheckYear']); exit();
       
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');

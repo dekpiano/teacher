@@ -17,9 +17,19 @@
 <section class="">
     <div class="container-fluid">
         <div class="articles card">
-            <div class="card-header d-flex align-items-center">
+            <div class="card-header d-flex align-items-center justify-content-between">
                 <h2 class="h3">ส่งแผนของ <?=$planNew[0]->pers_prefix.$planNew[0]->pers_firstname.' '.$planNew[0]->pers_lastname?> </h2>
                 <!-- <div class="badge badge-rounded bg-green">4 New </div> -->
+                <div class="mr-2">                      
+                        <select name="CheckYearCheckPlan" id="CheckYearCheckPlan" class="form-control w-auto">
+                            <?php foreach ($CheckYear as $key => $v_CheckYear): ?>
+                            <option
+                                <?=$this->uri->segment(5) == $v_CheckYear->seplan_year && $this->uri->segment(6) == $v_CheckYear->seplan_term ?"selected":""?>
+                                value="<?=$v_CheckYear->seplan_year.'/'.$v_CheckYear->seplan_term;?>">
+                                <?=$v_CheckYear->seplan_term.'/'.$v_CheckYear->seplan_year;?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
             </div>
             
         </div>

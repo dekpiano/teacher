@@ -40,6 +40,7 @@
                 </div>
             </div>
         </div>
+        <?php if($CheckTeach != "All"): ?>
         <div class="card">
             <div cass="card-body">
                 <div class="p-3">
@@ -87,6 +88,15 @@
                 </div>
             </div>
         </div>
+        <?php else:  ?>
+            <div class="card">
+                <div class="card-body">
+                   <div class="text-center">
+                   กรุณาเลือกครูผู้สอน เพื่อดาวน์โหลดไฟล์
+                   </div> 
+                </div>
+            </div>
+        <?php endif; ?>
 
 
     </div>
