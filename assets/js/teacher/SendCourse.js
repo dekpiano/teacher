@@ -323,7 +323,7 @@ $(document).on("change", ".seplan_status1", function() {
 
     $.ajax({
         type: 'POST',
-        url: "../../../ConTeacherCourse/UpdateStatus1",
+        url: "../../../../../ConTeacherCourse/UpdateStatus1",
         data: { status1: status1, planId: planId },
         dataType: 'json',
         beforeSend: function() {

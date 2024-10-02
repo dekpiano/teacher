@@ -75,7 +75,7 @@
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=27"></script>
+          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=28.1"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
           <?php if($this->uri->segment(1) === "TeacherJob"): ?>
