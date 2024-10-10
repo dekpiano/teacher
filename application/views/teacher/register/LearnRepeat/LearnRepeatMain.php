@@ -77,7 +77,7 @@
                                             class="btn btn-danger btn-sm"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i> ยังไม่เปิดให้บันทึก</a>
                                         <?php else: ?>
-                                        <a href="<?=base_url('Register/LearnRepeatAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectCode.'/all')?>"
+                                        <a href="<?=base_url('Register/LearnRepeatAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectID.'/all')?>"
                                             class="btn btn-primary btn-sm clickLoad"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i> บันทึกผลการเรียน</a>
                                         <?php endif; ?>
@@ -87,8 +87,8 @@
                                             target="_blank">
                                             <input type="text" name="report_RegisterYear" id="report_RegisterYear"
                                                 style="display:none" value="<?=$v_check_subject->RegisterYear;?>">
-                                            <input type="text" name="report_SubjectCode" id="report_SubjectCode"
-                                                style="display:none" value="<?=$v_check_subject->SubjectCode;?>">
+                                            <input type="text" name="report_SubjectID" id="report_SubjectID"
+                                                style="display:none" value="<?=$v_check_subject->SubjectID;?>">
 
                                             <input type="text" name="select_print" id="select_print"
                                                 style="display:none" value="all">

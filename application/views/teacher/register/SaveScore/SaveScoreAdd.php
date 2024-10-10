@@ -157,8 +157,8 @@ table thead {
                                             <?=$v_check_student->StudentLastName?>
                                             <input type="text" class="form-control sr-only" id="StudentID"
                                                 name="StudentID[]" value="<?=$v_check_student->StudentID?>">
-                                            <input type="text" class="form-control sr-only" id="SubjectCode"
-                                                name="SubjectCode" value="<?=$check_student[0]->SubjectCode?>">
+                                            <input type="text" class="form-control sr-only" id="SubjectID"
+                                                name="SubjectID" value="<?=$check_student[0]->SubjectID?>">
                                             <input type="text" class="form-control sr-only" id="RegisterYear"
                                                 name="RegisterYear" value="<?=$check_student[0]->RegisterYear?>">
                                             <input type="text" class="form-control sr-only" id="TimeNum" name="TimeNum"
@@ -236,8 +236,8 @@ table thead {
                                 <?php endif; ?>
 
 
-                                <button type="submit" class="btn btn-warning"><i class="fa fa-print"
-                                        aria-hidden="true"></i> พิมพ์รายงาน</button>
+                                <!-- <button type="submit" class="btn btn-warning"><i class="fa fa-print"
+                                        aria-hidden="true"></i> พิมพ์รายงาน</button> -->
 
                             </form>
                         </div>

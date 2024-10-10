@@ -320,7 +320,7 @@ $(document).on('submit', '.form_score_repeat', function(e) {
 $(document).on('click', '#chcek_report', function() {
 
     $("#report_RegisterYear").val($(this).attr('report-yaer'));
-    $("#report_SubjectCode").val($(this).attr('report-subject'));
+    $("#report_SubjectID").val($(this).attr('report-subject'));
 
     $('#select_print option').remove();
 

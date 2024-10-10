@@ -42,21 +42,22 @@ class ConTeacherRegister extends CI_Controller {
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $schoolyear = $this->db->select('*')->get('tb_schoolyear')->result();
         $data['check_subject'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.TeacherID,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RegisterYear',$schoolyear[0]->schyear_year)
                                 ->where('tb_subjects.SubjectYear',$schoolyear[0]->schyear_year)
-                                ->group_by('tb_register.SubjectCode')
+                                ->group_by('tb_register.SubjectID')
                                 ->order_by('tb_register.RegisterClass')
                                 ->get()->result();
         $data['onoff'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();                        
@@ -79,11 +80,11 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.RegisterYear
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
+                                ->where('tb_register.SubjectID',($subject))
                                 // ->where('tb_students.StudentClass','ม.6/3')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->group_by('tb_students.StudentClass')
@@ -92,12 +93,13 @@ class ConTeacherRegister extends CI_Controller {
       
         if($room == "all"){  
         $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
                                     tb_register.TeacherID,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
@@ -115,12 +117,12 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('tb_register.TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
+                                ->where('tb_register.SubjectID',($subject))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
@@ -131,13 +133,14 @@ class ConTeacherRegister extends CI_Controller {
             $sub_checkroom = explode('-',$room);
             $sub_room = $sub_checkroom[0].'/'.$sub_checkroom[1];
             $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -153,12 +156,12 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
+                                ->where('tb_register.SubjectID',($subject))
                                 ->where('tb_students.StudentClass','ม.'.$sub_room)
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
@@ -166,8 +169,8 @@ class ConTeacherRegister extends CI_Controller {
 
         }
 
-        $check_idSubject = $this->db->where('SubjectCode',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
-        //echo '<pre>';print_r($data['check_student']); exit();
+        $check_idSubject = $this->db->where('SubjectID',($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
+        //echo '<pre>';print_r($subject); exit();
         $data['set_score'] = $this->db->where('regscore_subjectID',$check_idSubject->SubjectID)->get('tb_register_score')->result();
         $data['onoff_savescore'] = $this->db->where('onoff_id >=',2)->where('onoff_id <=',5)->get('tb_register_onoff')->result();   
        
@@ -181,8 +184,10 @@ class ConTeacherRegister extends CI_Controller {
     public function insert_score(){ 
 
         $TimeNum = $this->input->post('TimeNum');
+        //print_r($this->input->post()); exit();
+
         foreach ($this->input->post('StudentID') as $num => $value) {
-           //print_r($this->input->post('TimeNum'));
+           
             // print_r($this->input->post('SubjectCode'));
             $study_time = $this->input->post('study_time');
             // print_r(); exit();
@@ -197,7 +202,7 @@ class ConTeacherRegister extends CI_Controller {
             }
             
 
-            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
+            $key = array('StudentID' => $value,'SubjectID' => $this->input->post('SubjectID'), 'RegisterYear' => $this->input->post('RegisterYear'));
             $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'));
            echo $this->db->update('tb_register',$data,$key);
         }
@@ -208,6 +213,7 @@ class ConTeacherRegister extends CI_Controller {
         $CheckRepeat = $this->db->select('onoff_detail,onoff_year')->where('onoff_id',7)->get('tb_register_onoff')->result();
         $TimeNum = $this->input->post('TimeNum');
         $Grade_Type = '';
+        //print_r($this->input->post());exit();
         foreach ($this->input->post('StudentID') as $num => $value) {
            //print_r($this->input->post('TimeNum'));
             // print_r($this->input->post('SubjectCode'));
@@ -241,7 +247,7 @@ class ConTeacherRegister extends CI_Controller {
                 }
             }  
 
-            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'));
+            $key = array('StudentID' => $value,'SubjectID' => $this->input->post('SubjectID'));
            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'),'Grade_Type' => $Grade_Type,'RepeatStatus' => $RepeatStatus,'RepeatYear' => $RepeatYear);
            //echo print_r($key);
            echo $this->db->update('tb_register',$data,$key);
@@ -252,10 +258,10 @@ class ConTeacherRegister extends CI_Controller {
 
     public function setting_score($key){      
        
-
+        $list = array('before_middle','test_midterm','after_midterm','final_exam');
+        $score = array('before_middle_score','test_midterm_score','after_midterm_score','final_exam_score');
         if($key == "form_insert_score"){
-            $list = array('before_middle','test_midterm','after_midterm','final_exam');
-            $score = array('before_middle_score','test_midterm_score','after_midterm_score','final_exam_score');
+            
             for ($i=0; $i <= 3 ; $i++) { 
                 $data = array('regscore_subjectID' => $this->input->post("regscore_subjectID"),
                 'regscore_namework' => $this->input->post($list[$i]),
@@ -264,8 +270,7 @@ class ConTeacherRegister extends CI_Controller {
             }
             echo 1;
         }elseif($key == "form_update_score"){
-            $list = array('before_middle','test_midterm','after_midterm','final_exam');
-            $score = array('before_middle_score','test_midterm_score','after_midterm_score','final_exam_score');
+           
             for ($i=0; $i <= 3 ; $i++) { 
                 $data = array(
                     'regscore_score' => $this->input->post($score[$i]) 
@@ -294,11 +299,11 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentClass,
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$this->input->post('report_yaer'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_subject'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_subject'))
                                 // ->where('tb_students.StudentClass','ม.6/3')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->group_by('tb_students.StudentClass')
@@ -325,7 +330,7 @@ class ConTeacherRegister extends CI_Controller {
             $data['CheckPrint'] = "all";
             $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
-                            ->where('SubjectCode',$this->input->post('report_SubjectCode'))
+                            ->where('SubjectID',$this->input->post('report_SubjectID'))
                             ->get('tb_subjects')->result();
             $data['re_room'] = $data['re_subjuct'][0]->SubjectClass; 
             $data['re_teacher'] = "";
@@ -335,12 +340,12 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentClass
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->group_by('tb_students.StudentClass')
@@ -351,7 +356,7 @@ class ConTeacherRegister extends CI_Controller {
             foreach ($data['check_level'] as $key => $value_level) {
 
                 $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
@@ -359,6 +364,7 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -374,19 +380,19 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
 
             $data['re_room'] = $value_level->StudentClass;
             $data['check_student1'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
@@ -394,6 +400,7 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -409,13 +416,13 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('StudentClass',$value_level->StudentClass)
                                 ->where('RegisterYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
@@ -440,7 +447,7 @@ class ConTeacherRegister extends CI_Controller {
             $data['CheckPrint'] = "";
              $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
-                            ->where('SubjectCode',$this->input->post('report_SubjectCode'))
+                            ->where('SubjectID',$this->input->post('report_SubjectID'))
                             ->get('tb_subjects')->result();
             //echo "<pre>";print_r($data['re_subjuct']); exit();
             $data['re_room'] = $this->input->post('select_print');
@@ -463,7 +470,7 @@ class ConTeacherRegister extends CI_Controller {
         $data['set_score'] = $this->db->where('regscore_subjectID',$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
         
         $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
@@ -471,6 +478,7 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -486,12 +494,12 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RegisterYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 ->where('tb_students.StudentClass',$this->input->post('select_print'))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
@@ -519,19 +527,20 @@ class ConTeacherRegister extends CI_Controller {
         $register_onoff = $this->db->select('*')->where('onoff_id',7)->get('tb_register_onoff')->result();
         $schoolyear = $this->db->select('*')->get('tb_schoolyear')->result();
         $data['check_subject'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.TeacherID,
                                     tb_register.Grade_Type,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
                                     tb_register.RepeatYear
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 //->where('TeacherID',$this->session->userdata('login_id'))
                                 //->where('tb_register.Grade_Type !=',"")
                                 ->where('tb_register.RepeatYear',$register_onoff[0]->onoff_year)
@@ -539,7 +548,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
                                 //->where('tb_subjects.SubjectYear',$register_onoff[0]->onoff_year)
                                 //->where('tb_register.RegisterYear',$register_onoff[0]->onoff_year)
-                                ->group_by('tb_register.SubjectCode')   
+                                ->group_by('tb_register.SubjectID')   
                                 //->group_by('tb_subjects.SubjectName')
                                 //->group_by('tb_register.RegisterYear')
                                 ->order_by('tb_register.RegisterYear','ASC')
@@ -565,11 +574,11 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.RegisterYear
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
+                                ->where('tb_register.SubjectID',($subject))
                                 //->where('tb_students.StudentClass','ม.6/3')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->group_by('tb_students.StudentClass')
@@ -578,13 +587,14 @@ class ConTeacherRegister extends CI_Controller {
       
         if($room == "all"){  
         $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Grade,
                                     tb_register.Score100,
                                     tb_register.TeacherID,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
@@ -601,13 +611,13 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID','LEFT')
                                 //->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
                                 //->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
+                                ->where('tb_register.SubjectID',($subject))
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')                                
                                 ->where('tb_register.Grade_Type',$data['onoff'][0]->onoff_detail)
                                 ->where('tb_register.RepeatYear',$data['onoff'][0]->onoff_year)
@@ -620,13 +630,14 @@ class ConTeacherRegister extends CI_Controller {
             $sub_checkroom = explode('-',$room);
             $sub_room = $sub_checkroom[0].'/'.$sub_checkroom[1];
             $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -641,11 +652,11 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentBehavior
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('RegisterYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
+                                ->where('tb_register.SubjectID',($subject))
                                 ->where('tb_students.StudentClass','ม.'.$sub_room)
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->order_by('tb_students.StudentClass','ASC')
@@ -654,7 +665,7 @@ class ConTeacherRegister extends CI_Controller {
 
         }
 
-        $check_idSubject = $this->db->where('SubjectCode',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
+        $check_idSubject = $this->db->where('SubjectID',($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
       
         $data['set_score'] = $this->db->where('regscore_subjectID',$check_idSubject->SubjectID)->get('tb_register_score')->result();
         $data['onoff_savescore'] = $this->db->where('onoff_id >=',2)->where('onoff_id <=',5)->get('tb_register_onoff')->result();   
@@ -685,7 +696,7 @@ class ConTeacherRegister extends CI_Controller {
            
             $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
-                            ->where('SubjectCode',$this->input->post('report_SubjectCode'))
+                            ->where('SubjectID',$this->input->post('report_SubjectID'))
                             ->get('tb_subjects')->result();
             $data['CheckRepeat'] = $this->db->select('onoff_detail,onoff_year')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();  
            
@@ -697,12 +708,12 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentClass
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('RepeatTeacher',$this->session->userdata('login_id'))
                                 //->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
@@ -714,7 +725,7 @@ class ConTeacherRegister extends CI_Controller {
             foreach ($data['check_Level'] as $key => $v_check_Level) {
        
             $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
@@ -722,6 +733,7 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -737,12 +749,12 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
                                 //->where('RegisterYear',$this->input->post('report_RegisterYear'))                                
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 //->where('tb_students.StudentClass',$v_check_Level->StudentClass)
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->order_by('tb_students.StudentClass','ASC')
@@ -750,7 +762,7 @@ class ConTeacherRegister extends CI_Controller {
                                 ->get()->result();
 
                 $data['check_student1'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
@@ -758,6 +770,7 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -773,13 +786,13 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('tb_register.RepeatTeacher',$this->session->userdata('login_id'))
                                 //->where('RegisterYear',$this->input->post('report_RegisterYear'))       
                                 //->where('tb_register.RepeatYear',$this->input->post('report_RegisterYear'))                         
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 ->where('tb_students.StudentClass',$v_check_Level->StudentClass)
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->order_by('tb_students.StudentClass','ASC')
@@ -804,7 +817,7 @@ class ConTeacherRegister extends CI_Controller {
         }else{
              $data['re_subjuct'] = $this->db
                             ->where('SubjectYear',$this->input->post('report_RegisterYear'))
-                            ->where('SubjectCode',$this->input->post('report_SubjectCode'))
+                            ->where('SubjectID',$this->input->post('report_SubjectID'))
                             ->get('tb_subjects')->result();
             //echo "<pre>";print_r($data['re_subjuct']); exit();
             $data['re_room'] = $this->input->post('select_print');
@@ -827,7 +840,7 @@ class ConTeacherRegister extends CI_Controller {
         $data['set_score'] = $this->db->where('regscore_subjectID',@$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
         
         $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
@@ -835,6 +848,7 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_register.TeacherID,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -849,12 +863,12 @@ class ConTeacherRegister extends CI_Controller {
                                     tb_students.StudentBehavior
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.RegisterYear',$this->input->post('report_RegisterYear'))
                                 ->where('tb_subjects.SubjectYear',$this->input->post('report_RegisterYear'))
-                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_register.SubjectID',$this->input->post('report_SubjectID'))
                                 ->where('tb_students.StudentClass',$this->input->post('select_print'))
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')

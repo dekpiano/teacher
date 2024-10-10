@@ -72,7 +72,7 @@
                                             class="btn btn-danger btn-sm"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i> ยังไม่เปิดให้บันทึก</a>
                                         <?php else: ?>
-                                        <a href="<?=base_url('Register/SaveScoreAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectCode.'/all')?>"
+                                        <a href="<?=base_url('Register/SaveScoreAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectID.'/all')?>"
                                             class="btn btn-primary btn-sm clickLoad"><i class="fa fa-pencil"
                                                 aria-hidden="true"></i> บันทึกผลการเรียน</a>
                                         <?php endif; ?>
@@ -81,7 +81,7 @@
                                         <a href="#" id="chcek_report" class="btn btn-primary btn-sm" data-toggle="modal"
                                             data-target="#exampleModal"
                                             report-yaer="<?=$v_check_subject->RegisterYear?>"
-                                            report-subject="<?=$v_check_subject->SubjectCode?>"><i class="fa fa-print"
+                                            report-subject="<?=$v_check_subject->SubjectID?>"><i class="fa fa-print"
                                                 aria-hidden="true"></i> พิมพ์รายงาน</a>
                                     </td>
                                 </tr>
@@ -115,7 +115,7 @@
                     </select>
 
                     <input type="text" name="report_RegisterYear" id="report_RegisterYear" style="display:none">
-                    <input type="text" name="report_SubjectCode" id="report_SubjectCode" style="display:none">
+                    <input type="text" name="report_SubjectID" id="report_SubjectID" style="display:none">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
