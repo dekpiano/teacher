@@ -90,7 +90,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Register"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/Register.js?v=26"></script>
+          <script src="<?=base_url()?>assets/js/teacher/Register.js?v=27.2"></script>
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "SupStd"): ?>
