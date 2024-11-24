@@ -103,6 +103,18 @@
                     <?php endif; ?>
                 </ul>
             </li>
+
+            <li><a  href="#Cluds" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>งานพัฒนาผู้เรียน </a>
+                <ul id="Cluds"
+                    class="collapse list-unstyled <?=$this->uri->segment(1) == 'Clubs' ? 'show' : '' ?>">
+                    <li
+                        class="<?=$this->uri->segment(2) == 'Main' ? 'active' : '' ?>">
+                        <a class="Loader" href="<?=base_url('Clubs/Main');?>">ชุมนุม</a></li>
+                    
+                </ul>
+            </li>
+
             <li class=" <?=$this->uri->segment(1) == 'p' ? 'active' : '' ?>">
                 <a class="Loader" href="#"> <i class="icon-interface-windows"></i>งานประกันภายใน </a>
             </li>

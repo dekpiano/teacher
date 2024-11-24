@@ -96,6 +96,9 @@ $route['Register/LearnRepeatMain'] = "ConTeacherRegister/LearnRepeatMain";
 $route['Register/LearnRepeatAdd/(:any)/(:any)/(:any)/(:any)'] = "ConTeacherRegister/LearnRepeatAdd/$1/$2/$3/$4";
 $route['Register/ReportLearnRepeat'] = "ConTeacherRegister/ReportLearnRepeat";
 
+$route['Clubs/Main'] = "ConTeacherClubs/ClubsMain";
+
+
 $route['SupStd/Main'] = "ConTeacherStudentSupport/SupStdMain";
 $route['SupStd/CheckWorkManager/(:any)'] = "ConTeacherStudentSupport/SupStdCheckWorkManager/$1";
 $route['SupStd/CheckWorkExecutive'] = "ConTeacherStudentSupport/SupStdCheckWorkExecutive";
@@ -104,3 +107,5 @@ $route['SupStdMain/Add'] = "ConTeacherStudentSupport/SupStdAdd";
 
 $route['BudgetPlan/Cooperative/Home'] = "BudgetPlan/ConTeacherCooperative/CooperativeMain";
 $route['BudgetPlan/Cooperative'] = "BudgetPlan/ConTeacherCooperative/CooperativeShareCapital";
+
+

@@ -1,0 +1,148 @@
+<!-- Page Header-->
+<style>
+.services .card1 {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border: groove;
+}
+
+.services .card1:hover {
+    background-color: #fff;
+}
+
+.services .card1 span {
+    font-size: 14px;
+}
+
+.g-1 {
+    padding: 10px 15px;
+    margin: 0;
+}
+
+.callout {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 4px;
+}
+
+.callout-success {
+    border-left-color: #28a745;
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.callout-violet {
+    background-color: #f3e8fd;
+    /* สีพื้นหลังอ่อน */
+    border-left-color: #8a2be2;
+    /* สีขอบซ้าย */
+    color: #4b0082;
+    /* สีข้อความ */
+}
+</style>
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">ยินดีต้อนรับสู่ระบบงานสารสนเทศ SKJ</h2>
+    </div>
+</header>
+<!-- Dashboard Counts Section-->
+<section class="no-padding-bottom p-1">
+    <div class="container-fluid">
+
+        <?php $checkOnoff =  $ClubOnOff->c_onoff_regisend > date('Y-m-d H:i:s') ?"success":"red" ?>
+        <?php $checkOnoffThai =  $ClubOnOff->c_onoff_regisend > date('Y-m-d H:i:s') ?"เปิด":"ปิด" ?>
+        <?php $ExYear = explode('/', $ClubOnOff->c_onoff_year);?>
+        <div class="articles ">
+            <div class="callout callout-violet">
+                <p>
+                <h3 class="h2">ชุมนุม <?=$CheckClub->club_name;?> ยินดีต้อนรับ ... </h3>
+                </p>
+                ครูที่ปรึกษาชุมนุม <?=$CheckClub->advisors?></h3>
+            </div>
+
+
+            <div class="card mb-0">
+                <div class="card-header d-flex align-items-center bg-<?=$checkOnoff;?> text-white">
+                    กำหนดการลงทะเบียน ภาคเรียนที่ <?=$ExYear[1]?> ปีการศึกษา <?=$ExYear[0]?>
+                </div>
+                <div class="card-body row justify-content-between align-items-center">
+
+                    <div class="col-md-6 d-flex justify-content-center">
+                        <div class="text-right">
+                            <div>
+                                เปิดวันที่
+                                <b><?=$this->datethai->thai_date_and_time(strtotime($ClubOnOff->c_onoff_regisstart))?></b>
+                            </div>
+                            <div>
+                                ถึงวันที่
+                                <b><?=$this->datethai->thai_date_and_time(strtotime($ClubOnOff->c_onoff_regisend))?></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  text-center">
+
+                        <div>
+                            <button class="btn  bg-<?=$checkOnoff;?>">สถานะ :
+                                <?=$checkOnoffThai;?>ลงทะเบียนชุมนุม</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <section class="dashboard-counts no-padding-bottom pt-2">
+                <div class="">
+                    <div class="row bg-white has-shadow">
+                        <!-- Item -->
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="item d-flex align-items-center">
+                                <div class="icon bg-violet"><i class="icon-user"></i></div>
+                                <div class="title"><span>จำนวนที่<br>เปิดรับทั้งหมด</span>
+                                    <div class="progress">
+                                        <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25"
+                                            aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                                    </div>
+                                </div>
+                                <div class="number"><strong><?=$SummaryRegis->club_max_participants?></strong></div>
+                            </div>
+                        </div>
+                        <!-- Item -->
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="item d-flex align-items-center">
+                                <div class="icon bg-red"><i class="icon-padnote"></i></div>
+                                <div class="title"><span>จำนวนที่<br>ลงทะเบียน</span>
+                                    <div class="progress">
+                                        <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70"
+                                            aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                                    </div>
+                                </div>
+                                <div class="number"><strong><?=$SummaryRegis->RegisStudents?></strong></div>
+                            </div>
+                        </div>
+                        <!-- Item -->
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="item d-flex align-items-center">
+                                <div class="icon bg-green"><i class="icon-bill"></i></div>
+                                <div class="title"><span>จำนวนที่<br>ว่างคงเหลือ</span>
+                                    <div class="progress">
+                                        <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40"
+                                            aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                                    </div>
+                                </div>
+                                <div class="number"><strong><?=$SummaryRegis->RemainingSpots?></strong></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+</section>
