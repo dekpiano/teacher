@@ -54,6 +54,35 @@ var  $title = "ชุมนุม";
         // $this->session->sess_destroy();
         
     }
+
+    public function ViewClubRegister(){
+
+        $this->db->select('
+        tb_club_members.member_join_date,
+        tb_club_members.member_id,
+        tb_students.StudentNumber,
+        tb_students.StudentClass,
+        tb_students.StudentCode,
+        CONCAT(tb_students.StudentPrefix,tb_students.StudentFirstName," ",tb_students.StudentLastName) AS FullnameStu
+        ');
+        $this->db->from('tb_club_members');
+        $this->db->join('tb_students','tb_students.StudentID = tb_club_members.member_student_id');
+        $this->db->where('member_club_id', $this->input->post('clubid'));
+        $this->db->order_by('StudentClass,StudentCode','ASC');
+
+        $query = $this->db->get();
+        $result = $query->result_array();
+
+        echo json_encode($result);
+    }
+
+    public function ViewClubActivity(){
+
+        $result = $this->db->get('tb_club_settings_schedule')->result_array();
+
+        echo json_encode($result);
+
+    }
 }
 
 

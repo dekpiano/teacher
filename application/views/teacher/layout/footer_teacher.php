@@ -101,6 +101,10 @@
           <script src="<?=base_url()?>assets/js/teacher/TeacherProfile.js?v=3"></script>
           <?php endif; ?>
 
+          <?php if($this->uri->segment(1) === "Clubs"): ?>
+          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=1.5"></script>
+          <?php endif; ?>
+
           </body>
 
           <script>

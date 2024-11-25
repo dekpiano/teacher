@@ -145,8 +145,16 @@
         <span class="heading">งานงบประมาณและแผน</span>
         <ul class="list-unstyled">
             <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
-                <a class="Loader" href="<?=base_url('BudgetPlan/Cooperative/Home')?>"> <i
-                        class="icon-interface-windows"></i>สหกรณ์โรงเรียน(ครู) </a>
+
+                <a class="Loader" href="https://drive.google.com/drive/folders/1iHC6fbmwQ_iKPEvMbdorwWEUe2y8PwMg?usp=sharing"> <i class="icon-interface-windows"></i>แผนดำเนินงานประจำปีงบประมาณ </a>
+            </li>
+            <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
+
+                <a class="Loader" href="https://drive.google.com/drive/folders/1-JN8h9GpJfLUnd2Det_6HsZLqSMhetAk?usp=sharing"> <i class="icon-interface-windows"></i>แผนปฏิบัติการประจำปีงบประมาณ </a>
+            </li>
+            <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
+                <!-- <?=base_url('BudgetPlan/Cooperative/Home')?> -->
+                <a class="Loader" href="#"> <i class="icon-interface-windows"></i>สหกรณ์โรงเรียน(ครู) </a>
             </li>
         </ul>
 
