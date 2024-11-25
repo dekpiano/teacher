@@ -1,3 +1,6 @@
+<style>
+    
+</style>
 <!-- Modal -->
 <div class="modal fade" id="ModalClubRecordActivity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -10,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between">
+                    <div class="card-header d-flex justify-content-between bg-secondary text-white">
                         <div>
                             <h3 class="h2">กิจกรรมชุมนุม : <?=$CheckClub->club_name;?></h3>
                             <h5>
@@ -18,7 +21,7 @@
                             </h5>
                         </div>
                         <div>
-                            <button class="btn btn-warning ModalClubCheckName">พิมพ์รายชื่อ</button>
+                            <button class="btn btn-warning ">พิมพ์รายชื่อ</button>
                         </div>
 
 
