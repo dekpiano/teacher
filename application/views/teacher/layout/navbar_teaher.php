@@ -31,7 +31,7 @@
                 </ul>
             </li> -->
 
-            <li><a  href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
+            <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูผู้สอน </a>
                 <ul id="TeacherLarn"
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Teaching' ? 'show' : '' ?>">
@@ -44,16 +44,18 @@
                 </ul>
             </li>
 
-            <li><a  href="#TeacherSaveScore" aria-expanded="false" data-toggle="collapse"> <i
+            <li><a href="#TeacherSaveScore" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานวัดผล </a>
                 <ul id="TeacherSaveScore"
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Register' ? 'show' : '' ?>">
                     <li
                         class="<?=$this->uri->segment(2) == 'SaveScoreMain' || $this->uri->segment(2) =='SaveScoreAdd' ? 'active' : '' ?>">
-                        <a class="Loader" href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a></li>
+                        <a class="Loader" href="<?=base_url('Register/SaveScoreMain');?>">บันทึกผลการเรียน (ปกติ)</a>
+                    </li>
                     <li
                         class="<?=$this->uri->segment(2) == 'LearnRepeatMain' || $this->uri->segment(2) =='LearnRepeatAdd' ? 'active' : '' ?>">
-                        <a class="Loader" href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a></li>
+                        <a class="Loader" href="<?=base_url('Register/LearnRepeatMain');?>">บันทึกผลการเรียน (ซ้ำ)</a>
+                    </li>
                 </ul>
             </li>
 
@@ -66,7 +68,9 @@
                     <?php else : ?>
                     <li
                         class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == '' ? 'active' : '' ?>">
-                        <a class="Loader" href="<?=base_url('Course/SendPlanAll/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>"><i class="fa fa-file" aria-hidden="true"></i>
+                        <a class="Loader"
+                            href="<?=base_url('Course/SendPlanAll/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>"><i
+                                class="fa fa-file" aria-hidden="true"></i>
                             ส่งแผนการสอน</a>
                     </li>
                     <li
@@ -133,8 +137,16 @@
         <span class="heading">งานงบประมาณและแผน</span>
         <ul class="list-unstyled">
             <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
-                <a class="Loader" href="<?=base_url('BudgetPlan/Cooperative/Home')?>"> <i
-                        class="icon-interface-windows"></i>สหกรณ์โรงเรียน(ครู) </a>
+
+                <a class="Loader" href="https://drive.google.com/drive/folders/1iHC6fbmwQ_iKPEvMbdorwWEUe2y8PwMg?usp=sharing"> <i class="icon-interface-windows"></i>แผนดำเนินงานประจำปีงบประมาณ </a>
+            </li>
+            <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
+
+                <a class="Loader" href="https://drive.google.com/drive/folders/1-JN8h9GpJfLUnd2Det_6HsZLqSMhetAk?usp=sharing"> <i class="icon-interface-windows"></i>แผนปฏิบัติการประจำปีงบประมาณ </a>
+            </li>
+            <li class=" <?=$this->uri->segment(2) == 'Cooperative' ? 'active' : '' ?>">
+                <!-- <?=base_url('BudgetPlan/Cooperative/Home')?> -->
+                <a class="Loader" href="#"> <i class="icon-interface-windows"></i>สหกรณ์โรงเรียน(ครู) </a>
             </li>
         </ul>
 
