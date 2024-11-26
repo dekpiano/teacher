@@ -73,8 +73,8 @@
           <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 
 
-          <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=28.1"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
@@ -102,7 +102,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Clubs"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=1.9"></script>
+          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=2.0"></script>
           <?php endif; ?>
 
           </body>

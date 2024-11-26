@@ -81,7 +81,7 @@ function ViewClubActivity(clubid) {
                         <td>${student.tcs_week_number}</td>
                         <td>${thaiDate}</td>
                         <td>
-                            <button class="btn btn-danger btn-sm ModalClubCheckName" data-clubid="${student.tcs_week_number}" data-scheduleid="${student.tcs_schedule_id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                            <button class="btn btn-danger btn-sm ModalClubCheckName" data-clubid="${student.tcs_week_number}" data-scheduleid="${student.tcs_schedule_id}" data-datetime="${student.tcs_start_date}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
 </svg> เช็คชื่อ</button>
@@ -172,13 +172,19 @@ $(document).on('submit', '#FormRecordActivity', function(e) {
         type: 'POST',
         data: $(this).serialize(),
         success: function(response) {
-
-            console.log(response);
+            if(response){
+                Swal.fire({
+                    title: "แจ้งเตือน!",
+                    text: "บันทึกเวลาเรียนสำเร็จ!",
+                    icon: "success"
+                  });
+            }
+           
+           // console.log(response);
             
         },
         error: function() {
-            $responseMessage.text('Error submitting the form. Please try again.');
+            console.log("Error");
         }
     });
-
 });

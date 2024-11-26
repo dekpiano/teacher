@@ -111,17 +111,38 @@ var  $title = "ชุมนุม";
 
         if(!empty($this->input->post())){
             $status = $this->input->post('status');
-            $present = implode('|', array_keys($status));
+            // สร้าง Array สำหรับจัดกลุ่ม
+                $groupedData = array();
+
+                foreach ($status as $key => $value) {
+                    // ตรวจสอบว่ามีคีย์ของสถานะในกลุ่มหรือยัง ถ้าไม่มีก็สร้าง
+                    if (!isset($groupedData[$value])) {
+                        $groupedData[$value] = array();
+                    }
+                    // เพิ่มคีย์ (ID) เข้าไปในกลุ่มที่ตรงกับสถานะ
+                    $groupedData[$value][] = $key;
+                }
+                $CkeckMa = ($groupedData['มา'] ?? '');
+                $Ma = is_array($CkeckMa) ? implode("|", $CkeckMa) : '';
+                $CkeckKhad = ($groupedData['ขาด'] ?? '');
+                $Khad = is_array($CkeckKhad) ? implode("|", $CkeckKhad) : '';
+                $CkeckRapwy = ($groupedData['ลาป่วย'] ?? '');
+                $Rapwy = is_array($CkeckRapwy) ? implode("|", $CkeckRapwy) : '';
+                $CkeckRakic = ($groupedData['ลากิจ'] ?? '');
+                $Rakic = is_array($CkeckRakic) ? implode("|", $CkeckRakic) : '';
+                $CkeckKickrrm = ($groupedData['กิจกรรม'] ?? '');
+                $Kickrrm = is_array($CkeckKickrrm) ? implode("|", $CkeckKickrrm) : '';
+            
 
             $data = [
                 'tcra_club_id' =>  $this->input->post('clubid'),
                 'tcra_teac_id' => $this->session->userdata('login_id'),
                 'trca_schedule_id' => $this->input->post('scheduleid'), // วันที่
-                'tcra_ma'      => $present,           // สถานะ "มา" จะเก็บในรูปแบบ "3691|3706|3713"
-                'tcra_khad'     => '',                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
-                'tcra_rapwy'  => '',                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
-                'tcra_rakic'   => '',
-                'tcra_kickrrm'   => ''                   // กำหนดค่าว่างถ้าไม่มีข้อมูล
+                'tcra_ma'      => $Ma,           // สถานะ "มา" จะเก็บในรูปแบบ "3691|3706|3713"
+                'tcra_khad'     => $Khad,                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
+                'tcra_rapwy'  => $Rapwy,                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
+                'tcra_rakic'   => $Rakic,
+                'tcra_kickrrm'   => $Kickrrm                   // กำหนดค่าว่างถ้าไม่มีข้อมูล
             ];
             $result = $this->db->insert('tb_club_recoed_activity', $data);
             if ($result) {
