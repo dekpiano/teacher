@@ -77,12 +77,66 @@ var  $title = "ชุมนุม";
     }
 
     public function ViewClubActivity(){
-
-        $result = $this->db->get('tb_club_settings_schedule')->result_array();
+        $data['ClubOnOff'] = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+        $result = $this->db->where('tcs_academic_year',$data['ClubOnOff']->c_onoff_year)
+        ->get('tb_club_settings_schedule')->result_array();
 
         echo json_encode($result);
 
     }
+
+    public function ViewDataRecordStudyTime(){
+
+        $this->db->select('
+        tb_club_members.member_join_date,
+        tb_club_members.member_id,
+        tb_students.StudentNumber,
+        tb_students.StudentID,
+        tb_students.StudentClass,
+        tb_students.StudentCode,
+        CONCAT(tb_students.StudentPrefix,tb_students.StudentFirstName," ",tb_students.StudentLastName) AS FullnameStu
+        ');
+        $this->db->from('tb_club_members');
+        $this->db->join('tb_students','tb_students.StudentID = tb_club_members.member_student_id');
+        $this->db->where('member_club_id', $this->input->post('clubid'));
+        $this->db->order_by('StudentClass,StudentCode','ASC');
+
+        $query = $this->db->get();
+        $result = $query->result_array();
+
+        echo json_encode($result);
+    }
+
+    public function ClubInsertRecodeActivity(){
+
+        if(!empty($this->input->post())){
+            $status = $this->input->post('status');
+            $present = implode('|', array_keys($status));
+
+            $data = [
+                'tcra_club_id' =>  $this->input->post('clubid'),
+                'tcra_teac_id' => $this->session->userdata('login_id'),
+                'trca_schedule_id' => $this->input->post('scheduleid'), // วันที่
+                'tcra_ma'      => $present,           // สถานะ "มา" จะเก็บในรูปแบบ "3691|3706|3713"
+                'tcra_khad'     => '',                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
+                'tcra_rapwy'  => '',                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
+                'tcra_rakic'   => '',
+                'tcra_kickrrm'   => ''                   // กำหนดค่าว่างถ้าไม่มีข้อมูล
+            ];
+            $result = $this->db->insert('tb_club_recoed_activity', $data);
+            if ($result) {
+                echo json_encode(['status' => 'success', 'message' => 'บันทึกข้อมูลสำเร็จ']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล']);
+            }
+        }else {
+            echo json_encode(['status' => 'error', 'message' => 'ไม่มีข้อมูลส่งมา']);
+        }
+
+        
+
+    }
+
 }
 
 

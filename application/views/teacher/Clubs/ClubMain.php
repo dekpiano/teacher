@@ -190,7 +190,7 @@
         </div>
         <div class="col-md-3">
 
-            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRecordActivity">
+            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRecordActivity" data-clubid="<?=$CheckClub->club_id?>">
                 <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
                 <div class="text"><strong>บันทึกเวลาเรียน</strong></div>
             </div>
@@ -212,4 +212,4 @@
 
 <!-- //----  Modal ต่าง ๆ -->
  <?php $this->load->view('teacher/Clubs/ClubRegisterModal.php') ?>
- <?php $this->load->view('teacher/Clubs/ClubActivityParticipationRecord.php') ?>
+ <?php $this->load->view('teacher/Clubs/ClubModalRecordActivity.php') ?>
