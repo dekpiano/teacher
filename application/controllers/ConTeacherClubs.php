@@ -78,8 +78,23 @@ var  $title = "ชุมนุม";
 
     public function ViewClubActivity(){
         $data['ClubOnOff'] = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
-        $result = $this->db->where('tcs_academic_year',$data['ClubOnOff']->c_onoff_year)
-        ->get('tb_club_settings_schedule')->result_array();
+        $result = $this->db->select('
+            tb_club_recoed_activity.trca_schedule_id,
+            tb_club_settings_schedule.tcs_schedule_id,
+            tb_club_settings_schedule.tcs_start_date,
+            tb_club_settings_schedule.tcs_week_number,
+            tb_club_settings_schedule.tcs_week_status,
+            tb_club_settings_schedule.tcs_academic_year,
+            tb_club_recoed_activity.tcra_ma,
+            tb_club_recoed_activity.tcra_khad,
+            tb_club_recoed_activity.tcra_rapwy,
+            tb_club_recoed_activity.tcra_rakic,
+            tb_club_recoed_activity.tcra_kickrrm
+        ')
+        ->from('tb_club_settings_schedule')
+        ->join('tb_club_recoed_activity','tb_club_recoed_activity.trca_schedule_id = tb_club_settings_schedule.tcs_schedule_id','left')
+        ->where('tcs_academic_year',$data['ClubOnOff']->c_onoff_year)
+        ->get()->result_array();
 
         echo json_encode($result);
 
@@ -146,7 +161,7 @@ var  $title = "ชุมนุม";
             ];
             $result = $this->db->insert('tb_club_recoed_activity', $data);
             if ($result) {
-                echo json_encode(['status' => 'success', 'message' => 'บันทึกข้อมูลสำเร็จ']);
+                echo json_encode(['status' => 'success', 'message' => 'บันทึกข้อมูลสำเร็จ',"InsertedId"=>$this->db->insert_id()]);
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล']);
             }
@@ -154,7 +169,62 @@ var  $title = "ชุมนุม";
             echo json_encode(['status' => 'error', 'message' => 'ไม่มีข้อมูลส่งมา']);
         }
 
-        
+    }
+
+    public function CheckRecoedActivity(){
+       
+        $result = $this->db->where('trca_schedule_id',$this->input->post('recoedID'))->get('tb_club_recoed_activity')->row();
+
+        echo $result->tcra_id;
+    }
+
+    public function ClubUpdateRecodeActivity(){
+
+        if(!empty($this->input->post())){
+            $status = $this->input->post('status');
+            // สร้าง Array สำหรับจัดกลุ่ม
+                $groupedData = array();
+
+                foreach ($status as $key => $value) {
+                    // ตรวจสอบว่ามีคีย์ของสถานะในกลุ่มหรือยัง ถ้าไม่มีก็สร้าง
+                    if (!isset($groupedData[$value])) {
+                        $groupedData[$value] = array();
+                    }
+                    // เพิ่มคีย์ (ID) เข้าไปในกลุ่มที่ตรงกับสถานะ
+                    $groupedData[$value][] = $key;
+                }
+                $CkeckMa = ($groupedData['มา'] ?? '');
+                $Ma = is_array($CkeckMa) ? implode("|", $CkeckMa) : '';
+                $CkeckKhad = ($groupedData['ขาด'] ?? '');
+                $Khad = is_array($CkeckKhad) ? implode("|", $CkeckKhad) : '';
+                $CkeckRapwy = ($groupedData['ลาป่วย'] ?? '');
+                $Rapwy = is_array($CkeckRapwy) ? implode("|", $CkeckRapwy) : '';
+                $CkeckRakic = ($groupedData['ลากิจ'] ?? '');
+                $Rakic = is_array($CkeckRakic) ? implode("|", $CkeckRakic) : '';
+                $CkeckKickrrm = ($groupedData['กิจกรรม'] ?? '');
+                $Kickrrm = is_array($CkeckKickrrm) ? implode("|", $CkeckKickrrm) : '';
+            
+
+            $data = [
+                'tcra_club_id' =>  $this->input->post('clubid'),
+                'tcra_teac_id' => $this->session->userdata('login_id'),
+                'trca_schedule_id' => $this->input->post('scheduleid'), // วันที่
+                'tcra_ma'      => $Ma,           // สถานะ "มา" จะเก็บในรูปแบบ "3691|3706|3713"
+                'tcra_khad'     => $Khad,                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
+                'tcra_rapwy'  => $Rapwy,                 // กำหนดค่าว่างถ้าไม่มีข้อมูล
+                'tcra_rakic'   => $Rakic,
+                'tcra_kickrrm'   => $Kickrrm                   // กำหนดค่าว่างถ้าไม่มีข้อมูล
+            ];
+            $this->db->where('tcra_id',$this->input->post("recordId"));
+            $result = $this->db->update('tb_club_recoed_activity', $data);
+            if ($result) {
+                echo json_encode(['status' => 'success', 'message' => 'แก้ไขข้อมูลสำเร็จ',"InsertedId"=>$this->input->post("recordId")]);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล']);
+            }
+        }else {
+            echo json_encode(['status' => 'error', 'message' => 'ไม่มีข้อมูลส่งมา']);
+        }
 
     }
 

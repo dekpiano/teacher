@@ -76,18 +76,26 @@ function ViewClubActivity(clubid) {
             data.forEach((student, index) => {
                 const today = new Date(student.tcs_start_date);
                 const thaiDate = formatThaiDate(today);
+                
+                if (student.tcra_ma === null || student.tcra_ma.trim() === "") {
+                    var count = 0;
+                }else{
+                    var count = student.tcra_ma.split('|').filter(item => item.trim() !== "").length;
+                    console.log("จำนวนรายการที่ไม่ว่าง: " + count);
+                }
+                   
+                    
                 rows += `
                     <tr class="text-center">
                         <td>${student.tcs_week_number}</td>
                         <td>${thaiDate}</td>
                         <td>
-                            <button class="btn btn-danger btn-sm ModalClubCheckName" data-clubid="${student.tcs_week_number}" data-scheduleid="${student.tcs_schedule_id}" data-datetime="${student.tcs_start_date}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-</svg> เช็คชื่อ</button>
+                            <button class="btn btn-${student.trca_schedule_id ?'success':'danger'} btn-sm ModalClubCheckName" data-clubid="${student.tcs_week_number}" data-scheduleid="${student.tcs_schedule_id}" data-datetime="${student.tcs_start_date}"> 
+                            ${student.trca_schedule_id ?'✔ เช็คแล้ว':'✖ เช็คชื่อ'}
+                            </button>
                         </td>
                         <td></td>
-                        <td></td>
+                        <td>${count}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -111,9 +119,24 @@ $(document).on('click', '.ModalClubCheckName', function() {
     const today = new Date($(this).data("datetime"));
     const thaiDate = formatThaiDate(today);
     $('#ShowDatetime').text(thaiDate);
+    $('#recordId').val("");
 
     ViewDataRecordStudyTime(clubid,$(this).data("scheduleid"),clubid);
+    CheckRecoedActivity($(this).data("scheduleid"));
 });
+
+function CheckRecoedActivity(recoedID){
+
+    $.post("../ConTeacherClubs/CheckRecoedActivity", {recoedID:recoedID}, function (response) {      
+        if(response > 0){
+            $('#recordId').val(response);
+        }else{
+            $('#recordId').val("");
+        }
+        
+    }, 'json');
+}
+
 
 //--------------- ดูบันทึกเวลาเรียน -----------
 function ViewDataRecordStudyTime(clubid,today,clubid) {
@@ -165,26 +188,34 @@ function ViewDataRecordStudyTime(clubid,today,clubid) {
 
 $(document).on('submit', '#FormRecordActivity', function(e) {
     e.preventDefault();
-    //console.log($(this).serialize());
+
+    const url = $('#recordId').val() === '' 
+    ? '../ConTeacherClubs/ClubInsertRecodeActivity' // Insert เมื่อ ID ว่าง
+    : '../ConTeacherClubs/ClubUpdateRecodeActivity'; // Update เมื่อมี ID
 
     $.ajax({
-        url: '../ConTeacherClubs/ClubInsertRecodeActivity', 
+        url: url, 
         type: 'POST',
         data: $(this).serialize(),
+        dataType:'json',
         success: function(response) {
+           // console.log(response);
             if(response){
                 Swal.fire({
                     title: "แจ้งเตือน!",
-                    text: "บันทึกเวลาเรียนสำเร็จ!",
+                    text: response.message,
                     icon: "success"
                   });
             }
-           
-           // console.log(response);
-            
+            $('#recordId').val(response.InsertedId);
         },
-        error: function() {
-            console.log("Error");
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
         }
     });
 });
+
+$('#ModalClubCheckName').on('hidden.bs.modal', function (event) {
+    $('#ModalClubRecordActivity').modal('show');
+    ViewClubActivity();
+})

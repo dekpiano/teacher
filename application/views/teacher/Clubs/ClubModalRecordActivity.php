@@ -53,15 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>2</td>
-                                    <td>8</td>
-                                    <td>5</td>
-                                    <td>2</td>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -101,6 +93,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <form id="FormRecordActivity">
+                                <input type="hidden" id="recordId" name="recordId" value="">
                             <table class="table table-striped table-hover" id="TbClubRecordStudyTime">
                                 <thead>
                                     <tr class="bg-primary text-white text-center">
