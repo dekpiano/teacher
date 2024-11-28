@@ -112,14 +112,18 @@ var  $title = "ชุมนุม";
         CONCAT(tb_students.StudentPrefix,tb_students.StudentFirstName," ",tb_students.StudentLastName) AS FullnameStu
         ');
         $this->db->from('tb_club_members');
-        $this->db->join('tb_students','tb_students.StudentID = tb_club_members.member_student_id');
+        $this->db->join('tb_students','tb_students.StudentID = tb_club_members.member_student_id','left');
         $this->db->where('member_club_id', $this->input->post('clubid'));
         $this->db->order_by('StudentClass,StudentCode','ASC');
 
         $query = $this->db->get();
         $result = $query->result_array();
 
-        echo json_encode($result);
+        $GetStatus = $this->db->where('trca_schedule_id',$this->input->post('scheduleid'))
+        ->where('tcra_club_id',$this->input->post('clubid'))
+        ->get('tb_club_recoed_activity')->row();
+
+        echo json_encode(["StuList" => $result,"GetStatus" => $GetStatus]);
     }
 
     public function ClubInsertRecodeActivity(){
@@ -175,7 +179,7 @@ var  $title = "ชุมนุม";
        
         $result = $this->db->where('trca_schedule_id',$this->input->post('recoedID'))->get('tb_club_recoed_activity')->row();
 
-        echo $result->tcra_id;
+        echo $result->tcra_id ?? "";
     }
 
     public function ClubUpdateRecodeActivity(){
