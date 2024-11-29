@@ -198,7 +198,7 @@
                 <div class="icon bg-green"><i class="fa fa-calendar-o"></i></div>
                 <div class="text"><strong>ข้อมูลของชุมนุม</strong></div>
             </div>
-            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow">
+            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubReport">
                 <div class="icon bg-orange"><i class="fa fa-paper-plane-o"></i></div>
                 <div class="text"><strong>พิมพ์เอกสาร</strong></div>
             </div>
@@ -213,3 +213,4 @@
 <!-- //----  Modal ต่าง ๆ -->
  <?php $this->load->view('teacher/Clubs/ClubRegisterModal.php') ?>
  <?php $this->load->view('teacher/Clubs/ClubModalRecordActivity.php') ?>
+ <?php $this->load->view('teacher/Clubs/ClubReportModal.php') ?>

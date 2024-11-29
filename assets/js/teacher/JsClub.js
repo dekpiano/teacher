@@ -44,7 +44,9 @@ function ViewClubRegister(clubid) {
                         <td>${student.FullnameStu}</td>
                         <td>${student.StudentClass}</td>
                         <td>${student.StudentNumber}</td>
-                        <td>${student.member_join_date}</td>
+                        <td>${
+                            formatThaiDate(new Date(student.member_join_date))
+                        }</td>
                     </tr>
                 `;
             });
@@ -265,3 +267,8 @@ $('#ModalClubCheckName').on('hidden.bs.modal', function (event) {
     $('#ModalClubRecordActivity').modal('show');
     ViewClubActivity();
 })
+
+// ------------ พิมพ์เอกสาร  --------------
+$(document).on('click', '.ModalClubReport', function() {
+    $('#ModalClubRegister').modal("show");
+});

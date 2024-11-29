@@ -60,7 +60,8 @@
           <script src="<?=base_url()?>assets/js/front.js"></script>
           <script src="<?=base_url()?>assets/js/jquery.datetimepicker.js"></script>
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
+ <!-- Font Awesome -->
+ <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
           <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
           <!-- DataTable -->
           <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
@@ -102,7 +103,9 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Clubs"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=4"></script>
+          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=4.2"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
           <?php endif; ?>
 
           </body>
