@@ -93,27 +93,29 @@
                                 <!-- Box 1 -->
                                 <div class="col-md-6 col-lg-6 mb-4">
                                     <div class="service-box service-blue">
-                                    <i class="bi bi-journal-text"></i>
+                                        <i class="bi bi-journal-text"></i>
                                         <p>รายละเอียด</p>
                                         <h4>ใบรายชื่อนักเรียน</h4>
                                         <div class="actions">
-                                            <a href="#" class="btn btn-light  w-100"><i class="bi bi-printer-fill"></i> PDF</a>
+                                            <a href="#" class="btn btn-light  w-100"><i class="bi bi-printer-fill"></i>
+                                                PDF</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Box 2 -->
                                 <div class="col-md-6 col-lg-6 mb-4">
                                     <div class="service-box service-green">
-                                    <i class="bi bi-journal-text"></i>
+                                        <i class="bi bi-journal-text"></i>
                                         <p>รายละเอียด</p>
                                         <h4>ข้อมูลเวลาเรียน</h4>
                                         <div class="actions">
-                                            <a href="#" class="btn btn-light w-100"><i class="bi bi-printer-fill"></i> PDF</a>
+                                            <a href="#" class="btn btn-light w-100"><i class="bi bi-printer-fill"></i>
+                                                PDF</a>
                                         </div>
                                     </div>
                                 </div>
-                              
-                            
+
+
                             </div>
                         </div>
 
@@ -123,5 +125,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

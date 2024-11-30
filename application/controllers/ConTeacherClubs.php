@@ -232,7 +232,48 @@ var  $title = "ชุมนุม";
 
     }
 
+    public function ClubReportRecord(){
+            $path = (dirname(dirname(dirname(dirname(__FILE__))))); 
+            require $path . '/librarie_skj/mpdf/vendor/autoload.php';
+            $TeacherID = $this->session->userdata('login_id');
+            $ClubOnOff = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+
+            $data['GetSchedule'] = $this->db
+            ->select('tcs_week_number,tcs_start_date,tcs_academic_year')
+            ->where('tcs_academic_year',$ClubOnOff->c_onoff_year)->get('tb_club_settings_schedule')->result();
+
+            $data['CheckClub'] = $this->db->select('
+            skjacth_academic.tb_clubs.club_id
+            ')
+            ->from('skjacth_academic.tb_clubs')
+            ->join('skjacth_personnel.tb_personnel',"FIND_IN_SET(skjacth_personnel.tb_personnel.pers_id, REPLACE(skjacth_academic.tb_clubs.club_faculty_advisor, '|', ','))> 0",'left')
+            ->where("FIND_IN_SET('$TeacherID', REPLACE(tb_clubs.club_faculty_advisor, '|', ',')) >",0)
+            ->group_by('skjacth_academic.tb_clubs.club_id')->get()->row();
+
+            echo '<pre>';print_r($data['CheckClub']);exit();
+
+            $mpdf = new \Mpdf\Mpdf([
+                'default_font' => 'thsarabun', // ฟอนต์ภาษาไทย
+                'format' => 'A4' // แนวนอน
+            ]);
+
+            // โหลด HTML จากไฟล์
+            $html = $this->load->view('teacher/Clubs/Report/ReportRecord.php',$data); // true จะส่งคืน HTML เป็นสตริง
+
+            // เขียน HTML ลง PDF
+            //$mpdf->WriteHTML($html);
+
+            // ส่งออก PDF
+            //$mpdf->Output('attendance.pdf', 'I'); // ดาวน์โหลดไฟล์
+                
+    }
+
 }
+
+   
+
+
+
 
 
 ?>
