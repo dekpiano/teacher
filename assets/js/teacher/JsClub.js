@@ -270,5 +270,39 @@ $('#ModalClubCheckName').on('hidden.bs.modal', function (event) {
 
 // ------------ พิมพ์เอกสาร  --------------
 $(document).on('click', '.ModalClubReport', function() {
-    $('#ModalClubRegister').modal("show");
+    $('#ModalClubReport').modal("show");
 });
+
+
+function CheckStatusInTableAttendanceActivity(){
+    let resultMa;
+   
+    $('#TbReportAttendanceActivity tbody tr').each(function(index, row) {
+        let countMa = 0,CountKhad=0,CountRapwy=0,CountRakic=0,CountKickrrm=0;
+        $(row).find('.GetStatus').each(function(_, cell) {
+            const cellValue = $(cell).text().trim();
+            if (cellValue === 'ม') {
+                countMa++;
+            }else if(cellValue === 'ข'){
+                CountKhad++;
+            }else if(cellValue === 'ลป'){
+                CountRapwy++;
+            }else if(cellValue === 'ลก'){
+                CountRakic++;
+            }else if(cellValue === 'ก'){
+                CountKickrrm++;
+            }
+        })  
+            var Total = (countMa+CountKhad+CountRapwy+CountRakic+CountKickrrm);
+        $(row).find('.ShowNumMa').text(countMa);
+        $(row).find('.ShowNumKhad').text(CountKhad);
+        $(row).find('.ShowNumRapwy').text(CountRapwy);
+        $(row).find('.ShowNumRakic').text(CountRakic);
+        $(row).find('.ShowNumkickrrm').text(CountKickrrm);
+        $(this).find(".ShowNumToTal").text(Total);
+        $(this).find(".ShowNumAverage").text(parseFloat(((countMa+CountRapwy+CountRakic+CountKickrrm)/Total)*100).toFixed(2));
+            
+    });
+    
+}
+CheckStatusInTableAttendanceActivity();

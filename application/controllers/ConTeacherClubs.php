@@ -233,14 +233,12 @@ var  $title = "ชุมนุม";
     }
 
     public function ClubReportRecord(){
-            $path = (dirname(dirname(dirname(dirname(__FILE__))))); 
-            require $path . '/librarie_skj/mpdf/vendor/autoload.php';
             $TeacherID = $this->session->userdata('login_id');
             $ClubOnOff = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+            $data['title']  = "รายงานเวลาเรียน | ระบบงานชุมนุม";
+            $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+            $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
 
-            $data['GetSchedule'] = $this->db
-            ->select('tcs_week_number,tcs_start_date,tcs_academic_year')
-            ->where('tcs_academic_year',$ClubOnOff->c_onoff_year)->get('tb_club_settings_schedule')->result();
 
             $data['CheckClub'] = $this->db->select('
             skjacth_academic.tb_clubs.club_id
@@ -250,23 +248,114 @@ var  $title = "ชุมนุม";
             ->where("FIND_IN_SET('$TeacherID', REPLACE(tb_clubs.club_faculty_advisor, '|', ',')) >",0)
             ->group_by('skjacth_academic.tb_clubs.club_id')->get()->row();
 
-            echo '<pre>';print_r($data['CheckClub']);exit();
+            $data['GetSchedule'] = $this->db->select('
+                tb_club_settings_schedule.tcs_start_date,
+                tb_club_recoed_activity.tcra_ma,
+                tb_club_recoed_activity.tcra_khad,
+                tb_club_recoed_activity.tcra_rapwy,
+                tb_club_recoed_activity.tcra_rakic,
+                tb_club_recoed_activity.tcra_kickrrm,
+                tb_club_recoed_activity.tcra_club_id,
+                tb_club_settings_schedule.tcs_academic_year,
+                tb_club_settings_schedule.tcs_week_number
+            ')
+            ->from('tb_club_settings_schedule')
+            ->join('tb_club_recoed_activity','tb_club_recoed_activity.trca_schedule_id = tb_club_settings_schedule.tcs_schedule_id','left')
+            ->where('tcs_academic_year',$ClubOnOff->c_onoff_year)
+            ->order_by('tb_club_settings_schedule.tcs_week_number','ASC')
+            ->get()->result();
+            
 
-            $mpdf = new \Mpdf\Mpdf([
-                'default_font' => 'thsarabun', // ฟอนต์ภาษาไทย
-                'format' => 'A4' // แนวนอน
-            ]);
+            $data['GetStudent'] = $this->db->select('
+            tb_club_members.member_club_id,
+            tb_club_members.member_student_id,
+            tb_students.StudentClass,
+            tb_students.StudentCode,
+            CONCAT(tb_students.StudentPrefix,tb_students.StudentFirstName," ",tb_students.StudentLastName) AS FullnameStu,
+            tb_students.StudentNumber
+            ')->from('tb_club_members')
+            ->join('tb_students','tb_students.StudentID = tb_club_members.member_student_id')
+            ->where('tb_club_members.member_club_id',$data['CheckClub']->club_id)
+            ->order_by('StudentClass,StudentNumber','ASC')
+            ->get()->result();
 
-            // โหลด HTML จากไฟล์
-            $html = $this->load->view('teacher/Clubs/Report/ReportRecord.php',$data); // true จะส่งคืน HTML เป็นสตริง
+            $this->load->view('teacher/layout/header_teacher.php',$data);
+            $this->load->view('teacher/layout/navbar_teaher.php');
+            $html = $this->load->view('teacher/Clubs/Report/ReportRecord.php'); 
+            $this->load->view('teacher/layout/footer_teacher.php');
 
-            // เขียน HTML ลง PDF
-            //$mpdf->WriteHTML($html);
-
-            // ส่งออก PDF
-            //$mpdf->Output('attendance.pdf', 'I'); // ดาวน์โหลดไฟล์
+       
                 
     }
+
+    public function ClubReportRecordPDF(){
+        $path = (dirname(dirname(dirname(dirname(__FILE__))))); 
+        require $path . '/librarie_skj/mpdf/vendor/autoload.php';
+        $TeacherID = $this->session->userdata('login_id');
+        $ClubOnOff = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+        $data['title']  = "รายงานเวลาเรียน | ระบบงานชุมนุม";
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $data['teacher'] = $this->DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
+
+
+        $data['CheckClub'] = $this->db->select('
+        skjacth_academic.tb_clubs.club_id
+        ')
+        ->from('skjacth_academic.tb_clubs')
+        ->join('skjacth_personnel.tb_personnel',"FIND_IN_SET(skjacth_personnel.tb_personnel.pers_id, REPLACE(skjacth_academic.tb_clubs.club_faculty_advisor, '|', ','))> 0",'left')
+        ->where("FIND_IN_SET('$TeacherID', REPLACE(tb_clubs.club_faculty_advisor, '|', ',')) >",0)
+        ->group_by('skjacth_academic.tb_clubs.club_id')->get()->row();
+
+        $data['GetSchedule'] = $this->db->select('
+            tb_club_settings_schedule.tcs_start_date,
+            tb_club_recoed_activity.tcra_ma,
+            tb_club_recoed_activity.tcra_khad,
+            tb_club_recoed_activity.tcra_rapwy,
+            tb_club_recoed_activity.tcra_rakic,
+            tb_club_recoed_activity.tcra_kickrrm,
+            tb_club_recoed_activity.tcra_club_id,
+            tb_club_settings_schedule.tcs_academic_year,
+            tb_club_settings_schedule.tcs_week_number
+        ')
+        ->from('tb_club_settings_schedule')
+        ->join('tb_club_recoed_activity','tb_club_recoed_activity.trca_schedule_id = tb_club_settings_schedule.tcs_schedule_id','left')
+        ->where('tcs_academic_year',$ClubOnOff->c_onoff_year)
+        ->order_by('tb_club_settings_schedule.tcs_week_number','ASC')
+        ->get()->result();
+        
+
+        $data['GetStudent'] = $this->db->select('
+        tb_club_members.member_club_id,
+        tb_club_members.member_student_id,
+        tb_students.StudentClass,
+        tb_students.StudentCode,
+        CONCAT(tb_students.StudentPrefix,tb_students.StudentFirstName," ",tb_students.StudentLastName) AS FullnameStu,
+        tb_students.StudentNumber
+        ')->from('tb_club_members')
+        ->join('tb_students','tb_students.StudentID = tb_club_members.member_student_id')
+        ->where('tb_club_members.member_club_id',$data['CheckClub']->club_id)
+        ->order_by('StudentClass,StudentNumber','ASC')
+        ->get()->result();
+
+        //echo '<pre>';print_r($GetStudent);exit();
+
+        $mpdf = new \Mpdf\Mpdf([
+            'default_font' => 'thsarabun', // ฟอนต์ภาษาไทย
+            'format' => 'A4' // แนวนอน
+        ]);
+
+        // โหลด HTML จากไฟล์
+      
+        $html = $this->load->view('teacher/Clubs/Report/ReportRecordPDF.php',$data,true); // true จะส่งคืน HTML เป็นสตริง
+              
+
+        // เขียน HTML ลง PDF
+       $mpdf->WriteHTML($html);
+
+        // ส่งออก PDF
+        $mpdf->Output('attendance.pdf', 'I'); // ดาวน์โหลดไฟล์
+            
+}
 
 }
 

@@ -28,7 +28,7 @@
                             </h5>
                         </div>
                         <div>
-                            <button class="btn btn-warning ">พิมพ์รายชื่อ</button>
+                            <a href="<?=base_url('Clubs/Report/AttendanceActivity')?>" class="btn btn-warning ">สรุปเวลาเรียนกิจกรรม</a>
                         </div>
 
 

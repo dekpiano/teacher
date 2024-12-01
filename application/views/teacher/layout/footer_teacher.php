@@ -103,7 +103,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Clubs"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=4.2"></script>
+          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=4.4"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
           <?php endif; ?>

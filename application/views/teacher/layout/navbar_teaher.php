@@ -109,7 +109,7 @@
                 <ul id="Cluds"
                     class="collapse list-unstyled <?=$this->uri->segment(1) == 'Clubs' ? 'show' : '' ?>">
                     <li
-                        class="<?=$this->uri->segment(2) == 'Main' ? 'active' : '' ?>">
+                        class="<?=$this->uri->segment(1) == 'Clubs' ? 'active' : '' ?>">
                         <a class="Loader" href="<?=base_url('Clubs/Main');?>">ชุมนุม</a></li>
                     
                 </ul>
