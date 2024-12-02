@@ -2,7 +2,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 22px;
+    font-size: 24px;
 }
 
 th,
@@ -23,12 +23,11 @@ th {
 
 .subheader {
     text-align: center;
+    font-weight: bold;
 }
 
 .vertical-text {
-    writing-mode: vertical-lr;
-    /* หมุนข้อความแนวตั้ง */
-    transform: rotate(180deg);
+    text-rotate:90;
     /* หมุนกลับด้าน (หากต้องการให้อ่านจากล่างขึ้นบน) */
     text-align: center;
     white-space: nowrap;
@@ -39,13 +38,13 @@ th {
 
         <?php $ExYear =  explode('/',$GetSchedule[0]->tcs_academic_year); ?>
         <div class="subheader" style="font-size:22px;">บันทึกเวลาเรียน </div>
-        <div class="subheader" style="font-size:18px;">กิจกรรม คอมพิวเตอร์และหุ่นยนต์ ระดับชั้นมัธยมศึกษา ตอนปลาย</div>
+        <div class="subheader" style="font-size:18px;">กิจกรรมชุมนุม คอมพิวเตอร์และหุ่นยนต์ ระดับชั้นมัธยมศึกษา ตอนปลาย</div>
         <div class="subheader" style="font-size:18px;">เวลาเรียน 2 ชั่วโมง/สัปดาห์ รวมเวลาเรียน 40 ชั่วโมง</div>
      
 
             <table class="table" id="TbReportAttendanceActivity1">
                 <thead>
-                    <tr>
+                    <tr >
                         <th rowspan="3" class="vertical-text">เลขที่</th>
                         <th rowspan="3"> เลขประจำตัว</th>
                         <th rowspan="3" width="200">ชื่อ - นามสกุล</th>
@@ -62,16 +61,15 @@ th {
                         <?php endforeach; ?>
                         <th rowspan="2" class="vertical-text">มา</th>
                         <th rowspan="2" class="vertical-text">ขาด</th>
-                        <th rowspan="2" class="vertical-text">ลาป่วย</th>
-                        <th rowspan="2" class="vertical-text">ลากิจ</th>
-                        <th rowspan="2" class="vertical-text">กิจกรรม</th>
+                        <th rowspan="2" class="vertical-text">ลาป่วย/ลากิจ/กิจกรรม</th>                     
                         <th rowspan="2" class="vertical-text">รวม</th>
                         <th rowspan="2">%</th>
+                        <th rowspan="2" class="vertical-text">ผลการประเมิน (ผ/มผ)</th>
 
                     </tr>
                     <tr>
                         <?php foreach ($GetSchedule as $key => $v_GetSchedule) : ?>
-                        <th width="32"><?=$this->datethai->thai_date_short(strtotime($v_GetSchedule->tcs_start_date))?>
+                        <th width="32" class="vertical-text"><?=$this->datethai->thai_date_short_Full(strtotime($v_GetSchedule->tcs_start_date))?>
                         </th>
                         <?php endforeach; ?>
                     </tr>
@@ -96,7 +94,7 @@ th {
                 $Age = number_format((($countMa+$CountRapwy+$CountRakic+$CountKickrrm)/($ToTal == 0 ?"1":$ToTal))*100,2);
                 $ExMa = explode('|',$v_GetSchedule->tcra_ma);
                 if(in_array($v_GetStudent->member_student_id,$ExMa)){
-                    $Status = "ม";
+                    $Status = "/";
                     $countMa++;
                 }
                 $ExKhad = explode('|',$v_GetSchedule->tcra_khad);
@@ -126,11 +124,12 @@ th {
                         <?php endforeach; ?>
                         <td class="text-center ShowNumMa"><?=$countMa;?></td>
                         <td class="text-center ShowNumKhad"><?=$CountKhad;?></td>
-                        <td class="text-center ShowNumRapwy"><?=$CountRapwy;?></td>
-                        <td class="text-center ShowNumRakic"><?=$CountRakic;?></td>
-                        <td class="text-center ShowNumkickrrm"><?=$CountKickrrm;?></td>
+                        <td class="text-center ShowNumRapwy"><?=$CountRapwy+$CountRakic+$CountKickrrm;?></td>                     
                         <td class="text-center ShowNumToTal"><?=$ToTal?></td>
                         <td class="text-center ShowNumAverage"><?=$Age;?></td>
+                        <td>
+                            <?php if($Age >= 80){echo "ผ";}else{echo "มผ";} ?>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
 

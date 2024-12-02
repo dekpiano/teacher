@@ -341,11 +341,11 @@ var  $title = "ชุมนุม";
 
         $mpdf = new \Mpdf\Mpdf([
             'default_font' => 'thsarabun', // ฟอนต์ภาษาไทย
-            'format' => 'A4' // แนวนอน
+            'format' => 'A4',
+            'margin_top' => 5, // แนวนอน
         ]);
 
-        // โหลด HTML จากไฟล์
-      
+        // โหลด HTML จากไฟล์\
         $html = $this->load->view('teacher/Clubs/Report/ReportRecordPDF.php',$data,true); // true จะส่งคืน HTML เป็นสตริง
               
 
@@ -355,6 +355,18 @@ var  $title = "ชุมนุม";
         // ส่งออก PDF
         $mpdf->Output('attendance.pdf', 'I'); // ดาวน์โหลดไฟล์
             
+}
+
+//------------------------------ กำหนดการจัดกิจกรรมการเรียนรู้ ---------------------
+public function ClubSetLearnActivity(){
+    $activity_imploded = implode('|',$this->input->post('activity'));
+    $hours_imploded = implode('|',$this->input->post('hours'));
+        
+        $data = array('act_club_id' => $this->input->post('ClubId'),
+                    'act_name' => strpos($activity_imploded, '|') === false ?"$activity_imploded":$activity_imploded,
+                    'act_number_hours' =>  strpos($hours_imploded, '|') === false ?"$hours_imploded":$hours_imploded);
+    $Add = $this->db->insert('tb_club_activities',$data);
+    print_r($Add);
 }
 
 }

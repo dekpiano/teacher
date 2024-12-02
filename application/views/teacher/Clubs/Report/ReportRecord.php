@@ -70,12 +70,17 @@ thead tr:nth-child(3) th {
 
     <div class="container-fluid">
         <div class="crad">
-            <div class="card-body">
+            <div class="card-body d-flex justify-content-between">
                 <?php $ExYear =  explode('/',$GetSchedule[0]->tcs_academic_year); ?>
-                <div class="subheader" style="font-size:18px;">กิจกรรม คอมพิวเตอร์และหุ่นยนต์ ระดับชั้นมัธยมศึกษา
-                    ตอนปลาย
+                <div class="h1">รายงานการบันทึกเวลาเรียน ชุมนุมคอมพิวเตอร์และหุ่นยนต์ ระดับชั้นมัธยมศึกษา
+                    ตอนปลาย <br>
+                    เวลาเรียน 2 ชั่วโมง/สัปดาห์ รวมเวลาเรียน 40 ชั่วโมง
                 </div>
-                <div class="subheader" style="font-size:18px;">เวลาเรียน 2 ชั่วโมง/สัปดาห์ รวมเวลาเรียน 40 ชั่วโมง</div>
+                <div class="subheader">
+                <a target="_blank" href="<?=base_url('Clubs/Report/AttendanceActivityPDF')?>" class="btn btn-info"><i class="bi bi-printer-fill"></i>
+                พิมพ์รายงาน PDF</a>
+                </div>
+                
             </div>
         </div>
 

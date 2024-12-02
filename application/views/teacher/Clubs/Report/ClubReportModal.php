@@ -109,7 +109,7 @@
                                         <p>รายละเอียด</p>
                                         <h4>ข้อมูลเวลาเรียน</h4>
                                         <div class="actions">
-                                            <a href="#" class="btn btn-light w-100"><i class="bi bi-printer-fill"></i>
+                                            <a target="_blank" href="<?=base_url('Clubs/Report/AttendanceActivityPDF')?>" class="btn btn-light w-100"><i class="bi bi-printer-fill"></i>
                                                 PDF</a>
                                         </div>
                                     </div>

@@ -98,6 +98,7 @@ $route['Register/ReportLearnRepeat'] = "ConTeacherRegister/ReportLearnRepeat";
 
 $route['Clubs/Main'] = "ConTeacherClubs/ClubsMain";
 $route['Clubs/Report/AttendanceActivity'] = "ConTeacherClubs/ClubReportRecord";
+$route['Clubs/Report/AttendanceActivityPDF'] = "ConTeacherClubs/ClubReportRecordPDF";
 
 
 $route['SupStd/Main'] = "ConTeacherStudentSupport/SupStdMain";

@@ -306,3 +306,74 @@ function CheckStatusInTableAttendanceActivity(){
     
 }
 CheckStatusInTableAttendanceActivity();
+
+
+//--------------------------- กำหนดการจัดกิจกรรมการเรียนรู้ ----------------------------
+$(document).on('click', '.ModalClubSetLearnActivity', function() {
+    $('#ModalClubSetLearnActivity').modal("show");
+    const clubid = $(".ModalClubSetLearnActivity").data('clubid');
+    $('#ClubId').val(clubid);
+});
+// เพิ่มฟอร์มแต่ละข้อ
+$(document).on("click",".addRow",function (e) {
+    e.preventDefault();
+    
+    let rowCount = $("#activityTable tbody tr").length + 1; // นับจำนวนแถวปัจจุบัน
+    let newRow = `
+        <tr> 
+            <td class="text-center">${rowCount} </td>
+            <td><input type="text" class="form-control text-center" name="activity[]" placeholder="กรอกข้อมูลกิจกรรม"></td>
+            <td><input type="text" class="form-control text-center" name="hours[]" placeholder="เวลา/ชั่วโมง"></td>
+            <td>
+                <button type="button" class="btn btn-danger remove-row">ลบ</button>
+            </td>
+        </tr>
+    `;
+
+    $("#activityTable tbody").append(newRow); // เพิ่มแถวใหม่
+    
+});
+// ลบแถว
+$(document).on("click", ".remove-row", function () {
+    let currentRow = $(this).closest("tr"); // แถวปัจจุบัน
+    let prevRow = currentRow.prev(); // แถวก่อนหน้า
+
+    // ลบแถวปัจจุบัน
+    currentRow.remove();
+
+    // แสดงปุ่ม "เพิ่มกิจกรรม" ในแถวก่อนหน้า (ถ้ามี)
+    prevRow.find(".add-row").show();
+
+    // อัปเดตลำดับแถวใหม่
+    $("#activityTable tbody tr").each(function (index) {
+        $(this).find("td:first").text(index + 1);
+    });
+});
+
+$(document).on("submit","#FormSetLearnActivity",function (e) {
+    e.preventDefault();
+    
+    $.ajax({
+        url: '../ConTeacherClubs/ClubSetLearnActivity', 
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType:'json',
+        success: function(response) {
+           console.log(response);
+            if(response === 1){
+                Swal.fire({
+                    title: "แจ้งเตือน!",
+                    text: "กำหนดการจัดกิจกรรมการเรียนรู้ สำเร็จ!",
+                    icon: "success"
+                  });
+                  
+            }else{
+                console.log(response);
+            }
+            
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});

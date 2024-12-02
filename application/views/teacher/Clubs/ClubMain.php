@@ -189,9 +189,12 @@
             </div>
         </div>
         <div class="col-md-3">
-
-            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRecordActivity" data-clubid="<?=$CheckClub->club_id?>">
+        <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubSetLearnActivity" data-clubid="<?=$CheckClub->club_id?>">
                 <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
+                <div class="text"><strong>กำหนดกิจกรรม</strong></div>
+            </div>
+            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRecordActivity" data-clubid="<?=$CheckClub->club_id?>">
+                <div class="icon bg-red"><i class="bi bi-floppy-fill"></i></div>
                 <div class="text"><strong>บันทึกเวลาเรียน</strong></div>
             </div>
             <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRegister" data-clubid="<?=$CheckClub->club_id?>">
@@ -199,7 +202,7 @@
                 <div class="text"><strong>ข้อมูลของชุมนุม</strong></div>
             </div>
             <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubReport">
-                <div class="icon bg-orange"><i class="fa fa-paper-plane-o"></i></div>
+                <div class="icon bg-orange"><i class="bi bi-printer-fill"></i></div>
                 <div class="text"><strong>พิมพ์เอกสาร</strong></div>
             </div>
 
@@ -211,6 +214,7 @@
 
 
 <!-- //----  Modal ต่าง ๆ -->
- <?php $this->load->view('teacher/Clubs/ClubRegisterModal.php') ?>
- <?php $this->load->view('teacher/Clubs/ClubModalRecordActivity.php') ?>
- <?php $this->load->view('teacher/Clubs/ClubReportModal.php') ?>
+ <?php $this->load->view('teacher/Clubs/Register/ClubRegisterModal.php') ?>
+ <?php $this->load->view('teacher/Clubs/Record/ClubModalRecordActivity.php') ?>
+ <?php $this->load->view('teacher/Clubs/Report/ClubReportModal.php') ?>
+ <?php $this->load->view('teacher/Clubs/SetLearnActivity/ClubSetLearnActivityModal.php') ?>
