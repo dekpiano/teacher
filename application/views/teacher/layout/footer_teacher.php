@@ -103,7 +103,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Clubs"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=4.8"></script>
+          <script src="<?=base_url()?>assets/js/teacher/JsClub.js?v=5.1"></script>
           <?php endif; ?>
 
           </body>

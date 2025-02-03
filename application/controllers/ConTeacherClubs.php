@@ -361,12 +361,35 @@ var  $title = "ชุมนุม";
 public function ClubSetLearnActivity(){
     $activity_imploded = implode('|',$this->input->post('activity'));
     $hours_imploded = implode('|',$this->input->post('hours'));
+
+    $CheckClub = $this->db->where('act_club_id',$this->input->post('ClubId'))
+    ->get('tb_club_activities')->num_rows();
+            
+
+        if($CheckClub > 0){
+            $data = array(
+            'act_name' => strpos($activity_imploded, '|') === false ?"$activity_imploded":$activity_imploded,
+            'act_number_hours' =>  strpos($hours_imploded, '|') === false ?"$hours_imploded":$hours_imploded);
+            $this->db->where('act_club_id',$this->input->post('ClubId'));
+            $Add = $this->db->update('tb_club_activities',$data);
+
+        }else{
+            $data = array('act_club_id' => $this->input->post('ClubId'),
+            'act_name' => strpos($activity_imploded, '|') === false ?"$activity_imploded":$activity_imploded,
+            'act_number_hours' =>  strpos($hours_imploded, '|') === false ?"$hours_imploded":$hours_imploded);
+            $Add = $this->db->insert('tb_club_activities',$data);
+        }
         
-        $data = array('act_club_id' => $this->input->post('ClubId'),
-                    'act_name' => strpos($activity_imploded, '|') === false ?"$activity_imploded":$activity_imploded,
-                    'act_number_hours' =>  strpos($hours_imploded, '|') === false ?"$hours_imploded":$hours_imploded);
-    $Add = $this->db->insert('tb_club_activities',$data);
     print_r($Add);
+}
+
+public function ClubEditRecodeActivity($CludID){
+
+    $this->db->select('act_id,act_name,act_number_hours');
+    $this->db->where('act_club_id',$CludID);
+    $query = $this->db->get('tb_club_activities');
+
+    echo json_encode($query->result_array()); 
 }
 
 }

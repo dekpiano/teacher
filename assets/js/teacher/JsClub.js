@@ -313,6 +313,43 @@ $(document).on('click', '.ModalClubSetLearnActivity', function() {
     $('#ModalClubSetLearnActivity').modal("show");
     const clubid = $(".ModalClubSetLearnActivity").data('clubid');
     $('#ClubId').val(clubid);
+
+    $.ajax({
+        url: '../ConTeacherClubs/ClubEditRecodeActivity/'+clubid, // URL ที่เรียกไปยัง Controller
+        method: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            $('#activityTable tbody').empty(); // ล้างข้อมูลเก่าก่อน
+            let rowCount = 0;
+            let row = '';
+            response.forEach(function (item) {
+                rowCount++;
+                const names = item.act_name.split('|'); // แยกข้อมูลชื่อกิจกรรม
+                const hours = item.act_number_hours.split('|'); // แยกข้อมูลจำนวนชั่วโมง
+                const length = Math.max(names.length, hours.length);
+
+               
+                for (let i = 0; i < length; i++) {
+                    const name = names[i] ? names[i] : '-'; // ใช้ '-' ถ้าไม่มีข้อมูล
+                    const hour = hours[i] ? hours[i] : '-'; // ใช้ '-' ถ้าไม่มีข้อมูล
+                    console.log(name);
+                 row += `
+                    <tr>
+                        <td class="text-center">${i+1}</td>
+                        <td><input type="text" class="form-control" name="activity[]" value="${name}" placeholder="กรอกข้อมูลกิจกรรม"></td>
+                        <td style="justify-items: center"><input type="text" class="form-control text-center" style="width:50px;" name="hours[]" value="${hour}" placeholder="เวลา/ชั่วโมง"></td>
+                        <td>
+                            <button type="button" class="btn btn-sm  btn-danger remove-row"><i class="bi bi-trash-fill"></i></button>
+                        </td>
+                    </tr>
+                `;
+                }
+
+                $('#activityTable tbody').append(row); // เพิ่มแถวใหม่
+            });
+        }
+    });
+
 });
 // เพิ่มฟอร์มแต่ละข้อ
 $(document).on("click",".addRow",function (e) {
@@ -322,10 +359,10 @@ $(document).on("click",".addRow",function (e) {
     let newRow = `
         <tr> 
             <td class="text-center">${rowCount} </td>
-            <td><input type="text" class="form-control text-center" name="activity[]" placeholder="กรอกข้อมูลกิจกรรม"></td>
-            <td><input type="text" class="form-control text-center" name="hours[]" placeholder="เวลา/ชั่วโมง"></td>
+            <td><input type="text" class="form-control" name="activity[]" placeholder="กรอกข้อมูลกิจกรรม"></td>
+            <td style="justify-items: center"><input type="text" class="form-control text-center" style="width:50px;" name="hours[]" placeholder="เวลา/ชั่วโมง"></td>
             <td>
-                <button type="button" class="btn btn-danger remove-row">ลบ</button>
+                <button type="button" class="btn btn-sm btn-danger remove-row"><i class="bi bi-trash-fill"></i></button>
             </td>
         </tr>
     `;
@@ -376,4 +413,13 @@ $(document).on("submit","#FormSetLearnActivity",function (e) {
             console.log(jqXHR.responseText);
         }
     });
+});
+
+//--------------------------- กำหนดวัตุประสงค์กิจกรรม----------------------------
+$(document).on('click', '.ModalClubSetObjective', function() {
+    $('#ModalClubSetObjective').modal("show");
+    const clubid = $(".ModalClubSetObjective").data('clubid');
+    $('#ClubId').val(clubid);
+
+
 });

@@ -28,7 +28,7 @@
                             </h5>
                         </div>
                         <div>
-                            <a href="<?=base_url('Clubs/Report/AttendanceActivity')?>" class="btn btn-warning ">สรุปเวลาเรียนกิจกรรม</a>
+                            <a href="<?=base_url('Clubs/Report/AttendanceActivity')?>" class="btn btn-warning "><i class="bi bi-journal-text"></i> สรุปเวลาเรียนกิจกรรม</a>
                         </div>
 
 

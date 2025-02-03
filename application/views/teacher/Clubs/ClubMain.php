@@ -53,9 +53,9 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
-  }
+}
 
-  .cardDek::before {
+.cardDek::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -65,22 +65,22 @@
     background: #796AEE;
     transition: width 0.3s ease, left 0.3s ease;
     border-radius: 2px;
-  }
+}
 
-  .cardDek:hover {
+.cardDek:hover {
     transform: translateY(-5px);
     border-color: #796AEE;
-  }
+}
 
-  .cardDek:hover::before {
+.cardDek:hover::before {
     width: 100%;
     left: 0;
-  }
+}
 
-  .cardDek h3 {
+.cardDek h3 {
     margin: 0;
     color: #333;
-  }
+}
 </style>
 <header class="page-header">
     <div class="container-fluid">
@@ -89,21 +89,21 @@
 </header>
 <!-- Dashboard Counts Section-->
 <section class="no-padding-bottom p-4">
-    
-<?php $checkOnoff =  $ClubOnOff->c_onoff_regisend > date('Y-m-d H:i:s') ?"success":"red" ?>
-                <?php $checkOnoffThai =  $ClubOnOff->c_onoff_regisend > date('Y-m-d H:i:s') ?"เปิด":"ปิด" ?>
-                <?php $ExYear = explode('/', $ClubOnOff->c_onoff_year);?>
-                <div class="callout callout-violet">
-                        <p>
-                        <h1>ชุมนุม <?=$CheckClub->club_name;?> ยินดีต้อนรับ ... </h1>
-                        </p>
-                        ครูที่ปรึกษาชุมนุม <?=$CheckClub->advisors?></h3>
-                    </div>
+
+    <?php $checkOnoff =  $ClubOnOff->c_onoff_regisend > date('Y-m-d H:i:s') ?"success":"red" ?>
+    <?php $checkOnoffThai =  $ClubOnOff->c_onoff_regisend > date('Y-m-d H:i:s') ?"เปิด":"ปิด" ?>
+    <?php $ExYear = explode('/', $ClubOnOff->c_onoff_year);?>
+    <div class="callout callout-violet">
+        <p>
+        <h1>ชุมนุม <?=$CheckClub->club_name;?> ยินดีต้อนรับ ... </h1>
+        </p>
+        ครูที่ปรึกษาชุมนุม <?=$CheckClub->advisors?></h3>
+    </div>
     <div class="row">
         <div class="col-md-9">
             <div class="">
                 <div class="articles ">
-                   
+
 
                     <div class="card mb-0">
                         <div class="card-header d-flex align-items-center bg-<?=$checkOnoff;?> text-white">
@@ -189,15 +189,23 @@
             </div>
         </div>
         <div class="col-md-3">
-        <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubSetLearnActivity" data-clubid="<?=$CheckClub->club_id?>">
+            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubSetLearnActivity"
+                data-clubid="<?=$CheckClub->club_id?>">
                 <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
                 <div class="text"><strong>กำหนดกิจกรรม</strong></div>
             </div>
-            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRecordActivity" data-clubid="<?=$CheckClub->club_id?>">
+            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubSetObjective"
+                data-clubid="<?=$CheckClub->club_id?>">
+                <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
+                <div class="text"><strong>กำหนดวัตถุประสงค์</strong></div>
+            </div>
+            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRecordActivity"
+                data-clubid="<?=$CheckClub->club_id?>">
                 <div class="icon bg-red"><i class="bi bi-floppy-fill"></i></div>
                 <div class="text"><strong>บันทึกเวลาเรียน</strong></div>
             </div>
-            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRegister" data-clubid="<?=$CheckClub->club_id?>">
+            <div class="statistic cardDek d-flex align-items-center bg-white has-shadow ModalClubRegister"
+                data-clubid="<?=$CheckClub->club_id?>">
                 <div class="icon bg-green"><i class="fa fa-calendar-o"></i></div>
                 <div class="text"><strong>ข้อมูลของชุมนุม</strong></div>
             </div>
@@ -214,7 +222,8 @@
 
 
 <!-- //----  Modal ต่าง ๆ -->
- <?php $this->load->view('teacher/Clubs/Register/ClubRegisterModal.php') ?>
- <?php $this->load->view('teacher/Clubs/Record/ClubModalRecordActivity.php') ?>
- <?php $this->load->view('teacher/Clubs/Report/ClubReportModal.php') ?>
- <?php $this->load->view('teacher/Clubs/SetLearnActivity/ClubSetLearnActivityModal.php') ?>
+<?php $this->load->view('teacher/Clubs/Register/ClubRegisterModal.php') ?>
+<?php $this->load->view('teacher/Clubs/Record/ClubModalRecordActivity.php') ?>
+<?php $this->load->view('teacher/Clubs/Report/ClubReportModal.php') ?>
+<?php $this->load->view('teacher/Clubs/SetLearnActivity/ClubSetLearnActivityModal.php') ?>
+<?php $this->load->view('teacher/Clubs/SetObjective/ClubSetObjectiveModal.php') ?>

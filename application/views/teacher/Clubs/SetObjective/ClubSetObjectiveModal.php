@@ -70,19 +70,19 @@
 }
 </style>
 <!-- Modal -->
-<div class="modal fade" id="ModalClubSetLearnActivity" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="ModalClubSetObjective" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">กำหนดการจัดกิจกรรมการเรียนรู้</h5>
+                <h5 class="modal-title" id="exampleModalLabel">กำหนดวัตถุประสงค์</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form method="post" id="FormSetLearnActivity">
+                <form method="post" id="FormSetObjective">
                 <input type="hidden" name="ClubId" id="ClubId" value="">
                     <table class="w-100" id="activityTable">
                         <thead>
@@ -98,7 +98,7 @@
                                 <td class="text-center">1</td>
                                 <td>
                                     <input type="text" class="form-control text-center" name="activity[]"
-                                        placeholder="กรอกข้อมูลกิจกรรม">
+                                        placeholder="กรอกข้อมูลวัตถุประสงค์">
                                 </td>
                                 <td width="30">
                                     <input type="text" class="form-control text-center" name="hours[]"
@@ -111,8 +111,8 @@
 
                     </table>
                     <div class="mt-3 d-flex justify-content-between">
-                        <button class="btn btn-secondary addRow" id="addRow"><i class="bi bi-plus-square"></i> เพิ่มกิจกรรม</button>
-                        <button class="btn btn-primary" type="submit" id="SubAddSetLearnActivity"> <i class="bi bi-floppy-fill"></i> บันทึกกิจกรรม</button>
+                        <button class="btn btn-secondary addRow" id="addRow"><i class="bi bi-plus-square"></i> เพิ่มวัตถุประสงค์</button>
+                        <button class="btn btn-primary" type="submit" id="SubAddSetObjective"> <i class="bi bi-floppy-fill"></i> บันทึกวัตถุประสงค์</button>
                     </div>
 
                 </form>
