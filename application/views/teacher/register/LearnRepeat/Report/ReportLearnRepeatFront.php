@@ -271,10 +271,9 @@ $avg3_up = $avg3 + $avg35 + $avg4;
                 </p>
                 <p>
                     <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-                    (นางสาวอร่าม วัฒนะ)<br>
+                    (นายพงษ์ศักดิ์ เงินสันเทียะ)<br>
                 <div>
-                    <small>
-                    ผู้อำนวยการกองการศึกษา ศาสนาและวัฒนธรรม รักษาการในตำแหน่ง<br>
+                    <small>                    
                     ผู้อำนวยการสถานศึกษา โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์
                     </small>
                     

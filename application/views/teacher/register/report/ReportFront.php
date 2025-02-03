@@ -289,9 +289,8 @@ $avgSubject = round(((($grade4*4)+($grade35*3.5)+($grade3*3)+($grade25*2.5)+($gr
                 </p>
                 <p>
                     <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-                    (นางสาวอร่าม วัฒนะ)<br>
+                    (นายพงษ์ศักดิ์ เงินสันเทียะ)<br>
                 <div>
-                    ผู้อำนวยการกองการศึกษา ศาสนาและวัฒนธรรม รักษาการในตำแหน่ง<br>
                     ผู้อำนวยการสถานศึกษา โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์
                 </div>
 
