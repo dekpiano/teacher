@@ -1,4 +1,7 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 1);
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ConTeacherRegister extends CI_Controller {
@@ -314,7 +317,7 @@ class ConTeacherRegister extends CI_Controller {
     }
 
     public function report_pt(){ 
-        $path = (dirname(dirname(dirname(dirname(__FILE__)))));
+        $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
         
         $live_mpdf = new \Mpdf\Mpdf(
@@ -680,7 +683,7 @@ class ConTeacherRegister extends CI_Controller {
     public function ReportLearnRepeat(){
         
       
-        $path = (dirname(dirname(dirname(dirname(__FILE__))))); 
+        $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
 		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
         
         $live_mpdf = new \Mpdf\Mpdf(
