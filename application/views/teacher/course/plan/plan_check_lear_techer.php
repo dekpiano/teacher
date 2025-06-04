@@ -120,7 +120,7 @@
                                     </small>
                                     <br>
                                     <small><b>หน.ง : </b>
-                                        <?php if($this->session->userdata('login_id') == 'pers_014'):?>
+                                        <?php if($this->session->userdata('login_id') == 'pers_051'):?>
                                         <select id="seplan_status2" name="seplan_status2"
                                             planId="<?=$v_plan->seplan_ID;?>"
                                             class="bgCC<?=$v_plan->seplan_ID;?>  seplan_status2 <?=$textColor2;?>">

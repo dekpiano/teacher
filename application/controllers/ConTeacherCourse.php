@@ -188,6 +188,7 @@ var  $title = "หน้าแรก";
 
             $data['techer'] = $this->DBPers->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_learning,pers_img')
                                     ->where('pers_learning',$idlear)
+                                    ->where('pers_status','กำลังใช้งาน')
                                     ->get('tb_personnel')->result();
           
         }
