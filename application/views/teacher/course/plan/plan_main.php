@@ -57,8 +57,8 @@
                 <select class="form-control w-auto" id="CheckYearSendPlan">
                     <?php 
                     $SelYear = array('2566/1','2566/2','2567/1','2567/2');
-                    foreach ($SelYear as $key => $v_SelYear) : ?>
-                    <option <?php echo ($Y == $v_SelYear ?"selected":"") ?> value="<?=$v_SelYear?>"><?=$v_SelYear?></option>
+                    foreach ($CheckYearPlan as $key => $v_SelYear) : ?>
+                    <option <?php echo ($Y == $v_SelYear->seplan_year.'/'.$v_SelYear->seplan_term ?"selected":"") ?> value="<?=$v_SelYear->seplan_year.'/'.$v_SelYear->seplan_term?>"><?=$v_SelYear->seplan_term.'/'.$v_SelYear->seplan_year?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

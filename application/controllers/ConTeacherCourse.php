@@ -36,7 +36,12 @@ var  $title = "หน้าแรก";
         ->where('seplan_year',$year)
         ->where('seplan_term',$term)
         ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
-       //echo "<pre>"; print_r($data['planNew']); exit();        
+
+        $data['CheckYearPlan'] = $this->db->select('seplan_year,seplan_term')
+                                        ->group_by('seplan_year')
+                                        ->group_by('seplan_term')
+                                        ->get('tb_send_plan')->result();
+       //cho "<pre>"; print_r($CheckYearPlan); exit();        
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_main.php');
