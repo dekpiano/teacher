@@ -174,6 +174,37 @@ $('#FromUpdateTeacher').submit(function(e) {
 ////////////---------------------------------------------
 $(document).on('submit', '.update_seplan', function(e) {
     e.preventDefault();
+
+    var fileInput = $('#seplan_file').get(0);
+
+    // Check if a file is selected
+    if (fileInput.files.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'กรุณาเลือกไฟล์',
+            text: 'คุณต้องเลือกไฟล์ก่อนทำการบันทึก',
+            confirmButtonText: 'ตกลง'
+        });
+        return false; // Stop the function
+    }
+
+    var fileName = fileInput.files[0].name;
+    var allowedExtensions = /(\.doc|\.docx|\.pdf)$/i; // Regex for checking extensions
+
+    // Check for allowed file types
+    if (!allowedExtensions.exec(fileName)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'ไฟล์ไม่ถูกต้อง',
+            text: 'กรุณาอัปโหลดไฟล์ที่มีนามสกุล .pdf, .doc หรือ .docx เท่านั้น',
+            confirmButtonText: 'ตกลง'
+        });
+        // Clear the file input
+        $('#seplan_file').val('');
+        return false;
+    }
+
+
     $.ajax({
         url: '../../../ConTeacherCourse/UpdatePlan',
         type: "post",
@@ -205,10 +236,10 @@ $(document).on('submit', '.update_seplan', function(e) {
 });
 
 $(document).on('click', '.Model_update', function() {
-    $('#seplan_ID').val($(this).attr('seplanID'));
-    $('#seplan_coursecode').val($(this).attr('seplanCoursecode'));
-    $('#seplan_typeplan').val($(this).attr('seplanTypeplan'));
-    $('#seplan_sendcomment').html($(this).attr('seplan_sendcomment'));
+    $('#seplan_ID').val($(this).data('seplan-id'));
+    $('#seplan_coursecode').val($(this).data('seplan-coursecode'));
+    $('#seplan_typeplan').val($(this).data('seplan-typeplan'));
+    $('#seplan_sendcomment').val($(this).data('seplan-sendcomment'));
 
 });
 

@@ -419,7 +419,7 @@ var  $title = "หน้าแรก";
             $NewFile = $seplan_coursecode."_".$seplan_namesubject."_".$seplan_typeplan."_".$plan->seplan_usersend;       
 
             $config['upload_path']= "uploads/academic/course/plan/".$folder."/".$seplan_namesubject."/";
-            $config['allowed_types'] = '*';
+            $config['allowed_types'] = 'pdf|doc|docx';
             $config['remove_spaces'] = TRUE;
             $new_name = $NewFile;
             $config['file_name'] = $new_name;
