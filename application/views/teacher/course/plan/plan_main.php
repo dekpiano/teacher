@@ -56,7 +56,6 @@
                 <div class=" align-self-center" style="width: 150px;">เลือกปีการศึกษา</div>
                 <select class="form-control w-auto" id="CheckYearSendPlan">
                     <?php 
-                    $SelYear = array('2566/1','2566/2','2567/1','2567/2');
                     foreach ($CheckYearPlan as $key => $v_SelYear) : ?>
                     <option <?php echo ($Y == $v_SelYear->seplan_year.'/'.$v_SelYear->seplan_term ?"selected":"") ?> value="<?=$v_SelYear->seplan_year.'/'.$v_SelYear->seplan_term?>"><?=$v_SelYear->seplan_term.'/'.$v_SelYear->seplan_year?></option>
                     <?php endforeach; ?>
@@ -79,7 +78,7 @@
                                 <th scope="col">แบบตรวจแผน</th>
                                 <th scope="col">บันทึกตรวจใช้แผน</th>
                                 <th scope="col">โครงการสอน</th>
-                                <th scope="col">แผนการสอนหน้าเดียว</th>
+                                <th scope="col">แผนการสอน</th>
                                 <th scope="col">บันทึกหลังสอน</th>
                             </tr>
                         </thead>

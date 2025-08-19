@@ -111,32 +111,61 @@ $(document).on('keyup', '.study_time', function() {
 $(document).on('submit', '.form_set_score', function(e) {
     e.preventDefault();
 
-    $('.btn').addClass('disabled')
+    var form = $(this);
+    var submitButton = form.find('button[type="submit"]');
+    var originalButtonText = submitButton.html();
+    var sum = parseFloat($('#sum').val());
+
+    if (sum !== 100) {
+        Swal.fire({
+            icon: 'error',
+            title: 'คะแนนรวมไม่เท่ากับ 100',
+            text: 'กรุณาตรวจสอบคะแนนที่ตั้งค่าไว้ให้รวมกันได้ 100 คะแนนพอดี',
+        });
+        return; // Stop the function
+    }
+
+    // Disable the button and show a loading indicator
+    submitButton.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> กำลังบันทึก...');
+
     $.ajax({
-        url: '../../../../../ConTeacherRegister/setting_score/' + $(this).attr('id'),
+        url: '../../../../../ConTeacherRegister/setting_score/' + form.attr('id'),
         type: "post",
-        data: $(this).serialize(), //this is formData
+        data: form.serialize(),
         success: function(data) {
             console.log(data);
             if (data > 0) {
-                $('#editteacher').modal('hide');
+                $('#myModal').modal('hide');
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'บันทึกคะแนนสำเร็จ',
+                    title: 'ตั้งค่าคะแนนสำเร็จ',
                     showConfirmButton: false,
                     timer: 2000
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {
                         window.location.reload();
                     }
-                })
+                });
             } else {
-                window.location.reload();
+                 Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'ไม่สามารถบันทึกการตั้งค่าคะแนนได้',
+                });
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus);
+            console.log(textStatus, errorThrown);
+            Swal.fire({
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ',
+                text: textStatus,
+            });
+        },
+        complete: function() {
+            // Re-enable the button and restore its original text
+            submitButton.prop('disabled', false).html(originalButtonText);
         }
     });
 });
@@ -257,10 +286,17 @@ $(document).on('click', '#chcek_score', function() {
 $(document).on('submit', '.form_score', function(e) {
     e.preventDefault();
 
+    var form = $(this);
+    var submitButton = form.find('button[type="submit"]');
+    var originalButtonText = submitButton.html();
+
+    // Disable the button and show a loading indicator
+    submitButton.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> กำลังบันทึก...');
+
     $.ajax({
         url: '../../../../../ConTeacherRegister/insert_score',
         type: "post",
-        data: $(this).serialize(), //this is formData
+        data: form.serialize(),
         success: function(data) {
             console.log(data);
             if (data > 0) {
@@ -269,18 +305,32 @@ $(document).on('submit', '.form_score', function(e) {
                     icon: 'success',
                     title: 'บันทึกคะแนนสำเร็จ',
                     showConfirmButton: false,
-                    timer: 2000
-                }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        //window.location.reload();
-                    }
-                })
+                    timer: 1500
+                });
             } else {
-                // window.location.reload();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาดในการบันทึก',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseText);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ',
+                text: textStatus,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        },
+        complete: function() {
+            // Re-enable the button and restore its original text
+            submitButton.prop('disabled', false).html(originalButtonText);
         }
     });
 });
