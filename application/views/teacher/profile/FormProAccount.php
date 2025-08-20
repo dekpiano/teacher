@@ -39,7 +39,7 @@
                                     ?>
                                             <input autocomplete="off" type="text" class="form-control "
                                                 id="pers_britday" name="pers_britday" placeholder="" value="<?=$d?>"
-                                                required="" data-inputmask="'mask': '99-99-9999'">
+                                                required="">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="pers_username">Email</label>

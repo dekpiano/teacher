@@ -1,7 +1,5 @@
 $(document).on('keydown', '.KeyEnter', function(e) {
     var KeyEn = $(this).index('input.KeyEnter');
-    // console.log(KeyEn);
-    // console.log("Key" + e.keyCode);
     if (e.keyCode == 37) {
         KeyEn = KeyEn - 1;
         $('input.KeyEnter:eq(' + KeyEn + ')').focus();
@@ -21,9 +19,7 @@ $(document).on('keydown', '.KeyEnter', function(e) {
 });
 
 $(document).on('click', '.clickLoad', function() {
-    // disable button
     $(this).prop("disabled", true);
-    // add spinner to button
     $(this).html(
         '<i class="fa fa-circle-o-notch fa-spin"></i> loading...'
     );
@@ -36,19 +32,12 @@ $(".score").each(function() {
 });
 
 function calculateSum() {
-
     var sum = 0;
-
-    //iterate through each textboxes and add the values
     $(".score").each(function() {
-
-        //add only if the value is number
         if (!isNaN(this.value) && this.value.length != 0) {
             sum += parseFloat(this.value);
         }
-
     });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
     $("#sum").val(sum.toFixed(2));
     if (sum == 100) {
         $("#sum").last().addClass("is-valid");
@@ -60,80 +49,29 @@ function calculateSum() {
 }
 
 $(document).on('change', '#check_room', function() {
-
     window.location.href = $(this).val();
 });
 
-
-$(document).on('keyup', '.check_score', function() {
-    var num = parseInt($(this).val());
-    var key = parseInt($(this).attr('check-score-key'));
-    // console.log($(this).val());
-    //   console.log($(this).attr('check-score-key'));
-
-    if (num > key) {
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'คุณกรอกคะแนนเกินคะแนนเก็บ<br>กรุณากรอกคะแนนใหม่',
-            showConfirmButton: false,
-            timer: 3000
-        }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer) {
-                //window.location.reload();
-                $(this).val("0");
-            }
-        })
-    }
-});
-
-$(document).on('keyup', '.study_time', function() {
-    var num = parseInt($(this).val());
-    var key = parseInt($(this).attr('check-time'));
-
-    if (num > key) {
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'คุณกรอกเวลาเรียนเกินกำหนด ' + key + 'ชั่วโมง <br>กรุณากรอกเวลาเรียนใหม่',
-            showConfirmButton: false,
-            timer: 3000
-        }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer) {
-                //window.location.reload();
-                $(this).val("0");
-            }
-        })
-    }
-});
-
-
 $(document).on('submit', '.form_set_score', function(e) {
     e.preventDefault();
-
     var form = $(this);
     var submitButton = form.find('button[type="submit"]');
     var originalButtonText = submitButton.html();
     var sum = parseFloat($('#sum').val());
-
     if (sum !== 100) {
         Swal.fire({
             icon: 'error',
             title: 'คะแนนรวมไม่เท่ากับ 100',
             text: 'กรุณาตรวจสอบคะแนนที่ตั้งค่าไว้ให้รวมกันได้ 100 คะแนนพอดี',
         });
-        return; // Stop the function
+        return;
     }
-
-    // Disable the button and show a loading indicator
     submitButton.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> กำลังบันทึก...');
-
     $.ajax({
         url: '../../../../../ConTeacherRegister/setting_score/' + form.attr('id'),
         type: "post",
         data: form.serialize(),
         success: function(data) {
-            console.log(data);
             if (data > 0) {
                 $('#myModal').modal('hide');
                 Swal.fire({
@@ -156,7 +94,6 @@ $(document).on('submit', '.form_set_score', function(e) {
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
             Swal.fire({
                 icon: 'error',
                 title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ',
@@ -164,24 +101,20 @@ $(document).on('submit', '.form_set_score', function(e) {
             });
         },
         complete: function() {
-            // Re-enable the button and restore its original text
             submitButton.prop('disabled', false).html(originalButtonText);
         }
     });
 });
 
-
 $(".check_score").each(function() {
     $(this).keyup(function() {
         calculateTotal($(this).parent().index());
-        //console.log($(this).parent().index());
     });
 });
 
 $(".study_time").each(function() {
     $(this).keyup(function() {
         calculateTotal($(this).parent().index());
-        //console.log();
     });
 });
 
@@ -193,7 +126,6 @@ function calculateTotal(index) {
         }
     });
     $('#tb_score tbody tr td.totalCol:eq(' + index + ')').html(total);
-    // calculateSum();
     calculateRowSum();
 }
 
@@ -205,22 +137,17 @@ function Charactor($char) {
 function calculateRowSum() {
     var TimeNum = $('.study_time').attr('check-time');
     $('table tbody tr').each(function() {
-
         var sum = 0;
         var study_time;
         var Check_ro = 0;
         $(this).find('td').each(function() {
-
             if ($(this).find('.check_score').val() == "ร") {
                 Check_ro += 1;
             } else {
                 sum += parseInt($(this).find('.check_score').val()) || 0;
             }
         });
-
         study_time = $(this).find('.study_time').val()
-
-
         $(this).find('.subtot').html(sum);
         if (80 * TimeNum / 100 > study_time) {
             $(this).find('.grade').html('มส');
@@ -229,12 +156,10 @@ function calculateRowSum() {
         } else {
             $(this).find('.grade').html(check_grade(sum));
         }
-
     });
 }
 
 function check_grade(sum) {
-
     if ((sum > 100) || (sum < 0)) {
         var grade = "ไม่สามารถคิดเกรดได้ คะแนนเกิน";
     } else if ((sum >= 79.5) && (sum <= 100)) {
@@ -254,26 +179,18 @@ function check_grade(sum) {
     } else if (sum <= 49.4) {
         var grade = 0;
     }
-
-
-
     return grade;
 }
 calculateRowSum();
 
 $(document).on('click', '#chcek_score', function() {
-
-    //console.log($(this).attr('subject-id'));
-
     $.post("../../../../../ConTeacherRegister/edit_score", {
         subid: $(this).attr('subject-id')
     }, function(data, status) {
         if (data == 0) {
-            console.log(555);
             $(".form_set_score").attr('id', "form_insert_score");
         } else {
             $(".form_set_score").attr('id', "form_update_score");
-
             $('#before_middle_score').val(data[0].regscore_score);
             $('#test_midterm_score').val(data[1].regscore_score);
             $('#after_midterm_score').val(data[2].regscore_score);
@@ -285,20 +202,71 @@ $(document).on('click', '#chcek_score', function() {
 
 $(document).on('submit', '.form_score', function(e) {
     e.preventDefault();
-
     var form = $(this);
     var submitButton = form.find('button[type="submit"]');
     var originalButtonText = submitButton.html();
 
-    // Disable the button and show a loading indicator
-    submitButton.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> กำลังบันทึก...');
+    // --- START VALIDATION ---
+    var validationFailed = false;
+    form.find('tbody tr').each(function() {
+        var studentRow = $(this);
+        var studyTimeInput = studentRow.find('input[name="study_time[]"]');
+        var checkScoreInputs = studentRow.find('input[class*="check_score"]'); // Use class* to match check_score class
 
+        // Validate study_time
+        if (studyTimeInput.length > 0) {
+            var enteredStudyTime = parseInt(studyTimeInput.val(), 10);
+            var maxStudyTime = parseInt(studyTimeInput.attr('check-time'), 10);
+            if (!isNaN(enteredStudyTime) && enteredStudyTime > maxStudyTime) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เวลาเรียนที่กรอก (' + enteredStudyTime + ') เกินกว่าที่กำหนด (' + maxStudyTime + ')',
+                    text: 'กรุณาตรวจสอบข้อมูลในตาราง',
+                });
+                validationFailed = true;
+                return false; // Break out of .each() loop
+            }
+        }
+
+        // Validate check_score inputs
+        checkScoreInputs.each(function() {
+            var checkScoreInput = $(this);
+            var enteredScore = parseInt(checkScoreInput.val(), 10);
+            var maxScore = parseInt(checkScoreInput.attr('check-score-key'), 10);
+
+            // Allow "ร" character
+            if (checkScoreInput.val() === "ร") {
+                return true; // Continue to next input
+            }
+
+            if (!isNaN(enteredScore) && enteredScore > maxScore) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'คะแนนที่กรอก (' + enteredScore + ') เกินกว่าคะแนนเก็บ (' + maxScore + ')',
+                    text: 'กรุณาตรวจสอบข้อมูลในตาราง',
+                });
+                validationFailed = true;
+                return false; // Break out of .each() loop
+            }
+        });
+
+        if (validationFailed) {
+            return false; // Break out of outer .each() loop
+        }
+    });
+
+    if (validationFailed) {
+        submitButton.prop('disabled', false).html(originalButtonText); // Re-enable button
+        return; // Stop form submission
+    }
+    // --- END VALIDATION ---
+
+    submitButton.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> กำลังบันทึก...');
     $.ajax({
         url: '../../../../../ConTeacherRegister/insert_score',
         type: "post",
         data: form.serialize(),
         success: function(data) {
-            console.log(data);
             if (data > 0) {
                 Swal.fire({
                     position: 'top-end',
@@ -318,7 +286,6 @@ $(document).on('submit', '.form_score', function(e) {
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
@@ -329,7 +296,6 @@ $(document).on('submit', '.form_score', function(e) {
             });
         },
         complete: function() {
-            // Re-enable the button and restore its original text
             submitButton.prop('disabled', false).html(originalButtonText);
         }
     });
@@ -337,13 +303,11 @@ $(document).on('submit', '.form_score', function(e) {
 
 $(document).on('submit', '.form_score_repeat', function(e) {
     e.preventDefault();
-
     $.ajax({
         url: '../../../../../ConTeacherRegister/insert_score_repeat',
         type: "post",
-        data: $(this).serialize(), //this is formData
+        data: $(this).serialize(),
         success: function(data) {
-            console.log(data);
             if (data > 0) {
                 Swal.fire({
                     position: 'top-end',
@@ -366,23 +330,122 @@ $(document).on('submit', '.form_score_repeat', function(e) {
     });
 });
 
-
 $(document).on('click', '#chcek_report', function() {
-
     $("#report_RegisterYear").val($(this).attr('report-yaer'));
     $("#report_SubjectID").val($(this).attr('report-subject'));
-
     $('#select_print option').remove();
-
     $.post("../ConTeacherRegister/checkroom_report", {
         report_yaer: $(this).attr('report-yaer'),
         report_subject: $(this).attr('report-subject')
     }, function(data, status) {
-
         $.each(data, function(key, val) {
-            console.log(val.StudentClass);
             $('#select_print').append('<option value="' + val.StudentClass + '">' + val.StudentClass + '</option>');
         });
         $('#select_print').append('<option value="all">ทั้งหมด</option>');
     }, 'json');
 });
+
+// --- Auto-save functionality with Validation (Per-Field Debounce) ---
+// No global autosaveTimeout needed anymore
+// var autosaveTimeout; // This line is commented out or removed
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'bottom-end',
+  showConfirmButton: false,
+  timer: 2500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+});
+
+$(document).on('input', '.check_score, .study_time', function() {
+    var inputField = $(this);
+    var currentTimeout = inputField.data('autosaveTimeout'); // Get timeout specific to this field
+    clearTimeout(currentTimeout); // Clear this field's previous timeout
+
+    // --- VALIDATION ---
+    var enteredValue = parseInt(inputField.val(), 10);
+    var maxValue;
+    var errorMessage;
+
+    if (inputField.hasClass('check_score')) {
+        maxValue = parseInt(inputField.attr('check-score-key'), 10);
+        errorMessage = 'คะแนนที่กรอก (' + enteredValue + ') เกินกว่าคะแนนเก็บ (' + maxValue + ')';
+    } else if (inputField.hasClass('study_time')) {
+        maxValue = parseInt(inputField.attr('check-time'), 10);
+        errorMessage = 'เวลาเรียนที่กรอก (' + enteredValue + ') เกินกว่าที่กำหนด (' + maxValue + ')';
+    }
+
+    if (maxValue && !isNaN(enteredValue) && enteredValue > maxValue) {
+        Toast.fire({
+            icon: 'error',
+            title: errorMessage,
+            timer: 3000 // Longer for error
+        });
+        
+        // Revert to 0 as per new request
+        inputField.val('0'); 
+
+        setTimeout(function () {
+            inputField.focus().select();
+        }, 100); 
+        return; // Stop the autosave
+    }
+    // --- END VALIDATION ---
+
+    // --- AUTOSAVE ---
+    Toast.fire({
+        icon: 'info',
+        title: 'กำลังแก้ไข...',
+        timer: 1800
+    });
+
+    var studentRow = inputField.closest('tr'); // Use inputField directly
+    var newTimeout = setTimeout(function() { // Store this new timeout
+        var studentID = studentRow.find('input[name="StudentID[]"]').val();
+        var scores = studentRow.find('input[name^="' + studentID + '"]').map(function() {
+            return $(this).val();
+        }).get();
+        
+        var studentData = {
+            StudentID: studentID,
+            SubjectID: $('input[name="SubjectID"]').val(),
+            RegisterYear: $('input[name="RegisterYear"]').val(),
+            TimeNum: $('input[name="TimeNum"]').val(),
+            study_time: studentRow.find('input[name="study_time[]"]').val(),
+            scores: scores
+        };
+
+        $.ajax({
+            url: '../../../../../ConTeacherRegister/autosave_score',
+            type: 'POST',
+            data: studentData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'บันทึกข้อมูลเรียบร้อย'
+                    });
+                } else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'เกิดข้อผิดพลาด: ' + response.message
+                    });
+                }
+            },
+            error: function() {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ'
+                });
+            }
+        });
+    }, 1500); 
+
+    inputField.data('autosaveTimeout', newTimeout); // Store the new timeout ID on the field
+});
+

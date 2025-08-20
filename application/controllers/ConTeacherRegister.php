@@ -187,13 +187,11 @@ class ConTeacherRegister extends CI_Controller {
     public function insert_score(){ 
 
         $TimeNum = $this->input->post('TimeNum');
-        //print_r($this->input->post()); exit();
 
         foreach ($this->input->post('StudentID') as $num => $value) {
            
-            // print_r($this->input->post('SubjectCode'));
             $study_time = $this->input->post('study_time');
-            // print_r(); exit();
+            
             if((($TimeNum*80)/100) > $study_time[$num]){
                 $Grade = "มส";
             }else{
@@ -204,10 +202,92 @@ class ConTeacherRegister extends CI_Controller {
                 }
             }
             
+            // The unique key for the record
+            $key = array(
+                'StudentID' => $value,
+                'SubjectID' => $this->input->post('SubjectID'), 
+                'RegisterYear' => $this->input->post('RegisterYear')
+            );
 
-            $key = array('StudentID' => $value,'SubjectID' => $this->input->post('SubjectID'), 'RegisterYear' => $this->input->post('RegisterYear'));
-            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime' => date('Y-m-d H:i:s'));
-           echo $this->db->update('tb_register',$data,$key);
+            // The data to be saved
+            $data = array(
+                'Score100' => implode("|",$this->input->post($value)),
+                'Grade'  => $Grade,
+                'StudyTime' => $study_time[$num],
+                'Grade_UpdateTime' => date('Y-m-d H:i:s')
+            );
+
+            // Check if a record already exists
+            $this->db->where($key);
+            $query = $this->db->get('tb_register');
+
+            if ($query->num_rows() > 0) {
+                // If it exists, update it
+                $this->db->update('tb_register', $data, $key);
+            } else {
+                // If it doesn't exist, insert a new record
+                $this->db->insert('tb_register', array_merge($key, $data));
+            }
+        }
+        echo 1;
+    }
+
+    public function autosave_score() {
+        // Get data from POST request
+        $studentID = $this->input->post('StudentID');
+        $subjectID = $this->input->post('SubjectID');
+        $registerYear = $this->input->post('RegisterYear');
+        $study_time = $this->input->post('study_time');
+        $scores = $this->input->post('scores'); // Expecting an array of scores
+        $timeNum = $this->input->post('TimeNum');
+    
+        // Basic validation
+        if (empty($studentID) || empty($subjectID) || empty($registerYear)) {
+            echo json_encode(['status' => 'error', 'message' => 'Missing required identifiers.']);
+            return;
+        }
+    
+        // Grade calculation logic (same as in insert_score)
+        if ((($timeNum * 80) / 100) > $study_time) {
+            $grade = "มส";
+        } else {
+            if (is_array($scores) && in_array("ร", $scores)) {
+                $grade = "ร";
+            } else {
+                $grade = $this->check_grade(array_sum($scores));
+            }
+        }
+    
+        // The unique key for the record
+        $key = array(
+            'StudentID' => $studentID,
+            'SubjectID' => $subjectID,
+            'RegisterYear' => $registerYear
+        );
+    
+        // The data to be saved
+        $data = array(
+            'Score100' => implode("|", $scores),
+            'Grade' => $grade,
+            'StudyTime' => $study_time,
+            'Grade_UpdateTime' => date('Y-m-d H:i:s')
+        );
+    
+        // UPSERT logic
+        $this->db->where($key);
+        $query = $this->db->get('tb_register');
+    
+        if ($query->num_rows() > 0) {
+            $this->db->update('tb_register', $data, $key);
+        } else {
+            $this->db->insert('tb_register', array_merge($key, $data));
+        }
+    
+        // Check for errors and send response
+        if ($this->db->affected_rows() > 0) {
+            echo json_encode(['status' => 'success', 'message' => 'Score saved.']);
+        } else {
+            echo json_encode(['status' => 'success', 'message' => 'Score up-to-date.']);
         }
     }
 

@@ -1,6 +1,6 @@
 <div class="page-content d-flex align-items-stretch">
     <!-- Side Navbar -->
-    <nav class="side-navbar">
+    <nav class="side-navbar shrinked">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
             <div class="avatar"><img
@@ -67,7 +67,7 @@
                     <?php if($this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002') : ?>
                     <?php else : ?>
                     <li
-                        class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == '' ? 'active' : '' ?>">
+                        class="<?=$this->uri->segment(1) == 'Course' && $this->uri->segment(2) == 'SendPlanAll' ? 'active' : '' ?>">
                         <a class="Loader"
                             href="<?=base_url('Course/SendPlanAll/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term);?>"><i
                                 class="fa fa-file" aria-hidden="true"></i>
@@ -152,4 +152,4 @@
 
     </nav>
 
-    <div class="content-inner">
+    <div class="content-inner active">

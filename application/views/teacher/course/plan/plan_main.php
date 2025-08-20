@@ -90,8 +90,8 @@
         ?>
 
         <!-- Dashboard Section -->
-        <section class="dashboard-header">
-            <div class="container-fluid">
+       
+            <div class="">
                 <div class="row">
                     <!-- Widget 1: Countdown -->
                     <div class="col-lg-5 mb-4">
@@ -169,7 +169,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+       
         <hr>
 
         <?php $Y = $this->uri->segment(3).'/'.$this->uri->segment(4); ?>

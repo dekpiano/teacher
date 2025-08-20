@@ -75,6 +75,8 @@
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=28.2"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
@@ -90,7 +92,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "Register"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/Register.js?v=27.3"></script>
+          <script src="<?=base_url()?>assets/js/teacher/Register.js?v=27.4"></script>
           <?php endif; ?>
 
           <?php if($this->uri->segment(1) === "SupStd"): ?>
@@ -104,9 +106,7 @@
           </body>
 
           <script>
-// $(window).on('load', function() {
-//     $(".se-pre-con").fadeOut(1000);
-// });
+
 
 $('.Loader').on('click', function() {
     $.LoadingOverlay("show");    
@@ -114,10 +114,11 @@ $('.Loader').on('click', function() {
 $.LoadingOverlay("hide");
 
 $(function() {
-    $("#show_date").datepicker({
+    $("#pers_britday").datepicker({
         dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
         changeMonth: true, // กำหนดให้เปลี่ยนเดือนได้
         changeYear: true, //กำหนดให้เปลี่ยนปีได้
+        yearRange: "-100:+0", // กำหนดช่วงปี 100 ปีก่อนหน้าถึงปีปัจจุบัน
         dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], //กำหนดชื่อย่อของวัน เป็น ภาษาไทย
         monthNamesShort: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม",
             "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
@@ -192,7 +193,7 @@ $(document).ready(function() {
         }]
     });
 
-
+    $ ('[data-inputmask]').inputmask();
 
 });
           </script>

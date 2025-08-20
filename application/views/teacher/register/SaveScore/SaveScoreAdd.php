@@ -1,34 +1,39 @@
 <!-- Page Header-->
 <style>
-.services .card1 {
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    border: groove;
-}
+    /* Style for sticky header */
+    .table-responsive {
+        max-height: 75vh; /* Set a max-height for the scrollable area */
+        overflow-y: auto;
+    }
 
-.services .card1:hover {
-    background-color: #fff;
-}
+    #tb_score thead th {
+        position: -webkit-sticky; /* For Safari */
+        position: sticky;
+        top: 0;
+        z-index: 2; /* Needs to be higher than other elements */
+        background-color: #fff;
+        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    }
 
-.services .card1 span {
-    font-size: 14px;
-}
+    .services .card1 {
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        border: groove;
+    }
 
-.g-1 {
-    padding: 10px 15px;
-    margin: 0;
-}
+    .services .card1:hover {
+        background-color: #fff;
+    }
 
-table thead,
-table tfoot {
-    position: sticky;
-}
+    .services .card1 span {
+        font-size: 14px;
+    }
 
-table thead {
-    inset-block-start: 0;
-    /* "top" */
-}
+    .g-1 {
+        padding: 10px 15px;
+        margin: 0;
+    }
 </style>
 <header class="page-header">
     <div class="container-fluid">
@@ -146,6 +151,7 @@ table thead {
                                             }
                                             ?>
                                         </td>
+                                        <td class="align-middle text-center"><span class="autosave-status"></span></td>
                                     </tr>
                                     <?php else:?>
                                     <tr>
@@ -208,6 +214,7 @@ table thead {
                                             }
                                             ?>
                                         </td>
+                                        
                                     </tr>
                                     <?php endif; ?>
                                     <?php endforeach; ?>
