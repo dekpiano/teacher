@@ -100,6 +100,12 @@
                                         elseif(floatval($check_student[0]->SubjectUnit) == 1){$TimeNum = 40;}
                                         elseif(floatval($check_student[0]->SubjectUnit) == 1.5){$TimeNum = 60;}
                                         elseif(floatval($check_student[0]->SubjectUnit) == 2.0){$TimeNum = 80;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 2.5){$TimeNum = 100;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 3.0){$TimeNum = 120;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 3.5){$TimeNum = 140;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 4.0){$TimeNum = 160;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 4.5){$TimeNum = 180;}
+                                        elseif(floatval($check_student[0]->SubjectUnit) == 5.0){$TimeNum = 200;}
                                         ?>
                                         <th width="">เวลาเรียน<br> <small>(<?=intval($TimeNum);?> ชั่วโมง)</small> </th>
                                         <?php 
